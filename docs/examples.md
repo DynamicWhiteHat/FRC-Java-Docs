@@ -1,10 +1,14 @@
 # Source Code Examples
+This page is for maintainers of this website.
+
 Check out the source code to learn how each piece is made
 
-## Code
+For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+
+## Code Snippets
 
 ```java title="Example Java code" linenums="1" hl_lines="3-4"
-//This is an example of Jave code with line numbers and lines 3-4 highlighted
+// This is an example of Jave code with line numbers and lines 3-4 highlighted
 int teamNum = 422
 if (teamNum==422) {
     System.out.println("This is team 422");
@@ -61,7 +65,6 @@ graph LR
 ```
 
 ### Sequence Diagrams
-## Sequence Diagrams
 
 ```mermaid
 sequenceDiagram

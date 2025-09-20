@@ -1,17 +1,25 @@
-# Welcome to MkDocs
+# Welcome to the 422 Java Docs
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+This site serves as a starting point for learning to code for FRC.
 
-## Commands
+Make your way through the pages to gain a foundation for programming on the team.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+## Getting Started
 
-## Project layout
+If you're new, start with the [Getting Started Guide](gettingStarted.md) to set up your tools and environment.
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+## Table of Contents
+
+- [Java Basics](introToJava/whyJava.md)
+- [FRC-Specific Programming](frcSpecifics/frcProgramming.md)
+
+
+## Useful Links
+
+* <a href="https://github.com/team422" target="_blank">422 Github</a>
+* <a href="https://wpilib.org/" target="_blank">WPILib Website</a>
+* <a href="https://github.wpilib.org/allwpilib/docs/release/java/index.html" target="_blank">WPILib API Docs</a>
+
+## Need Help?
+
+If you have questions, feel free to reach out to team members.

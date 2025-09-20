@@ -43,9 +43,18 @@ markdown_extensions:
   - pymdownx.blocks.caption
 
 nav:
-  - Getting Started: getting_started.md
   - Index: index.md
+  - Getting Started: gettingStarted.md
+  - Intro to Java:
+    - Why Java?: introToJava/whyJava.md
+    - Day 1: introToJava/javaDay1.md
+  - FRC Specifics:
+    - FRC Nuances: frcSpecifics/frcProgramming.md
+    - Susbsystems: frcSpecifics/subsystems.md
   - Source Code Examples: examples.md
+
+repo_name: DynamicWhiteHat/FRC-Java-Docs
+repo_url: https://github.com/DynamicWhiteHat/FRC-Java-Docs
 
 extra:
   social:
@@ -55,4 +64,3 @@ extra:
       link: https://www.mechtechrobotics.com
     - icon: fontawesome/brands/youtube
       link: https://www.youtube.com/@mechtechdragons
-
