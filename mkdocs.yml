@@ -7,6 +7,7 @@ theme:
   favicon: assets/Logo.png
   features: 
     - navigation.footer
+
   palette:
   # Dark Mode
   - scheme: slate
@@ -27,7 +28,6 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
-
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -37,9 +37,15 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.tabbed:
       alternate_style: true
-
   - admonition
   - pymdownx.details
+  - md_in_html
+  - pymdownx.blocks.caption
+
+nav:
+  - Getting Started: getting_started.md
+  - Index: index.md
+  - Source Code Examples: examples.md
 
 extra:
   social:
@@ -49,3 +55,4 @@ extra:
       link: https://www.mechtechrobotics.com
     - icon: fontawesome/brands/youtube
       link: https://www.youtube.com/@mechtechdragons
+
