@@ -1,0 +1,51 @@
+site_name: FRC Team 422 Java Docs
+site_url: https://frc422.github.io/JavaDocs
+theme: 
+  name: material
+  icon:
+    logo: fontawesome/brands/java
+  favicon: assets/Logo.png
+  features: 
+    - navigation.footer
+  palette:
+  # Dark Mode
+  - scheme: slate
+    toggle:
+      icon: material/weather-sunny
+      name: Light Mode
+    primary: green
+    accent: deep purple
+   # Light Mode
+  - scheme: default
+    toggle:
+      icon: material/weather-night
+      name: Dark Mode
+    primary: green
+    accent: deep purple
+markdown_extensions:
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+
+  - admonition
+  - pymdownx.details
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/team422
+    - icon: material/web
+      link: https://www.mechtechrobotics.com
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/@mechtechdragons
