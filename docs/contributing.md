@@ -1,5 +1,5 @@
-# Source Code Examples
-This page is for maintainers of this website.
+# Contributing
+This page is for contributors for this website.
 
 Check out the source code to learn how each piece is made
 

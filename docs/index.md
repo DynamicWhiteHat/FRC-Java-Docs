@@ -1,4 +1,4 @@
-# Welcome to the 422 Java Docs
+# Welcome To The Guide To FRC Java
 
 This site serves as a starting point for learning to code for FRC.
 

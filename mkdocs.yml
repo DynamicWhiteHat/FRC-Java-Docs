@@ -1,4 +1,4 @@
-site_name: FRC Team 422 Java Docs
+site_name: Beginner's Guide To FRC Java
 site_url: https://frc422.github.io/JavaDocs
 theme: 
   name: material
@@ -47,11 +47,13 @@ nav:
   - Getting Started: gettingStarted.md
   - Intro to Java:
     - Why Java?: introToJava/whyJava.md
-    - Day 1: introToJava/javaDay1.md
+    - Lesson 1: introToJava/javaLesson1.md
+    - Lesson 2: introToJava/javaLesson2.md
+    - Lesson 3: introToJava/javaLesson3.md
   - FRC Specifics:
     - FRC Nuances: frcSpecifics/frcProgramming.md
     - Susbsystems: frcSpecifics/subsystems.md
-  - Source Code Examples: examples.md
+  - Contributing: contributing.md
 
 repo_name: DynamicWhiteHat/FRC-Java-Docs
 repo_url: https://github.com/DynamicWhiteHat/FRC-Java-Docs
