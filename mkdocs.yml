@@ -50,6 +50,7 @@ nav:
     - Lesson 1: introToJava/javaLesson1.md
     - Lesson 2: introToJava/javaLesson2.md
     - Lesson 3: introToJava/javaLesson3.md
+    - Quiz: introToJava/javaQuiz.md
   - FRC Specifics:
     - FRC Nuances: frcSpecifics/frcProgramming.md
     - Susbsystems: frcSpecifics/subsystems.md

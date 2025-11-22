@@ -22,7 +22,7 @@ An object is a real, usable thing created from a class, which is like its bluepr
 
 When you create an object, it gets its own data (called members or fields), which stores information about that specific object. It also gets methods, which are the actions it can perform.
 
-For example, for the Car class: it might say that every car has a color, speed, and fuelLevel, and that it can drive(), brake(), or honk(). When you make a car object, you now have a real car in your program: it might be red, going 50 mph, and able to honk whenever you call myCar.honk().
+For example, for the Car class: it might say that every car has a color, speed, and fuelLevel, and that it can `drive()`, `brake()`, or `honk()`. When you make a car object, you now have a real car in your program: it might be red, going 50 mph, and able to honk whenever you call `myCar.honk()`.
 
 ### How to create an object
 
@@ -66,7 +66,11 @@ Java is an object-oriented program language, which means that objects will take 
 === "Car.java"
     ```java title="Car.java" 
     public class Car {
-        private String color;
+        public String color;
+
+        public Car(String color) {
+            this.color = color;
+        }
 
         public void drive() {
             // insert drive code
