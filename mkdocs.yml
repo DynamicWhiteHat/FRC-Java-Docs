@@ -1,28 +1,26 @@
 site_name: Beginner's Guide To FRC Java
 site_url: https://frc422.github.io/JavaDocs
-theme: 
+theme:
   name: material
   icon:
     logo: fontawesome/brands/java
   favicon: assets/Logo.png
-  features: 
+  features:
     - navigation.footer
-
   palette:
-  # Dark Mode
-  - scheme: slate
-    toggle:
-      icon: material/weather-sunny
-      name: Light Mode
-    primary: green
-    accent: deep purple
-   # Light Mode
-  - scheme: default
-    toggle:
-      icon: material/weather-night
-      name: Dark Mode
-    primary: green
-    accent: deep purple
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Light Mode
+      primary: green
+      accent: deep purple
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Dark Mode
+      primary: green
+      accent: deep purple
+
 markdown_extensions:
   - attr_list
   - pymdownx.emoji:
@@ -42,6 +40,12 @@ markdown_extensions:
   - md_in_html
   - pymdownx.blocks.caption
 
+extra_css:
+  - stylesheets/frc-labs.css
+
+extra_javascript:
+  - javascripts/frc-labs.js
+
 nav:
   - Index: index.md
   - Getting Started: gettingStarted.md
@@ -52,8 +56,8 @@ nav:
     - Lesson 3: introToJava/javaLesson3.md
     - Quiz: introToJava/javaQuiz.md
   - FRC Specifics:
-    - FRC Nuances: frcSpecifics/frcProgramming.md
-    - Susbsystems: frcSpecifics/subsystems.md
+    - Robot Program Architecture: frcSpecifics/frcProgramming.md
+    - Subsystems: frcSpecifics/subsystems.md
   - Contributing: contributing.md
 
 repo_name: DynamicWhiteHat/FRC-Java-Docs
