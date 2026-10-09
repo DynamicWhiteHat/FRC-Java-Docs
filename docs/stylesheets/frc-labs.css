@@ -1,0 +1,62 @@
+/* Interactive FRC learning labs */
+.frc-lab {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .8rem;
+  padding: 1rem;
+  margin: 1.25rem 0;
+  background: var(--md-code-bg-color);
+}
+.frc-lab h3 { margin-top: 0; }
+.frc-lab__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem;
+  margin: .8rem 0;
+}
+.frc-lab button {
+  border: 1px solid var(--md-primary-fg-color);
+  border-radius: .45rem;
+  padding: .45rem .75rem;
+  cursor: pointer;
+  color: var(--md-primary-fg-color);
+  background: var(--md-default-bg-color);
+  font: inherit;
+}
+.frc-lab button:hover,
+.frc-lab button[aria-pressed="true"] {
+  color: var(--md-primary-bg-color);
+  background: var(--md-primary-fg-color);
+}
+.frc-lab input[type="range"] { width: min(100%, 22rem); }
+.frc-lab__readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  align-items: center;
+  margin: .8rem 0;
+}
+.frc-lab__state {
+  display: inline-block;
+  padding: .2rem .55rem;
+  border-radius: .35rem;
+  font-weight: 700;
+  font-size: .8rem;
+  background: var(--md-default-fg-color--lightest);
+}
+.frc-lab__state[data-state="running"] { background: #d5f5e3; color: #145a32; }
+.frc-lab__state[data-state="stopped"] { background: #fbe3e4; color: #7b241c; }
+.frc-lab__output {
+  display: block;
+  min-height: 2.5rem;
+  padding: .7rem;
+  border-radius: .45rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: var(--md-code-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+.frc-lab [data-check-feedback] { margin: .75rem 0 0; font-weight: 600; }
+.frc-lab [data-check-feedback][data-correct="true"] { color: #1b7f45; }
+.frc-lab [data-check-feedback][data-correct="false"] { color: #b42318; }
+.frc-lab__hint { font-size: .9rem; opacity: .8; }
