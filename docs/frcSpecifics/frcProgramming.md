@@ -75,9 +75,21 @@ src/main/java/frc/robot/
 ├── Robot.java           The modes: init and periodic methods.
 ├── RobotContainer.java  Creates subsystems and controllers, connects buttons to commands.
 ├── Constants.java       Numbers that belong in one place: CAN IDs, ports, speeds.
-├── subsystems/          One file per mechanism on the robot.
-│   ├── DriveSubsystem.java
-│   └── IntakeSubsystem.java
+├── subsystems/          One folder per mechanism on the robot.
+|   └── drive/
+│       └── Drive.java
+│   └── intake/
+|       └── pivot
+|           └── PivotIO.java
+|           └── PivotIOKraken.java
+|           └── PivotIOReplay.java
+|           └── PivotIOSim.java
+|       └── rollers
+|           └── RollersIO.java
+|           └── RollersIOKraken.java
+|           └── RollersIOReplay.java
+|           └── RollersIOSim.java
+|       └── Intake.java
 └── commands/            Larger commands that don't fit inside a subsystem.
 ```
 
@@ -256,10 +268,10 @@ public class Arm extends SubsystemBase {
 You'll see these everywhere, usually together.
 
 - `final` means the variable can never be reassigned after it's set. A motor controller is created once and never swapped out, so we write `private final SparkMax m_motor`.
-- `static` means the thing belongs to the class itself, not to each object. You can use it without creating an object, like `Math.abs(x)` or `Constants.kMaxSpeed`.
+- `static` means the thing belongs to the class itself, not to each object. So no matter how many objects of a class you make, changing a static variable for one of them changes it for all the objects at the same time.
 - A `static final` value is a __constant__: one fixed number that lives in one place.
 
-WPILib teams follow two naming habits, and you'll see them in every project:
+WPILib teams, including ours, follow two naming habits, and you'll see them in every project:
 
 | Convention | Used for | Example |
 |---|---|---|
@@ -349,6 +361,8 @@ If the arm motor ever changes CAN id, you fix it in exactly one place, and every
 A __lambda__ is a method with no name that you can store in a variable and pass around. It's written `() -> something`. The `()` holds any inputs, and the arrow points to the code to run.
 
 This matters in FRC because you often want to say "do this, but not right now, do it when the driver presses a button." Passing `m_motor.set(0.5)` directly would run it immediately, when the code is read. Wrapping it as `() -> m_motor.set(0.5)` gives the scheduler a package to run later.
+
+Lambdas are mainly used in button bindings, where Java expects a `runnable`, and passing it a method with a parameter instead will confuse it.
 
 ```playground
 //@ title: Running code later
