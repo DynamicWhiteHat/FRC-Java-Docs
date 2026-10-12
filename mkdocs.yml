@@ -5,8 +5,9 @@ theme:
   icon:
     logo: fontawesome/brands/java
   favicon: assets/Logo.png
-  features: 
+  features:
     - navigation.footer
+    - content.code.annotate
 
   palette:
   # Dark Mode
@@ -33,6 +34,13 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+        # Interactive widgets, see docs/javascripts/playground.js
+        - name: playground
+          class: playground
+          format: !!python/name:pymdownx.superfences.fence_code_format
+        - name: quiz
+          class: quiz
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.tabbed:
@@ -53,8 +61,18 @@ nav:
     - Quiz: introToJava/javaQuiz.md
   - FRC Specifics:
     - FRC Nuances: frcSpecifics/frcProgramming.md
-    - Susbsystems: frcSpecifics/subsystems.md
+    - Subsystems: frcSpecifics/subsystems.md
+    - RobotContainer: frcSpecifics/robotContainer.md
   - Contributing: contributing.md
+
+extra_css:
+  - stylesheets/playground.css
+
+# Order matters: the interpreter, then the fake WPILib, then the widgets.
+extra_javascript:
+  - javascripts/minijava.js
+  - javascripts/wpilib-prelude.js
+  - javascripts/playground.js
 
 repo_name: DynamicWhiteHat/FRC-Java-Docs
 repo_url: https://github.com/DynamicWhiteHat/FRC-Java-Docs

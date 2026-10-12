@@ -10,8 +10,12 @@ If you're new, start with the [Getting Started Guide](gettingStarted.md) to set 
 
 ## Table of Contents
 
-- [Java Basics](introToJava/whyJava.md)
-- [FRC-Specific Programming](frcSpecifics/frcProgramming.md)
+- [Java Basics](introToJava/whyJava.md): the Java you need, with code you can run and edit right on the page.
+- [FRC-Specific Programming](frcSpecifics/frcProgramming.md): how a robot program runs and the Java that shows up in every project.
+    - [Subsystems](frcSpecifics/subsystems.md)
+    - [RobotContainer](frcSpecifics/robotContainer.md)
+
+Most pages have live editors and practice challenges. You don't need to install anything to try them. The robot examples run in a pretend WPILib that lives in your browser.
 
 
 ## Useful Links

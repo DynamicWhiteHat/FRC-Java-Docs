@@ -21,13 +21,22 @@ Operators in Java are typically grouped into categories depending on their funct
 Comparision operators will output a boolean value, either true or false, depending on the values provided. You can use the output for setting members, using conditionals, and more. Below is an example of using comparision operators.
 
 
-```java
-boolean isGreater = 5>7;
-// isGreater is false
-if (5==5) {
+```playground
+//@ title: Comparison operators
+//@ goal: Run it, then change the numbers and see which lines print true or false.
+boolean isGreater = 5 > 7;
+System.out.println("5 > 7 is " + isGreater);
+System.out.println("5 == 5 is " + (5 == 5));
+System.out.println("7 != 3 is " + (7 != 3));
+System.out.println("3 <= 3 is " + (3 <= 3));
+
+if (5 == 5) {
     System.out.println("This is true");
 }
 ```
+
+!!! note "`==` vs `=`"
+    A single `=` __assigns__ a value (`int x = 5;`). A double `==` __compares__ two values (`x == 5`). Mixing them up is one of the most common beginner mistakes.
 
 ### Arithmetic operators
 
@@ -42,16 +51,33 @@ Arithmetic operators are used for basic mathematical operations, such as adding 
 
 Using arithmetic operators is simple. Just place them between the two values you want to use it on.
 
-```java
+Before you run this, work out what it prints. Type your prediction in the box, then press __Check my prediction__.
+
+```playground
+//@ title: Predict the output
+//@ mode: predict
+//@ goal: What will these two lines print? Put each answer on its own line.
 int a = 5;
 int b = 6;
-System.out.println(a+b);
-System.out.println(a%b);
+System.out.println(a + b);
+System.out.println(a % b);
+//@@ explain
+`5 + 6` is 11. For `5 % 6`, 6 doesn't fit into 5 at all, so the whole 5 is left over as the remainder.
 ```
 
-``` title="Output"
-11
-1
+#### Integer division
+
+When you divide two `int`s, Java throws away the decimal part. This catches out almost everyone at least once, and it matters in FRC code, where you'll often divide to turn encoder counts into distances.
+
+```playground
+//@ title: Integer division
+//@ mode: predict
+//@ goal: Predict all three lines. Careful with the first two!
+System.out.println(7 / 2);
+System.out.println(7 / 2.0);
+System.out.println(1 / 2);
+//@@ explain
+Two `int`s divide as an `int`, so `7 / 2` is 3 and `1 / 2` is 0. If either side is a `double`, you get a decimal answer: `7 / 2.0` is 3.5.
 ```
 
 
@@ -75,7 +101,16 @@ An `if` statement is the first part of any conditional. It initiates the check b
 if (condition) {
     // do this
 }
-if (vehicle.color == "red") {
+```
+
+Run it below. Then change `color` to `"blue"` and run it again. Nothing prints, because the condition is false and there is no `else`.
+
+```playground
+//@ title: Your first if statement
+//@ goal: Change color to "blue". What happens?
+String color = "red";
+
+if (color.equals("red")) {
     System.out.println("The car is red");
 }
 ```
@@ -95,14 +130,19 @@ else {
     // do this
 }
 
-if (vehicle.color == "red") {
+```
+
+```playground
+//@ title: if and else
+//@ goal: Run it with each color: "red", then something else.
+String color = "green";
+
+if (color.equals("red")) {
     System.out.println("The car is red");
 }
-
 else {
     System.out.println("The car is not red");
 }
-
 ```
 
 In the example above, the first if statement checks whether the car is red. If the car is not red, that condition evaluates to false, and the program moves to the `else` block. The `else` block doesn’t have its own condition, it simply runs whenever the if statement fails, acting like a “catch-all” for everything that wasn’t true.
@@ -113,15 +153,15 @@ What if you wanted to check if the car was blue? Although you could technically 
 
 === "Bad example"
     ```java
-    if (vehicle.color == "red") {
+    if (vehicle.color.equals("red")) {
         System.out.println("The car is red");
     }
 
-    if (vehicle.color == "blue") {
+    if (vehicle.color.equals("blue")) {
         System.out.println("The car is blue");
     }
 
-    if (vehicle.color == "orange") {
+    if (vehicle.color.equals("orange")) {
         System.out.println("The car is orange");
     }
 
@@ -131,15 +171,15 @@ What if you wanted to check if the car was blue? Although you could technically 
     ```
 === "Good example"
     ```java
-    if (vehicle.color == "red") {
+    if (vehicle.color.equals("red")) {
         System.out.println("The car is red");
     }
 
-    else if (vehicle.color == "blue") {
+    else if (vehicle.color.equals("blue")) {
         System.out.println("The car is blue");
     }
 
-    else if (vehicle.color == "orange") {
+    else if (vehicle.color.equals("orange")) {
         System.out.println("The car is orange");
     }
 
@@ -157,11 +197,32 @@ This small change makes the code much more efficient:
 
 By using `else if`, you make your code both faster and easier to read.
 
+```playground
+//@ title: An else if chain
+//@ goal: Try "red", "blue", "orange" and "purple". Which branch runs for each?
+String color = "blue";
+
+if (color.equals("red")) {
+    System.out.println("The car is red");
+}
+else if (color.equals("blue")) {
+    System.out.println("The car is blue");
+}
+else if (color.equals("orange")) {
+    System.out.println("The car is orange");
+}
+else {
+    System.out.println("The car is some other color");
+}
+```
+
 ### Conditionals with booleans
 
 Conditionals can also be used with booleans directly, since they can only be either true or false. The snippet below provides an example.
 
-```java
+```playground
+//@ title: Conditionals with booleans
+//@ goal: Run it, then set carIsOn to false.
 boolean carIsOn = true;
 
 if (carIsOn) {
@@ -170,10 +231,6 @@ if (carIsOn) {
 else {
     System.out.println("Turn car on to drive");
 }
-```
-
-``` title="Output"
-Ready to drive
 ```
 You wouldn't need to say `if (carIsOn==true)`, since Java knows that since its a boolean value, it can only be true or false, so it handles the checking for you.
 
@@ -189,9 +246,11 @@ A `for` loop is a way to repeat a block of code a set number of times. Think of 
 
 The proper way to write a for loop uses a variable, typically called `i`, to keep track of how many times the loop has run. An example is shown below.
 
-```java
-for (int i=0;i<10;i++) {
-    // Do a push-up
+```playground
+//@ title: Do 10 push-ups
+//@ goal: Run it. Then change the 10 to a different number, and try starting i at 1 instead of 0.
+for (int i = 0; i < 10; i++) {
+    System.out.println("Push-up number " + (i + 1));
 }
 ```
 
@@ -241,13 +300,12 @@ The update doesn’t always have to be an increment; it can be any expression th
 
 The example below shows how you can use the three components of a `for` loop to count down from 10, skipping every other number.
 
-```java
-for (int i=10; i>=0; i -=2) {
+```playground
+//@ title: Counting down by twos
+//@ goal: Run it. Then make it count down by threes, or count up from 0 to 20 by fives.
+for (int i = 10; i >= 0; i -= 2) {
     System.out.print(i + " ");
 }
-```
-``` title="Output"
-10 8 6 4 2 0 
 ```
 
 Here, the `i` variable starts at 10 and we decrease it by 2 every time the loop runs. This continues while `i` is greater than or equal to 0.
@@ -256,26 +314,88 @@ Here, the `i` variable starts at 10 and we decrease it by 2 every time the loop 
 
 ## Practice
 
-Look at the code below. What will it print?
+#### Predict the output
 
-=== "Identify"
-    ```java
-    for (int i = 0; i <= 5; i++) {
-        if (i % 2 == 0) {
-            System.out.println(i + " is even");
-        } else if (i > 3) {
-            System.out.println(i + " is greater than 3 and odd");
-        } else {
-            System.out.println(i + " is odd");
-        }
+Look at the code below. What will it print? Work it out on paper first, one value of `i` at a time, then type your answer and press __Check my prediction__.
+
+```playground
+//@ title: Even, odd, or big?
+//@ mode: predict
+//@ goal: Type exactly what this prints, one line per line of output.
+for (int i = 0; i <= 5; i++) {
+    if (i % 2 == 0) {
+        System.out.println(i + " is even");
+    } else if (i > 3) {
+        System.out.println(i + " is greater than 3 and odd");
+    } else {
+        System.out.println(i + " is odd");
     }
-    ```
-=== "Answers"
-    ``` title="Output"
-    0 is even
-    1 is odd
-    2 is even
-    3 is odd
-    4 is even
-    5 is greater than 3 and odd
-    ```
+}
+//@@ explain
+Even numbers hit the first branch. For the odd ones, only 5 is greater than 3, so it gets the second branch.
+```
+
+#### Challenge 1: Limit a motor speed
+
+Motors in FRC accept a speed from -1.0 to 1.0. Anything beyond that is invalid, so robot code often __clamps__ a value into the allowed range. You can do that with the conditionals you just learned.
+
+```playground
+//@ title: Clamp a speed
+//@ goal: Finish the method so it returns 1.0 if speed is above 1.0, returns -1.0 if speed is below -1.0, and otherwise returns speed unchanged.
+//@ require: if | Use an if statement.
+public double clamp(double speed) {
+    // your code here
+    return speed;
+}
+//@@ harness
+System.out.println(clamp(0.5));
+System.out.println(clamp(2.3));
+System.out.println(clamp(-5.0));
+System.out.println(clamp(-0.25));
+//@@ expect
+0.5
+1.0
+-1.0
+-0.25
+//@@ hint
+You need two checks: one for speed too high, and one for speed too low.
+//@@ hint
+`if (speed > 1.0) { return 1.0; }` stops the method right there and sends back 1.0. Write the matching check for the low end.
+//@@ solution
+public double clamp(double speed) {
+    if (speed > 1.0) {
+        return 1.0;
+    } else if (speed < -1.0) {
+        return -1.0;
+    }
+    return speed;
+}
+//@@ explain
+This exact idea is in WPILib as `MathUtil.clamp`. You'll meet it again when you start driving motors.
+```
+
+#### Challenge 2: Count down
+
+```playground
+//@ title: Liftoff
+//@ goal: Use a for loop to print 5, 4, 3, 2, 1 on separate lines, then print Liftoff!
+//@ require: for\s*\( | Use a for loop.
+// Write your loop here:
+
+//@@ expect
+5
+4
+3
+2
+1
+Liftoff!
+//@@ hint
+Start i at 5, keep going while i is at least 1, and use i-- to count down.
+//@@ solution
+for (int i = 5; i >= 1; i--) {
+    System.out.println(i);
+}
+System.out.println("Liftoff!");
+//@@ explain
+Counting down just means starting high, checking with `>=`, and decreasing with `i--`.
+```

@@ -25,5 +25,13 @@ jobs:
           path: .cache
           restore-keys: |
             mkdocs-material-
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # Don't publish a broken exercise: these fail the build if any lesson code,
+      # solution or quiz is malformed.
+      - run: node tools/test-minijava.js
+      - run: node tools/test-wpilib.js
+      - run: node tools/check-lessons.js
       - run: pip install mkdocs-material
       - run: mkdocs gh-deploy --force
