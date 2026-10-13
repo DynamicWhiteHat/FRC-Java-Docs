@@ -100,6 +100,15 @@ class SparkMax implements MotorController {
 }
 class CANSparkMax extends SparkMax {}
 
+/* A "request" you hand a TalonFX / Kraken: spin at this many volts (a battery is about 12 V). */
+class VoltageOut {
+  private double _output;
+  public VoltageOut(double output) { _output = output; }
+  public VoltageOut withOutput(double output) { _output = output; return this; }
+  public VoltageOut withEnableFOC(boolean enable) { return this; }
+  public double getOutput() { return _output; }
+}
+
 class TalonFX implements MotorController {
   private int _id;
   private double _speed = 0.0;
@@ -108,6 +117,8 @@ class TalonFX implements MotorController {
     _id = deviceId;
     Host.emit("motor", _id, 0.0);
   }
+  public TalonFX(int deviceId, String canbus) { this(deviceId); }
+  public void setControl(VoltageOut request) { set(request.getOutput() / 12.0); }
   public void set(double speed) {
     _speed = MathUtil.clamp(speed, -1.0, 1.0);
     if (_inverted) { Host.emit("motor", _id, -_speed); Sim.setMotorOutput(_id, -_speed); }
@@ -163,15 +174,87 @@ class DifferentialDrive {
   }
 }
 
+/* ---------------- logging & team utilities (AdvantageKit-style) ---------------- */
+
+/* Every "<Name>AutoLogged" inputs class implements this. The page writes those classes for
+   you from @AutoLog, the same way AdvantageKit does it when the robot code is built. */
+interface LoggableInputs { void toLog(String prefix); }
+
+/* On a real robot, Logger writes everything to a log file you can replay later.
+   Here, everything you log shows up in the SmartDashboard panel. */
+class Logger {
+  public static void recordOutput(String key, double value) { Host.emit("dash", key, value); }
+  public static void recordOutput(String key, int value) { Host.emit("dash", key, (double) value); }
+  public static void recordOutput(String key, boolean value) { Host.emit("dash", key, value); }
+  public static void recordOutput(String key, String value) { Host.emit("dash", key, value); }
+  public static void recordOutput(String key, Object value) { Host.emit("dash", key, "" + value); }
+  public static void processInputs(String key, LoggableInputs inputs) { inputs.toLog(key); }
+}
+
+/* Robot classes extend LoggedRobot instead of TimedRobot so everything can be logged. */
+class LoggedRobot extends TimedRobot {}
+
+class RobotBase {
+  public static boolean isReal() { return false; }
+  public static boolean isSimulation() { return true; }
+}
+
+/* A number you can tune from the dashboard while the robot runs. */
+class LoggedTunableNumber implements DoubleSupplier {
+  private String _key;
+  private double _value;
+  private Map<Integer, Double> _lastSeen = new HashMap<>();
+  public LoggedTunableNumber(String dashboardKey, double defaultValue) { _key = "/Tuning/" + dashboardKey; _value = defaultValue; }
+  public double get() { return _value; }
+  public double getAsDouble() { return _value; }
+  /* On the real robot you change the number by typing in the dashboard. Here you call set(). */
+  public void set(double value) { _value = value; }
+  /* True the first time it's asked, and again whenever the number has changed since the last ask from this id. */
+  public boolean hasChanged(int id) {
+    double current = get();
+    Double last = _lastSeen.get(id);
+    if (last == null || current != last) { _lastSeen.put(id, current); return true; }
+    return false;
+  }
+  /* Runs the action if any of these numbers changed since the last time this id checked. */
+  public static void ifChanged(int id, Runnable action, LoggedTunableNumber... tunableNumbers) {
+    boolean changed = false;
+    for (LoggedTunableNumber n : tunableNumbers) { if (n.hasChanged(id)) { changed = true; } }
+    if (changed) { action.run(); }
+  }
+}
+
+/* A tiny state machine: one enum of states, and the method to run for each one. */
+class SubsystemProfiles<T extends Enum<T>> {
+  private T _current;
+  private T _last;
+  private Map<T, Runnable> _periodic;
+  public SubsystemProfiles(Map<T, Runnable> profilePeriodicFunctions, T defaultProfile) {
+    if (defaultProfile == null) { throw new IllegalArgumentException("Default profile cannot be null"); }
+    _periodic = profilePeriodicFunctions;
+    _current = defaultProfile;
+    _last = defaultProfile;
+  }
+  public void setCurrentProfile(T profile) { _last = _current; _current = profile; }
+  public T getCurrentProfile() { return _current; }
+  public Runnable getPeriodicFunction() {
+    return _periodic.getOrDefault(_current, () -> System.out.println("WARNING: No periodic function for profile " + _current));
+  }
+  public Runnable getPeriodicFunctionTimed() { return getPeriodicFunction(); }
+  public void revertToLastProfile() { setCurrentProfile(_last); }
+}
+
 /* ---------------- command-based framework ---------------- */
 
 class Command {
   private ArrayList<SubsystemBase> _requirements = new ArrayList<>();
+  private boolean _runsDisabled = false;
   public void initialize() {}
   public void execute() {}
   public boolean isFinished() { return false; }
   public void end(boolean interrupted) {}
-  public boolean runsWhenDisabled() { return false; }
+  public boolean runsWhenDisabled() { return _runsDisabled; }
+  public Command ignoringDisable(boolean disable) { _runsDisabled = disable; return this; }
   public void addRequirements(Subsystem... subsystems) {
     for (Subsystem s : subsystems) { _requirements.add(s); }
   }
@@ -371,7 +454,7 @@ class CommandScheduler {
     return null;
   }
   public void schedule(Command command) {
-    if (!Sim.isEnabled()) { return; }
+    if (!Sim.isEnabled() && !command.runsWhenDisabled()) { return; }
     if (_scheduled.contains(command)) { return; }
     for (Subsystem s : command.getRequirements()) {
       Command other = commandRequiring(s);
@@ -394,8 +477,7 @@ class CommandScheduler {
     for (Trigger t : _triggers) { t.poll(); }
     if (!Sim.isEnabled()) {
       ArrayList<Command> all = new ArrayList<>(_scheduled);
-      for (Command c : all) { cancel(c); }
-      return;
+      for (Command c : all) { if (!c.runsWhenDisabled()) { cancel(c); } }
     }
     ArrayList<Command> snapshot = new ArrayList<>(_scheduled);
     for (Command c : snapshot) {

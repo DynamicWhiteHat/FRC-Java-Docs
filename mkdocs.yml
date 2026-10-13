@@ -63,6 +63,8 @@ nav:
     - FRC Nuances: frcSpecifics/frcProgramming.md
     - Subsystems: frcSpecifics/subsystems.md
     - RobotContainer: frcSpecifics/robotContainer.md
+    - RobotState: frcSpecifics/robotState.md
+    - Constants: frcSpecifics/constants.md
   - Contributing: contributing.md
 
 extra_css:

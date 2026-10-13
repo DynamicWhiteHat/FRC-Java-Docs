@@ -204,6 +204,99 @@ t('override of user class method', `class A { void f() {} } class B extends A { 
 t('override toString ok', `class A { @Override public String toString() { return "A!"; } }`, `System.out.println(new A());`, 'A!\n');
 t('dashboard round trip + motor output', `public class S extends SubsystemBase { SparkMax m = new SparkMax(7, MotorType.kBrushless); public void go() { m.set(0.3); } @Override public void periodic() { SmartDashboard.putNumber("v", m.get()); } }`, `S s = new S(); s.go(); Sim.loops(1); System.out.println(SmartDashboard.getNumber("v", -1.0) + " " + Sim.getMotorOutput(7) + " " + SmartDashboard.getNumber("nope", -1.0));`, '0.3 0.3 -1.0\n');
 
+/* team-style architecture: IO interface + @AutoLog inputs + state machine (AdvantageKit-style) */
+const ioSrc = `
+public interface ArmIO {
+  @AutoLog
+  public static class ArmInputs {
+    public double angleDeg;
+    public boolean connected;
+    public String label = "arm";
+  }
+  void updateInputs(ArmInputs inputs);
+  void setVoltage(double volts);
+}
+public class ArmIOSim implements ArmIO {
+  private double m_v = 0.0;
+  @Override public void updateInputs(ArmInputs inputs) { inputs.angleDeg = m_v * 10.0; inputs.connected = true; }
+  @Override public void setVoltage(double volts) { m_v = volts; }
+}
+public class Arm extends SubsystemBase {
+  public static enum ArmState { kStow, kReach }
+  private final ArmIO m_io;
+  private final ArmInputsAutoLogged m_inputs = new ArmInputsAutoLogged();
+  private final SubsystemProfiles<ArmState> m_profiles;
+  public Arm(ArmIO io) {
+    m_io = io;
+    Map<ArmState, Runnable> map = new HashMap<>();
+    map.put(ArmState.kStow, this::stow);
+    map.put(ArmState.kReach, this::reach);
+    m_profiles = new SubsystemProfiles<>(map, ArmState.kStow);
+  }
+  public void updateState(ArmState s) { m_profiles.setCurrentProfile(s); }
+  public ArmState getState() { return m_profiles.getCurrentProfile(); }
+  @Override public void periodic() {
+    m_io.updateInputs(m_inputs);
+    m_profiles.getPeriodicFunctionTimed().run();
+    Logger.processInputs("Arm", m_inputs);
+    Logger.recordOutput("Arm/State", m_profiles.getCurrentProfile());
+  }
+  private void stow() { m_io.setVoltage(0.0); }
+  private void reach() { m_io.setVoltage(3.0); }
+}`;
+{
+  const r = MiniJava.run(ioSrc, { prelude: ['wpilib'], harness: `Arm a = new Arm(new ArmIOSim()); Sim.loops(1); a.updateState(Arm.ArmState.kReach); Sim.loops(2);` });
+  const d = r.events.filter((e) => e.kind === 'dash').map((e) => e.args.join('=')).join(',');
+  const want = 'Arm/angleDeg=0,Arm/connected=true,Arm/label=arm,Arm/State=kStow,' +
+    'Arm/angleDeg=0,Arm/connected=true,Arm/label=arm,Arm/State=kReach,' +
+    'Arm/angleDeg=30,Arm/connected=true,Arm/label=arm,Arm/State=kReach';
+  if (!r.error && d === want) pass++; else { fail++; failures.push('✗ AutoLogged inputs + SubsystemProfiles: ' + JSON.stringify(r.error) + '\n   ' + d); }
+}
+{
+  // a top-level @AutoLog class (not nested in an interface) is supported too
+  const r = MiniJava.run(`@AutoLog public class Flat { public int count; }`, { prelude: ['wpilib'], harness: `FlatAutoLogged f = new FlatAutoLogged(); f.count = 3; Logger.processInputs("F", f);` });
+  const d = r.events.filter((e) => e.kind === 'dash').map((e) => e.args.join('=')).join(',');
+  if (!r.error && d === 'F/count=3') pass++; else { fail++; failures.push('✗ top-level @AutoLog: ' + JSON.stringify(r.error) + ' ' + d); }
+}
+t('SubsystemProfiles: missing state warns instead of crashing', `enum S { kA, kB }`,
+  `Map<S, Runnable> m = new HashMap<>(); m.put(S.kA, () -> System.out.println("A")); SubsystemProfiles<S> p = new SubsystemProfiles<>(m, S.kA); p.getPeriodicFunction().run(); p.setCurrentProfile(S.kB); p.getPeriodicFunction().run(); p.revertToLastProfile(); System.out.println(p.getCurrentProfile());`,
+  'A\nWARNING: No periodic function for profile kB\nkA\n');
+{
+  const r = MiniJava.run(`enum S { kA }`, { prelude: ['wpilib'], harness: `SubsystemProfiles<S> p = new SubsystemProfiles<>(new HashMap<>(), null);` });
+  if (r.error && /IllegalArgumentException: Default profile cannot be null/.test(r.error.message)) pass++;
+  else { fail++; failures.push('✗ SubsystemProfiles null default: ' + JSON.stringify(r.error)); }
+}
+t('TalonFX + VoltageOut', ``, `TalonFX m = new TalonFX(4, "rio"); m.setControl(new VoltageOut(0.0).withOutput(6.0).withEnableFOC(true)); System.out.println(m.get());`, '0.5\n');
+/* ifChanged: runs on the first check, then only after a number is changed (all numbers are checked, not just the first). */
+t('LoggedTunableNumber ifChanged', ``,
+  `LoggedTunableNumber p = new LoggedTunableNumber("P", 1.0); LoggedTunableNumber d = new LoggedTunableNumber("D", 0.0);
+   int[] n = new int[1];
+   for (int i = 0; i < 3; i++) { LoggedTunableNumber.ifChanged(7, () -> n[0]++, p, d); }
+   System.out.println(n[0]);
+   d.set(0.5); LoggedTunableNumber.ifChanged(7, () -> n[0]++, p, d); LoggedTunableNumber.ifChanged(7, () -> n[0]++, p, d);
+   System.out.println(n[0]);
+   p.set(2.0); d.set(0.9); LoggedTunableNumber.ifChanged(7, () -> n[0]++, p, d);
+   System.out.println(n[0]);
+   LoggedTunableNumber.ifChanged(8, () -> n[0]++, p, d);
+   System.out.println(n[0]);`, '1\n2\n3\n4\n');
+t('LoggedTunableNumber', ``,`LoggedTunableNumber n = new LoggedTunableNumber("Arm P", 2.5); DoubleSupplier s = n; System.out.println(n.get() + " " + s.getAsDouble());`, '2.5 2.5\n');
+t('LoggedRobot is a TimedRobot', `public class Robot extends LoggedRobot { @Override public void robotPeriodic() { System.out.println("tick"); } }`, `Sim.start(new Robot()); Sim.loops(2);`, 'tick\ntick\n');
+t('generated AutoLogged class does not shift error lines', `public interface X {\n  @AutoLog\n  public static class XInputs { public double a; }\n}\npublic class Bad { void f() { int y = zzz; } }`, `new Bad().f();`, '<<compile@5: cannot find symbol>>');
+
+/* ignoringDisable: zeroing sensors while the robot is disabled */
+{
+  const src = `public class Z extends SubsystemBase { public int zeros = 0; public void zero() { zeros++; } }
+  public class RC { public Z z = new Z(); public CommandXboxController c = new CommandXboxController(0);
+    public RC(boolean ignore) {
+      Command cmd = Commands.runOnce(() -> z.zero());
+      if (ignore) { cmd = cmd.ignoringDisable(true); }
+      c.start().onTrue(cmd);
+    } }`;
+  const run = (ignore, mode) => MiniJava.run(src, { prelude: ['wpilib'], harness: `Sim.setMode("${mode}"); RC rc = new RC(${ignore}); Sim.press(0, "START"); Sim.loops(3); System.out.println(rc.z.zeros);` }).output;
+  const got = [run(false, 'disabled'), run(true, 'disabled'), run(false, 'teleop')].join('|');
+  if (got === '0\n|1\n|1\n') pass++; else { fail++; failures.push('✗ ignoringDisable: ' + JSON.stringify(got)); }
+}
+
 /* helpful errors */
 t('forgot extends', `public class Bad { public void periodic() {} }`, `new Bad().run(() -> {});`, '<<compile@2: cannot find symbol>>');
 

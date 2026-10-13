@@ -2798,6 +2798,42 @@ class StackOverflowError extends Error {}
    * run()
    * ------------------------------------------------------------------ */
 
+  /* AdvantageKit's annotation processor writes a "<Name>AutoLogged" class for every
+   * @AutoLog inputs class. We do the same here, as hidden Java appended after the
+   * student's code (so error line numbers still match what they typed).
+   * Only used with the 'wpilib' prelude, which provides Logger and LoggableInputs. */
+  function autoLogSource(src, opts) {
+    if (!/@AutoLog\b/.test(src) || (opts.prelude || []).indexOf('wpilib') === -1) return '';
+    // blank out comments and strings (keeping lengths) so braces inside them can't confuse the scan
+    const clean = src.replace(/\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\\n])*"/g, (m) => m.replace(/[^\n]/g, ' '));
+    const re = /@AutoLog\b\s*(?:public\s+|static\s+|final\s+)*class\s+(\w+)[^{]*\{/g;
+    let out = '', m;
+    while ((m = re.exec(clean))) {
+      const name = m[1];
+      let depth = 1, i = re.lastIndex;
+      while (i < clean.length && depth > 0) { const c = clean[i++]; if (c === '{') depth++; else if (c === '}') depth--; }
+      const body = clean.slice(re.lastIndex, i - 1);
+      // the top-level type this class is nested in (if any)
+      let d = 0, owner = null, t;
+      const scan = /\b(?:class|interface|enum)\s+(\w+)|[{}]/g;
+      const prefix = clean.slice(0, m.index);
+      while ((t = scan.exec(prefix))) {
+        if (t[0] === '{') d++;
+        else if (t[0] === '}') d--;
+        else if (d === 0) owner = t[1];
+      }
+      const fields = [];
+      const fre = /(?:public\s+)?(?:double|int|long|float|boolean|String)\s+(\w+)\s*(?:=[^;]*)?;/g;
+      let f;
+      while ((f = fre.exec(body))) fields.push(f[1]);
+      out += '\nclass ' + name + 'AutoLogged extends ' + (owner ? owner + '.' : '') + name + ' implements LoggableInputs {\n' +
+        '  public void toLog(String prefix) {\n' +
+        fields.map((n) => '    Logger.recordOutput(prefix + "/' + n + '", ' + n + ');\n').join('') +
+        '  }\n}\n';
+    }
+    return out;
+  }
+
   function run(source, opts) {
     opts = opts || {};
     const it = new Interp(opts);
@@ -2813,7 +2849,7 @@ class StackOverflowError extends Error {}
         it.load(pp, true);
       }
       // ---- parse user code (+ hidden harness) ----
-      const full = source + (opts.harness ? '\n' + opts.harness : '');
+      const full = source + autoLogSource(source, opts) + (opts.harness ? '\n' + opts.harness : '');
       const prog = parseSource(full);
       const loose = prog.loose.length > 0 || prog.methods.length > 0;
       if (loose) {
@@ -2871,7 +2907,7 @@ class StackOverflowError extends Error {}
         if (!PRELUDES[name]) throw new Error('Unknown prelude: ' + name);
         it.load(parsedPrelude(name, PRELUDES[name]), true);
       }
-      const prog = parseSource(source);
+      const prog = parseSource(source + autoLogSource(source, opts));
       if (prog.loose.length > 0 || prog.methods.length > 0) {
         throw compileErr('class, interface, or enum expected\n  (put your code inside a class)', (prog.loose[0] || prog.methods[0]).line);
       }

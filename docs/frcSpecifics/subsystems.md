@@ -1,483 +1,766 @@
 # Subsystems
 
-A __subsystem__ is one mechanism on the robot: the drivetrain, the intake, the arm, the shooter. In code, each one is a class in its own file inside the `subsystems` folder, and it follows one rule:
+A __subsystem__ is one mechanism on the robot: the intake, the elevator, the climber. On our team, every subsystem is built the same way, in three layers, and it runs on __states__. Once you've seen one, you can read all of them.
 
-!!! info "The subsystem rule"
-    __Only the subsystem touches its own hardware.__ Nothing else on the robot calls its motors directly. Everyone else asks the subsystem to do something.
+This page builds an intake from scratch. Every editor runs in your browser, so you can try each idea as you read.
 
-This is the same idea as `private` from the Java lessons. A `Car` keeps its `color` private and lets you change it through methods. A subsystem keeps its motors private and lets the rest of the robot use them through methods.
+## Three layers
+
+The rule is the one from the Java lessons: __only one class touches the hardware.__ Everything else asks. We take that rule one step further and split each mechanism into three layers.
+
+```mermaid
+graph TD
+    S["Intake.java<br>the subsystem: states and logic"] -->|"only talks to"| IO["IntakeIO.java<br>the interface: what the hardware can do"]
+    IO --- K["IntakeIOKraken<br>real motors"]
+    IO --- SIM["IntakeIOSim<br>pretend motors"]
+    IO --- R["IntakeIOReplay<br>does nothing"]
+```
+
+- __`IntakeIO`__ is an interface. It lists everything the hardware can do (spin at some voltage) and everything it can report (how fast it's spinning).
+- __`IntakeIOKraken`, `IntakeIOSim` and `IntakeIOReplay`__ each implement that interface. One talks to real motors, one is a pretend intake, and one does nothing.
+- __`Intake`__ is the subsystem. It holds an `IntakeIO` and never knows which one. All the thinking happens here.
+
+!!! note "Our real intake is two mechanisms"
+    To keep this page small, we're building an intake with a single roller. On the real robot, the intake is a roller __and__ a pivot arm, so it has two IO folders, `intake/roller/` (`IntakeRollerIO`) and `intake/pivot/` (`PivotIO`), each with its own Kraken, Sim and Replay classes. One `Intake` subsystem holds both. When you open the real code, that's why you won't find a file called `IntakeIO`. Every piece works exactly the way it does here, just twice. The `Manipulator` does the same thing with a roller, a wrist and a sensor.
+
+Why go to all this trouble? Three reasons.
+
+1. __We can test without a robot.__ The robot isn't always available, and half the team wants to code at the same time. With `IntakeIOSim`, your code runs on a laptop.
+2. __We can replay matches.__ Every loop, the robot logs everything the hardware reported. After a match, we feed that log back through the same `Intake` code on a laptop, using the replay class so no hardware is needed, and watch exactly what the code decided. If something went wrong, we can find out why.
+3. __Changing hardware touches one file.__ Swap a motor type and only the Kraken class changes. The logic doesn't care.
 
 ```mermaid
 graph LR
-    B[Button pressed] --> C[Command]
-    C -->|"intake()"| S[IntakeSubsystem]
-    S --> M[(Motor)]
+    subgraph "On the robot"
+    A["Real motor"] --> B["IntakeIOKraken"] --> C["Intake logic"] --> L["Log file"]
+    end
+    subgraph "Replaying on a laptop"
+    L2["Log file"] --> D["IntakeIOReplay (no hardware)"] --> E["Same Intake logic"]
+    end
 ```
 
-Why bother? Because when the intake spins the wrong way, there's exactly one file to look in. And because the scheduler can use the subsystem to make sure two commands never fight over the same motor. More on that below.
+## Try the finished intake
 
-## What goes in a subsystem file
-
-Every subsystem file has the same four parts. Here is one, with the parts labeled. You'll build this one in a moment.
-
-```java title="IntakeSubsystem.java"
-public class IntakeSubsystem extends SubsystemBase {          // (1)!
-
-    private final SparkMax m_motor =                          // (2)!
-        new SparkMax(IntakeConstants.kMotorId, MotorType.kBrushless);
-
-    public IntakeSubsystem() {                                // (3)!
-        // set up the motor here
-    }
-
-    public void intake() {                                    // (4)!
-        m_motor.set(IntakeConstants.kIntakeSpeed);
-    }
-
-    public void stop() {
-        m_motor.set(0.0);
-    }
-
-    @Override
-    public void periodic() {                                  // (5)!
-        SmartDashboard.putNumber("Intake speed", m_motor.get());
-    }
-}
-```
-
-1. `extends SubsystemBase` is what makes this class a subsystem. The scheduler now knows it exists.
-2. The hardware, `private final`. Nothing outside this class can reach the motor.
-3. The constructor runs once when the robot starts. This is where hardware gets configured.
-4. Simple public methods describing what the mechanism can __do__. Keep them small and named for the action.
-5. `periodic()` runs every 20 ms for you. It's the place for telemetry, meaning numbers you want to see on the dashboard.
-
-## Build an intake
-
-Time to run one. This robot has an intake, and the `RobotContainer` already connects the A button to it. __You don't need to understand `RobotContainer` yet__, because that's the next page. For now, focus on the subsystem.
-
-Press __Run__, make sure the robot is in __teleop__, then press and hold the __A__ button on the virtual controller. The intake motor should spin, and the dashboard should show its speed.
+Here is the whole thing working. Read it once, press __Run__, switch to __Teleop__, then press __A__ (intake), __B__ (outtake) and __X__ (stow). Watch the dashboard on the right. You'll see the state change and the speed ramp up. You will build each of these pieces yourself below.
 
 ```playground
-//@ title: An intake subsystem
+//@ title: The finished intake
 //@ panel: robot
-//@ goal: Run it and hold A. Then change 0.8 to a different speed and restart. The motor reads its speed from the one line in intake().
-//@ lines: 30
-public class IntakeSubsystem extends SubsystemBase {
-    private final SparkMax m_motor = new SparkMax(5, MotorType.kBrushless);
-
-    public void intake() {
-        m_motor.set(0.8);
+//@ show: controller,dashboard
+//@ goal: Run it, switch to Teleop, and press A, B and X. Notice that the speed doesn't jump instantly, because the pretend motor takes a moment to spin up.
+//@ lines: 70
+//@ maxlines: 34
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
     }
 
-    public void stop() {
-        m_motor.set(0.0);
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+    private double m_velocity = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        // spin up a little each loop, like a real motor does
+        m_velocity += (m_voltage * 8.0 - m_velocity) * 0.2;
+        inputs.velocityRPS = m_velocity;
+        inputs.voltage = m_voltage;
     }
 
     @Override
-    public void periodic() {
-        SmartDashboard.putNumber("Intake speed", m_motor.get());
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
     }
 }
 
-public class RobotContainer {
-    private final IntakeSubsystem m_intake = new IntakeSubsystem();
-    private final CommandXboxController m_driver = new CommandXboxController(0);
-
-    public RobotContainer() {
-        configureBindings();
-    }
-
-    private void configureBindings() {
-        // While A is held: intake. When released: stop.
-        m_driver.a().whileTrue(
-            m_intake.startEnd(() -> m_intake.intake(), () -> m_intake.stop()));
-    }
-}
-```
-
-Look at the __Scheduler__ section as you press and release the button. When you hold A, a command named `StartEndCommand` appears: it started when you pressed the button and ended when you let go. We'll look at how that's built in a moment.
-
-### Challenge: add a method
-
-The intake can only go one way. Real intakes also need to spit a game piece back out. Add an `outtake()` method that runs the motor backwards at half speed.
-
-```playground
-//@ title: Add outtake()
-//@ prelude: wpilib
-//@ goal: Add a public method called outtake() that sets the motor to -0.5.
-//@ lines: 20
-//@ require: void\s+outtake\s*\(\s*\) | Add a public void method named outtake() with no inputs.
-public class IntakeSubsystem extends SubsystemBase {
-    private final SparkMax m_motor = new SparkMax(5, MotorType.kBrushless);
-
-    public void intake() {
-        m_motor.set(0.8);
-    }
-
-    public void stop() {
-        m_motor.set(0.0);
-    }
-
-    // Add outtake() here
-
-}
-//@@ harness
-IntakeSubsystem intake = new IntakeSubsystem();
-intake.intake();
-System.out.println(Sim.getMotorOutput(5));
-intake.outtake();
-System.out.println(Sim.getMotorOutput(5));
-intake.stop();
-System.out.println(Sim.getMotorOutput(5));
-//@@ expect
-0.8
--0.5
-0.0
-//@@ hint
-It looks just like `intake()` and `stop()`: `public void`, a name, empty parentheses, and braces.
-//@@ hint
-Inside the braces, call `m_motor.set(...)` with a negative number.
-//@@ solution
-public class IntakeSubsystem extends SubsystemBase {
-    private final SparkMax m_motor = new SparkMax(5, MotorType.kBrushless);
-
-    public void intake() {
-        m_motor.set(0.8);
-    }
-
-    public void stop() {
-        m_motor.set(0.0);
-    }
-
-    public void outtake() {
-        m_motor.set(-0.5);
-    }
-}
-//@@ explain
-A negative speed spins the motor the other way. Notice that only the subsystem knows the motor's CAN id and speeds. The rest of the robot just says `outtake()`.
-```
-
-### Replace magic numbers with constants
-
-`5`, `0.8` and `-0.5` are __magic numbers__: numbers sitting in code with no explanation. Change the CAN id and you'd have to hunt for every `5`. This is what `Constants.java` is for, as you saw on the [FRC Nuances](frcProgramming.md) page.
-
-```playground
-//@ title: Use constants
-//@ prelude: wpilib
-//@ goal: Replace the three magic numbers in IntakeSubsystem with the constants from IntakeConstants.
-//@ lines: 28
-//@ require: new SparkMax\(\s*(Constants\.)?IntakeConstants\.kMotorId | Use IntakeConstants.kMotorId for the motor id.
-//@ require: set\(\s*(Constants\.)?IntakeConstants\.kIntakeSpeed | Use IntakeConstants.kIntakeSpeed in intake().
-//@ require: set\(\s*(Constants\.)?IntakeConstants\.kOuttakeSpeed | Use IntakeConstants.kOuttakeSpeed in outtake().
-public class Constants {
-    public static class IntakeConstants {
-        public static final int kMotorId = 5;
-        public static final double kIntakeSpeed = 0.8;
-        public static final double kOuttakeSpeed = -0.5;
-    }
-}
-
-public class IntakeSubsystem extends SubsystemBase {
-    private final SparkMax m_motor = new SparkMax(5, MotorType.kBrushless);
-
-    public void intake() {
-        m_motor.set(0.8);
-    }
-
-    public void outtake() {
-        m_motor.set(-0.5);
-    }
-}
-//@@ harness
-IntakeSubsystem intake = new IntakeSubsystem();
-intake.intake();
-System.out.println(Sim.getMotorOutput(Constants.IntakeConstants.kMotorId));
-intake.outtake();
-System.out.println(Sim.getMotorOutput(Constants.IntakeConstants.kMotorId));
-//@@ expect
-0.8
--0.5
-//@@ hint
-A constant is reached through its class names, like `Constants.IntakeConstants.kMotorId`. Swap each number for the matching constant.
-//@@ solution
-public class Constants {
-    public static class IntakeConstants {
-        public static final int kMotorId = 5;
-        public static final double kIntakeSpeed = 0.8;
-        public static final double kOuttakeSpeed = -0.5;
-    }
-}
-
-public class IntakeSubsystem extends SubsystemBase {
-    private final SparkMax m_motor = new SparkMax(Constants.IntakeConstants.kMotorId, MotorType.kBrushless);
-
-    public void intake() {
-        m_motor.set(Constants.IntakeConstants.kIntakeSpeed);
-    }
-
-    public void outtake() {
-        m_motor.set(Constants.IntakeConstants.kOuttakeSpeed);
-    }
-}
-//@@ explain
-Now the numbers live in one file. In a real project you'd add `import static frc.robot.Constants.IntakeConstants.*;` or `import frc.robot.Constants.IntakeConstants;` and write `IntakeConstants.kMotorId`.
-```
-
-## Command factories
-
-So far, a subsystem exposes methods like `intake()` and `stop()`. But a button doesn't call a method. It schedules a __command__. A command is an action that the scheduler starts, runs, and ends, and a subsystem can build commands for itself using helper methods inherited from `SubsystemBase`:
-
-| Helper | What the command does |
-|---|---|
-| `runOnce(() -> ...)` | Runs the code one time, then finishes. |
-| `run(() -> ...)` | Runs the code every 20 ms until something cancels it. |
-| `startEnd(() -> start, () -> end)` | Runs `start` once when it begins, and `end` once when it's cancelled. |
-| `runEnd(() -> run, () -> end)` | Runs `run` every 20 ms, and `end` once when it's cancelled. |
-
-These are the lambdas from the last page doing their job. You hand the scheduler "do this later," and it decides when.
-
-It's common to have the subsystem return ready-made commands. That keeps `RobotContainer` short and easy to read:
-
-```java
-public Command intakeCommand() {
-    return startEnd(() -> intake(), () -> stop());
-}
-```
-
-Try it. This challenge makes the command for you to finish. The test schedules your command, lets it run, then cancels it, like a driver pressing and releasing a button.
-
-```playground
-//@ title: Write a command factory
-//@ prelude: wpilib
-//@ goal: Finish intakeCommand() so it runs intake() while the command is active and calls stop() when it ends.
-//@ lines: 22
-//@ require: startEnd | Use startEnd(...) to build the command.
-public class IntakeSubsystem extends SubsystemBase {
-    private final SparkMax m_motor = new SparkMax(5, MotorType.kBrushless);
-
-    public void intake() {
-        m_motor.set(0.8);
-    }
-
-    public void stop() {
-        m_motor.set(0.0);
-    }
-
-    public Command intakeCommand() {
-        // return a command here
-        return null;
-    }
-}
-//@@ harness
-IntakeSubsystem intake = new IntakeSubsystem();
-Command cmd = intake.intakeCommand();
-cmd.schedule();
-Sim.loops(3);
-System.out.println("running: " + Sim.getMotorOutput(5));
-cmd.cancel();
-Sim.loops(1);
-System.out.println("after cancel: " + Sim.getMotorOutput(5));
-//@@ expect
-running: 0.8
-after cancel: 0.0
-//@@ hint
-`startEnd` takes two lambdas. The first runs at the start, and the second runs when the command ends.
-//@@ hint
-`return startEnd(() -> intake(), () -> stop());`
-//@@ solution
-public class IntakeSubsystem extends SubsystemBase {
-    private final SparkMax m_motor = new SparkMax(5, MotorType.kBrushless);
-
-    public void intake() {
-        m_motor.set(0.8);
-    }
-
-    public void stop() {
-        m_motor.set(0.0);
-    }
-
-    public Command intakeCommand() {
-        return startEnd(() -> intake(), () -> stop());
-    }
-}
-//@@ explain
-The motor starts when the command starts and stops when it's cancelled, so even if something unexpected interrupts it, the intake never gets left running. That safety is why `startEnd` is so popular for held buttons.
-```
-
-## One command per subsystem at a time
-
-Each command declares which subsystems it __requires__. The helper methods above automatically require the subsystem that built them. The scheduler follows one rule: __only one command can use a subsystem at a time__. If a second command that requires the same subsystem starts, the first is interrupted.
-
-That's the safety net that stops two commands from fighting over a motor. See if you can predict what happens.
-
-```playground
-//@ title: Two commands, one intake
-//@ mode: predict
-//@ prelude: wpilib
-//@ goal: What do the three lines print?
-//@ lines: 21
 public class Intake extends SubsystemBase {
-    private final SparkMax m_motor = new SparkMax(5, MotorType.kBrushless);
-    public void spin(double speed) { m_motor.set(speed); }
-}
-
-Intake intake = new Intake();
-Command forward = intake.startEnd(() -> intake.spin(0.8), () -> intake.spin(0.0));
-Command backward = intake.startEnd(() -> intake.spin(-0.5), () -> intake.spin(0.0));
-
-forward.schedule();
-Sim.loops(1);
-System.out.println("motor: " + Sim.getMotorOutput(5));
-
-backward.schedule();
-Sim.loops(1);
-System.out.println("motor: " + Sim.getMotorOutput(5));
-System.out.println("forward still running? " + forward.isScheduled());
-//@@ explain
-Both commands require the same subsystem, so scheduling `backward` cancels `forward` first. The motor ends up at -0.5 (from `backward`), and `forward` is no longer scheduled.
-```
-
-## Reading sensors in a subsystem
-
-Subsystems also own the __sensors__ for their mechanism, such as limit switches and encoders. They expose what the sensor sees through methods that return values. Try the intake below. It has a break-beam sensor on digital port 0 that detects when a game piece is inside. Flip the sensor switch in the panel to simulate a game piece arriving, and watch the intake stop on its own.
-
-```playground
-//@ title: An intake with a sensor
-//@ panel: robot
-//@ dio: 0
-//@ goal: Run it and hold A. The intake spins until you flip the DIO 0 switch (a game piece breaks the beam), then it stops. Release A and hold it again with the sensor still on: the intake won't start.
-//@ lines: 38
-public class IntakeSubsystem extends SubsystemBase {
-    private final SparkMax m_motor = new SparkMax(5, MotorType.kBrushless);
-    private final DigitalInput m_beamBreak = new DigitalInput(0);
-
-    public boolean hasPiece() {
-        return m_beamBreak.get();
+    public static enum IntakeState {
+        kStow,
+        kIntaking,
+        kOuttaking
     }
 
-    public Command intakeCommand() {
-        return runEnd(
-            () -> {
-                if (hasPiece()) {
-                    m_motor.set(0.0);
-                } else {
-                    m_motor.set(0.8);
-                }
-            },
-            () -> m_motor.set(0.0));
+    private final IntakeIO m_io;
+    private final IntakeInputsAutoLogged m_inputs = new IntakeInputsAutoLogged();
+    private final SubsystemProfiles<IntakeState> m_profiles;
+
+    public Intake(IntakeIO io) {
+        m_io = io;
+
+        Map<IntakeState, Runnable> periodicHash = new HashMap<>();
+        periodicHash.put(IntakeState.kStow, this::stowPeriodic);
+        periodicHash.put(IntakeState.kIntaking, this::intakingPeriodic);
+        periodicHash.put(IntakeState.kOuttaking, this::outtakingPeriodic);
+
+        m_profiles = new SubsystemProfiles<>(periodicHash, IntakeState.kStow);
+    }
+
+    public void updateState(IntakeState state) {
+        m_profiles.setCurrentProfile(state);
+    }
+
+    public IntakeState getCurrentState() {
+        return m_profiles.getCurrentProfile();
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putBoolean("Has piece", hasPiece());
-        SmartDashboard.putNumber("Intake speed", m_motor.get());
+        m_io.updateInputs(m_inputs);
+
+        m_profiles.getPeriodicFunctionTimed().run();
+
+        Logger.processInputs("Intake", m_inputs);
+        Logger.recordOutput("Intake/State", m_profiles.getCurrentProfile());
+    }
+
+    public void stowPeriodic() {
+        m_io.setVoltage(0.0);
+    }
+
+    public void intakingPeriodic() {
+        m_io.setVoltage(8.0);
+    }
+
+    public void outtakingPeriodic() {
+        m_io.setVoltage(-8.0);
     }
 }
 
+// Buttons just change the state. You'll see how this works in RobotContainer.
 public class RobotContainer {
-    private final IntakeSubsystem m_intake = new IntakeSubsystem();
+    private final Intake m_intake = new Intake(new IntakeIOSim());
     private final CommandXboxController m_driver = new CommandXboxController(0);
 
     public RobotContainer() {
-        m_driver.a().whileTrue(m_intake.intakeCommand());
+        m_driver.a().onTrue(Commands.runOnce(() -> m_intake.updateState(Intake.IntakeState.kIntaking)));
+        m_driver.b().onTrue(Commands.runOnce(() -> m_intake.updateState(Intake.IntakeState.kOuttaking)));
+        m_driver.x().onTrue(Commands.runOnce(() -> m_intake.updateState(Intake.IntakeState.kStow)));
     }
 }
 ```
 
-!!! warning "Why `m_beamBreak.get()` and not `!`"
-    On real hardware, many digital sensors read __false__ when triggered, so you'll often see `!m_beamBreak.get()`. Check how your sensor is wired. The simulator reads `true` when the switch is on.
+Now let's build it, one layer at a time.
+
+## Layer 1: the IO interface
+
+The interface does two jobs. It lists what you can __tell__ the hardware to do (`setVoltage`), and it defines everything the hardware can __report__, bundled into an inputs class.
+
+```java title="IntakeIO.java"
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+```
+
+The inputs class is just a bag of public fields: speed, voltage, current, temperature, and whether the motor is even connected. The `@AutoLog` above it tells AdvantageKit, our logging library, to record every field in it. `updateInputs` fills the bag with fresh readings, and `setVoltage` is a command going the other way.
+
+We control intake motors with __voltage__ instead of a percent. A battery gives about 12 volts, so `8.0` means two thirds power, and unlike a percent, it doesn't change when the battery sags.
+
+Your turn. `IntakeIOSim` is finished below, but the interface it implements doesn't exist yet. Write it.
+
+```playground
+//@ title: Write the IO interface
+//@ goal: Write IntakeIO. It needs an inputs class with two double fields (velocityRPS and voltage), an updateInputs method, and a setVoltage method.
+//@ lines: 24
+//@ require: @AutoLog | Put @AutoLog above the inputs class.
+//@ require: interface\s+IntakeIO | Declare an interface named IntakeIO.
+// Write the IntakeIO interface here:
+
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        inputs.velocityRPS = m_voltage * 8.0;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+//@@ harness
+IntakeIO io = new IntakeIOSim();
+IntakeIO.IntakeInputs inputs = new IntakeIO.IntakeInputs();
+io.setVoltage(6.0);
+io.updateInputs(inputs);
+System.out.println(inputs.velocityRPS);
+System.out.println(inputs.voltage);
+//@@ expect
+48.0
+6.0
+//@@ hint
+Start with `public interface IntakeIO {`. Inside it go three things: the inputs class, and two method headers that end in a semicolon instead of a body.
+//@@ hint
+The inputs class is `@AutoLog public static class IntakeInputs { ... }` with `public double velocityRPS;` and `public double voltage;` inside.
+//@@ solution
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        inputs.velocityRPS = m_voltage * 8.0;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+//@@ explain
+Every IO class for this mechanism now has to provide exactly these two methods, and fill in exactly these two fields. That's the contract that makes real, sim and replay swappable.
+```
+
+!!! note "Where does `IntakeInputsAutoLogged` come from?"
+    You'll see the subsystem use a class called `IntakeInputsAutoLogged`, which you never wrote. When the robot code is built, AdvantageKit reads each `@AutoLog` class and generates a `...AutoLogged` version of it that knows how to write every field to the log, and read it back during a replay. The editors on this page generate it for you the same way.
+
+## Layer 2: the IO classes
+
+Each IO class fills in the inputs and applies the voltage. They differ in where the numbers come from.
+
+### The simulated intake
+
+In simulation there's no motor to ask, so the class remembers the voltage it was told and pretends to be a motor. Real teams use WPILib's physics classes here. We'll keep the math simple: speed is 8 times the voltage.
+
+```playground
+//@ title: Make the pretend motor report
+//@ goal: Fill in updateInputs. The velocity should be 8 times the voltage the motor was told, and the voltage field should report that voltage.
+//@ lines: 28
+//@ require: inputs\.velocityRPS\s*= | Set inputs.velocityRPS.
+//@ require: inputs\.voltage\s*= | Set inputs.voltage.
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        // Report what the pretend motor is doing here:
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+//@@ harness
+IntakeIO io = new IntakeIOSim();
+IntakeIO.IntakeInputs inputs = new IntakeIO.IntakeInputs();
+io.setVoltage(6.0);
+io.updateInputs(inputs);
+System.out.println(inputs.velocityRPS);
+System.out.println(inputs.voltage);
+//@@ expect
+48.0
+6.0
+//@@ hint
+`m_voltage` holds the last voltage the subsystem asked for.
+//@@ hint
+`inputs.velocityRPS = m_voltage * 8.0;` and `inputs.voltage = m_voltage;`
+//@@ solution
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        inputs.velocityRPS = m_voltage * 8.0;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+//@@ explain
+The subsystem never asks "is this real?" It calls `updateInputs`, reads the fields, and gets sensible numbers either way.
+```
+
+### The replay intake
+
+When replaying a log, the real readings come from the log file, and there is no hardware to command. So the replay class is empty: every method exists and does nothing. You wrote one of these on the previous page.
+
+```java title="IntakeIOReplay.java"
+public class IntakeIOReplay implements IntakeIO {
+    @Override
+    public void updateInputs(IntakeInputs inputs) {}
+
+    @Override
+    public void setVoltage(double voltage) {}
+}
+```
+
+### The real intake
+
+This is the only class that touches a real motor. Our robot uses Kraken motors, which are controlled through a `TalonFX` object from the CTRE library. You don't need to memorize it, but read it, because every real IO class on our robot looks like this.
+
+```java title="IntakeIOKraken.java (shortened)"
+public class IntakeIOKraken implements IntakeIO {
+    private TalonFX m_motor;
+
+    private StatusSignal<AngularVelocity> m_motorVelocity;
+    private StatusSignal<Voltage> m_motorVoltage;
+
+    private final VoltageOut m_voltageOut = new VoltageOut(0.0).withEnableFOC(true);
+
+    public IntakeIOKraken(int port) {
+        m_motor = new TalonFX(port, Ports.kDriveCanivoreName);
+
+        // protect the motor and the battery
+        var currentLimits =
+            new CurrentLimitsConfigs()
+                .withSupplyCurrentLimitEnable(true)
+                .withSupplyCurrentLimit(CurrentLimitConstants.kIntakeRollerDefaultSupplyLimit);
+
+        m_motor.getConfigurator().apply(new TalonFXConfiguration().withCurrentLimits(currentLimits));
+
+        // ask the motor for the readings we want, and how often
+        m_motorVelocity = m_motor.getVelocity();
+        m_motorVoltage = m_motor.getMotorVoltage();
+        BaseStatusSignal.setUpdateFrequencyForAll(75.0, m_motorVelocity, m_motorVoltage);
+    }
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        BaseStatusSignal.refreshAll(m_motorVelocity, m_motorVoltage);
+
+        inputs.velocityRPS = m_motorVelocity.getValue().in(RotationsPerSecond);
+        inputs.voltage = m_motorVoltage.getValue().in(Volts);
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_motor.setControl(m_voltageOut.withOutput(voltage));
+    }
+}
+```
+
+Compare it to the sim class. `setVoltage` and `updateInputs` are the same two methods with the same fields. The only difference is that this one gets its numbers by asking a real motor. The constructor takes the CAN id as a parameter. That's how `RobotContainer`, not this class, decides which motor it is.
+
+```quiz
+@ title: The IO layers
+? Which class is the only one that talks to a real motor?
+- `Intake`
+- `IntakeIO`
++ `IntakeIOKraken`
+- `IntakeIOSim`
+> The subsystem only knows about the `IntakeIO` interface. The Kraken class is the one place real hardware is used.
+
+? Why is `IntakeIOReplay` empty?
+- It isn't finished yet
++ During a replay the readings come from the log file and there's no hardware to command
+- Replays don't use motors, so the class is deleted
+- Because the Kraken class does the work
+> An empty implementation is exactly right. The logged data already says what the hardware did.
+
+? What does `updateInputs` do?
+- Sends a command to the motor
++ Fills the inputs object with fresh readings
+- Changes the subsystem's state
+- Creates the motor
+> It is the way __in__: the hardware (real or pretend) reports what it's doing.
+
+? Why do we command a motor with voltage instead of a percent?
+- Percent doesn't work on Krakens
++ The same voltage gives the same push even as the battery drains
+- Voltage is easier to type
+- It uses less power
+> A percent of a sagging battery is a weaker push. A voltage request stays the same.
+```
+
+## Layer 3: the subsystem
+
+Now the part where the thinking happens. The subsystem has three pieces:
+
+1. A list of __states__, as an enum. Each state is one thing the mechanism can be doing.
+2. A __map__ from each state to the method that runs while it's in that state.
+3. A `periodic()` method, called every 20 ms, that ties it together.
+
+```java title="The heart of Intake.java"
+public static enum IntakeState {
+    kStow,
+    kIntaking,
+    kOuttaking
+}
+
+private SubsystemProfiles<IntakeState> m_profiles;
+
+public Intake(IntakeIO io) {
+    m_io = io;
+
+    Map<IntakeState, Runnable> periodicHash = new HashMap<>();
+    periodicHash.put(IntakeState.kStow, this::stowPeriodic);
+    periodicHash.put(IntakeState.kIntaking, this::intakingPeriodic);
+    periodicHash.put(IntakeState.kOuttaking, this::outtakingPeriodic);
+
+    m_profiles = new SubsystemProfiles<>(periodicHash, IntakeState.kStow);
+}
+```
+
+This is the interface/enum/map pattern from the previous page. `SubsystemProfiles` is a small helper class our team wrote that keeps track of the current state and hands back the method to run for it. It starts in `kStow`.
+
+Everything else in the subsystem is small. Changing state is one line, and everything that happens in a state is a short method:
+
+```java title="Changing state, and what each state does"
+public void updateState(IntakeState state) {
+    m_profiles.setCurrentProfile(state);
+}
+
+public void stowPeriodic() {
+    m_io.setVoltage(0.0);
+}
+
+public void intakingPeriodic() {
+    m_io.setVoltage(8.0);
+}
+```
+
+Nothing happens at the moment `updateState` is called. It only changes which method `periodic()` will run next. Here's `periodic()`, the method the scheduler calls every loop. The order of its lines matters.
+
+```java title="periodic(), in order"
+@Override
+public void periodic() {
+    m_io.updateInputs(m_inputs);                       // 1. read the hardware
+
+    m_profiles.getPeriodicFunctionTimed().run();       // 2. run the current state's method
+
+    Logger.processInputs("Intake", m_inputs);          // 3. log what we read
+    Logger.recordOutput("Intake/State", m_profiles.getCurrentProfile());  // 4. log the state
+}
+```
+
+__Read first, think second, log last.__ Every decision in step 2 is made with fresh readings from step 1. And because the inputs are logged, a replay can run the exact same step 2 with the exact same numbers the robot saw.
+
+Time to add to it. This is the intake without an outtake state. Add one: a new `kOuttaking` state that runs the roller backwards.
+
+```playground
+//@ title: Add the outtake state
+//@ prelude: wpilib
+//@ goal: Add a kOuttaking state. Add it to the enum, register outtakingPeriodic in the map, and write outtakingPeriodic so it sets the voltage to Constants.IntakeConstants.kOuttakeVoltage.
+//@ lines: 70
+//@ maxlines: 30
+//@ require: put\(\s*IntakeState\.kOuttaking\s*,\s*this::outtakingPeriodic\s*\) | Register kOuttaking with this::outtakingPeriodic.
+//@ require: void\s+outtakingPeriodic | Write a method called outtakingPeriodic.
+public class Constants {
+    public static final class IntakeConstants {
+        public static final double kIntakeVoltage = 8.0;
+        public static final double kOuttakeVoltage = -8.0;
+    }
+}
+
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        inputs.velocityRPS = m_voltage * 8.0;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+
+public class Intake extends SubsystemBase {
+    public static enum IntakeState {
+        kStow,
+        kIntaking
+    }
+
+    private final IntakeIO m_io;
+    private final IntakeInputsAutoLogged m_inputs = new IntakeInputsAutoLogged();
+    private final SubsystemProfiles<IntakeState> m_profiles;
+
+    public Intake(IntakeIO io) {
+        m_io = io;
+
+        Map<IntakeState, Runnable> periodicHash = new HashMap<>();
+        periodicHash.put(IntakeState.kStow, this::stowPeriodic);
+        periodicHash.put(IntakeState.kIntaking, this::intakingPeriodic);
+
+        m_profiles = new SubsystemProfiles<>(periodicHash, IntakeState.kStow);
+    }
+
+    public void updateState(IntakeState state) {
+        m_profiles.setCurrentProfile(state);
+    }
+
+    public double getVoltage() {
+        return m_inputs.voltage;
+    }
+
+    @Override
+    public void periodic() {
+        m_io.updateInputs(m_inputs);
+        m_profiles.getPeriodicFunctionTimed().run();
+        Logger.processInputs("Intake", m_inputs);
+        Logger.recordOutput("Intake/State", m_profiles.getCurrentProfile());
+    }
+
+    public void stowPeriodic() {
+        m_io.setVoltage(0.0);
+    }
+
+    public void intakingPeriodic() {
+        m_io.setVoltage(Constants.IntakeConstants.kIntakeVoltage);
+    }
+}
+//@@ harness
+Intake intake = new Intake(new IntakeIOSim());
+intake.updateState(Intake.IntakeState.kOuttaking);
+Sim.loops(2);
+System.out.println(intake.getVoltage());
+//@@ expect
+-8.0
+//@@ hint
+There are three places to change: the enum list, the map in the constructor, and a new method at the bottom.
+//@@ hint
+In the enum add `kOuttaking`. In the constructor add `periodicHash.put(IntakeState.kOuttaking, this::outtakingPeriodic);`. Then write `public void outtakingPeriodic()` like `intakingPeriodic()`, but with `Constants.IntakeConstants.kOuttakeVoltage`.
+//@@ solution
+public class Constants {
+    public static final class IntakeConstants {
+        public static final double kIntakeVoltage = 8.0;
+        public static final double kOuttakeVoltage = -8.0;
+    }
+}
+
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        inputs.velocityRPS = m_voltage * 8.0;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+
+public class Intake extends SubsystemBase {
+    public static enum IntakeState {
+        kStow,
+        kIntaking,
+        kOuttaking
+    }
+
+    private final IntakeIO m_io;
+    private final IntakeInputsAutoLogged m_inputs = new IntakeInputsAutoLogged();
+    private final SubsystemProfiles<IntakeState> m_profiles;
+
+    public Intake(IntakeIO io) {
+        m_io = io;
+
+        Map<IntakeState, Runnable> periodicHash = new HashMap<>();
+        periodicHash.put(IntakeState.kStow, this::stowPeriodic);
+        periodicHash.put(IntakeState.kIntaking, this::intakingPeriodic);
+        periodicHash.put(IntakeState.kOuttaking, this::outtakingPeriodic);
+
+        m_profiles = new SubsystemProfiles<>(periodicHash, IntakeState.kStow);
+    }
+
+    public void updateState(IntakeState state) {
+        m_profiles.setCurrentProfile(state);
+    }
+
+    public double getVoltage() {
+        return m_inputs.voltage;
+    }
+
+    @Override
+    public void periodic() {
+        m_io.updateInputs(m_inputs);
+        m_profiles.getPeriodicFunctionTimed().run();
+        Logger.processInputs("Intake", m_inputs);
+        Logger.recordOutput("Intake/State", m_profiles.getCurrentProfile());
+    }
+
+    public void stowPeriodic() {
+        m_io.setVoltage(0.0);
+    }
+
+    public void intakingPeriodic() {
+        m_io.setVoltage(Constants.IntakeConstants.kIntakeVoltage);
+    }
+
+    public void outtakingPeriodic() {
+        m_io.setVoltage(Constants.IntakeConstants.kOuttakeVoltage);
+    }
+}
+//@@ explain
+Adding a state is always the same three steps: add it to the enum, register its method in the map, write the method. The harness called `Sim.loops(2)` because the state's method runs on the first loop, and the readings reflect it on the second.
+```
+
+Notice that you didn't touch the IO classes at all. A new behavior is a new state, and the hardware layer stays exactly as it was.
+
+## Using sensors to change state
+
+Because `periodic()` reads the inputs before running the state, a state can look at a sensor and move the mechanism to another state by itself. This is how we stop an intake the moment it has a game piece.
+
+```java title="A state that changes itself"
+public void intakingPeriodic() {
+    m_io.setVoltage(IntakeConstants.kIntakeVoltage);
+
+    // current spikes when the rollers squeeze a game piece
+    if (m_inputs.current > IntakeConstants.kHasPieceCurrent) {
+        updateState(IntakeState.kHold);
+    }
+}
+```
+
+The operator pressed intake once. The subsystem decided for itself when it was done. Our real intake does exactly this, along with checking whether its pivot has reached an angle before spinning the rollers.
+
+```quiz
+@ title: Subsystem states
+? Why is the first line of `periodic()` a call to `updateInputs`?
+- It's required by Java
++ So the state's method decides using fresh readings
+- So the log file is smaller
+- To reset the motor
+> Read first, think second, log last.
+
+? You call `intake.updateState(IntakeState.kIntaking)`. When do the rollers start spinning?
+- Instantly, inside `updateState`
++ On the next `periodic()`, when the new state's method runs
+- Never, you need a command for that
+- When the driver presses A again
+> `updateState` only changes which method runs next. `periodic()` does the work.
+
+? You add a new state `kHold` to the enum but forget to register a method for it in the map. What happens when the subsystem enters `kHold`?
+- The rollers stop safely
++ It prints a warning (and does nothing), because there's no method to run for that state
+- It fixes itself
+- The robot code won't compile
+> `SubsystemProfiles` warns you in the console when a state has no method. Each state in the enum needs a line in the map.
+
+? What decides whether a subsystem is connected to real or simulated hardware?
+- `Intake`
++ `RobotContainer`, which hands the subsystem an IO class when it builds it
+- `periodic()`
+- `stowPeriodic()`
+> The subsystem only talks to the interface, so it never knows which IO class it got. Choosing real or sim is one decision, made in one place. (There are small exceptions, like picking simulation-friendly PID numbers. You'll see one on the Constants page.)
+```
+
+## What about commands?
+
+If you've followed an FRC tutorial, you may have seen subsystems that build commands for each action. That's a perfectly good style, and it's what the WPILib documentation teaches. Here is what the two approaches look like for the same button.
+
+=== "Commands in the subsystem"
+
+    ```java
+    // in IntakeSubsystem
+    public Command intake() {
+        return startEnd(() -> m_motor.set(0.8), () -> m_motor.set(0.0));
+    }
+
+    // in RobotContainer
+    m_driver.a().whileTrue(m_intake.intake());
+    ```
+
+=== "States (our team)"
+
+    ```java
+    // in Intake
+    public void updateState(IntakeState state) {
+        m_profiles.setCurrentProfile(state);
+    }
+
+    // in RobotContainer (or RobotState), when the driver presses A
+    m_intake.updateState(IntakeState.kIntaking);
+    ```
+
+We use states because a real robot rarely has one mechanism doing one thing. Picking up a game piece means the intake, the indexer and the elevator all have to change at the same moment, and then react to sensors. With states, one place (`RobotState`, which you'll see soon) can set all of them, and the log shows each subsystem's state at every moment. We still use commands where they fit best: driving and autonomous routines.
 
 ## On a real robot
 
-The classes in this page's editors have the same names as the real ones, but a real subsystem file starts with `package` and `import` lines and usually configures its motor. Here is what the real thing looks like with a REV SPARK MAX, using the 2025+ REVLib API:
+Real files begin with a `package` line and imports, which this page left out. They also use your team's constants. A few details:
 
-```java title="IntakeSubsystem.java (real robot)"
-package frc.robot.subsystems;
-
-import static frc.robot.Constants.IntakeConstants.*;
-
-import com.revrobotics.spark.SparkBase.PersistMode;
-import com.revrobotics.spark.SparkBase.ResetMode;
-import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import com.revrobotics.spark.config.SparkMaxConfig;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-public class IntakeSubsystem extends SubsystemBase {
-    private final SparkMax m_motor = new SparkMax(kMotorId, MotorType.kBrushless);
-
-    public IntakeSubsystem() {
-        SparkMaxConfig config = new SparkMaxConfig();
-        config.inverted(false)
-              .idleMode(IdleMode.kBrake)
-              .smartCurrentLimit(40);
-        m_motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    }
-
-    public Command intakeCommand() {
-        return startEnd(() -> m_motor.set(kIntakeSpeed), () -> m_motor.set(0.0));
-    }
-
-    @Override
-    public void periodic() {
-        SmartDashboard.putNumber("Intake speed", m_motor.get());
-    }
-}
-```
-
-!!! note "Vendor libraries change"
-    REV rewrote its Java API for the 2025 season, and CTRE (Phoenix 6) has its own style for Talon FX and Kraken motors. If your team uses a different motor controller or library version, the structure above stays exactly the same. The imports and the setup lines in the constructor are what change. Ask a mentor which library your robot uses.
-
-```quiz
-@ title: Subsystems
-? What is the "subsystem rule"?
-- Every subsystem must have exactly one motor
-+ Only the subsystem touches its own hardware
-- Subsystems can't have constructors
-- A subsystem can only run one line of code per loop
-> Everyone else on the robot asks the subsystem to do things. They never reach into the motors.
-
-? Where should the numbers like the intake's CAN id live?
-- Directly inside `Robot.java`
-+ In `Constants.java`
-- In every file that uses them
-- In `Main.java`
-> One place makes it easy to find and change them, and avoids typos from copying a number around.
-
-? You want a command that runs the intake for as long as a button is held, and stops it on release. Which helper fits best?
-- `runOnce`
-- `run`
-+ `startEnd`
-- `Commands.none()`
-> `startEnd` starts something and guarantees the end action runs when the command is cancelled.
-
-? Two commands both require `IntakeSubsystem`. The first is running, and then the second is scheduled. What happens?
-- Both run at the same time
-+ The first is cancelled, then the second runs
-- The second is ignored
-- The robot crashes
-> The scheduler never lets two commands use one subsystem at once, and by default the newer one wins.
-
-? When is a subsystem's `periodic()` method called?
-- Whenever you call it from a button binding
-- Only in teleop
-+ Every 20 ms, automatically
-- Once at startup
-> `SubsystemBase` registers the subsystem with the scheduler, which calls `periodic()` on every loop.
-
-? What is a __magic number__? (Pick all that apply.)
-+ A number written directly in code with no name explaining it
-+ Something better replaced with a constant like `kIntakeSpeed`
-- A number that is always 7
-- A number the compiler picks for you
-> Naming your numbers makes code readable and gives you one place to change them.
-```
+- __`IntakeInputsAutoLogged`__ is generated when the code is built. You'll see it used but never find a file for it.
+- __Alerts__: our subsystems turn on a dashboard alert when a motor reports it's disconnected, so a loose wire shows up before a match, not during it.
+- __Timing__: each subsystem logs how long its `periodic()` took, so we notice if one gets slow.
+- __Tuning__: numbers like voltages are not plain `double`s in our constants. They're tunable from the dashboard while the robot runs. See [Constants](constants.md).
 
 ---
 
 ## What's next
 
-You can now build a subsystem and give it commands. Next, learn how the [RobotContainer](robotContainer.md) creates your subsystems and decides which buttons make them move.
+You can now build a subsystem in layers and drive it with states. Next, see how [RobotContainer](robotContainer.md) builds each one, picks real or simulated hardware, and connects the controller.

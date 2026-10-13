@@ -126,7 +126,9 @@ Shown after the student passes.
 | `//@ require: regex \| message` | The code must match the pattern, otherwise the message is shown |
 | `//@ mode: predict` | Student predicts the output instead of writing code |
 | `//@ prelude: wpilib` | Loads the pretend WPILib (no `import` needed) |
-| `//@ panel: robot` | Shows the robot simulator and virtual controller |
+| `//@ panel: robot` | Shows the robot simulator and virtual controller. It starts a class named `Robot` (or `RobotContainer` if there is no `Robot`) |
+| `//@ show: controller,motors,dashboard,scheduler` | Which parts of the simulator panel to display (default is all four) |
+| `//@ dio: 0,1` | Adds a toggle button for each digital input channel, for pretend limit switches and sensors |
 | `//@@ harness` | Hidden code appended when checking |
 | `//@@ expect` | Exact output the check must produce |
 | `//@@ hint` | Repeatable. Revealed one at a time |
