@@ -13,7 +13,7 @@ graph TD
     S["Intake.java<br>the subsystem: states and logic"] -->|"only talks to"| IO["IntakeIO.java<br>the interface: what the hardware can do"]
     IO --- K["IntakeIOKraken<br>real motors"]
     IO --- SIM["IntakeIOSim<br>pretend motors"]
-    IO --- R["IntakeIOReplay<br>does nothing"]
+    IO --- R["IntakeIOReplay<br>for logged replay"]
 ```
 
 - __`IntakeIO`__ is an interface. It lists everything the hardware can do (spin at some voltage) and everything it can report (how fast it's spinning).
