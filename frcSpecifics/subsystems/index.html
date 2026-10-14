@@ -1,0 +1,1929 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://frc422.github.io/JavaDocs/frcSpecifics/subsystems/">
+      
+      
+        <link rel="prev" href="../frcProgramming/">
+      
+      
+        <link rel="next" href="../robotContainer/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/Logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Subsystems - Beginner's Guide To FRC Java</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/playground.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#subsystems" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Beginner&#39;s Guide To FRC Java" class="md-header__button md-logo" aria-label="Beginner's Guide To FRC Java" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M277.8 312.9c9.8-6.7 23.4-12.5 23.4-12.5s-38.7 7-77.2 10.2c-47.1 3.9-97.7 4.7-123.1 1.3-60.1-8 33-30.1 33-30.1s-36.1-2.4-80.6 19c-52.5 25.4 130 37 224.5 12.1m-85.4-32.1c-19-42.7-83.1-80.2 0-145.8C296.1 53.2 242.9 0 242.9 0c21.5 84.5-75.6 110.1-110.7 162.6-23.9 35.9 11.7 74.4 60.2 118.2M307 104.6c.1 0-175.2 43.8-91.5 140.2 24.7 28.4-6.5 54-6.5 54s62.7-32.4 33.9-72.9c-26.9-37.8-47.5-56.6 64.1-121.3m-6.1 270.5c-.5 1-1.2 1.8-2 2.6 128.3-33.7 81.1-118.9 19.8-97.3-3.3 1.2-6.2 3.4-8.2 6.3 3.6-1.3 7.3-2.3 11-3 31-6.5 75.5 41.5-20.6 91.4m47.1 62.3s14.5 11.9-15.9 21.2c-57.9 17.5-240.8 22.8-291.6.7-18.3-7.9 16-19 26.8-21.3 11.2-2.4 17.7-2 17.7-2-20.3-14.3-131.3 28.1-56.4 40.2C232.8 509.4 401 461.3 348 437.4M124.5 396c-78.7 22 47.9 67.4 148.1 24.5q-14.7-5.7-28.2-13.8c-44.7 8.5-65.4 9.1-106 4.5-33.5-3.8-13.9-15.2-13.9-15.2m179.8 97.2C225.6 508 128.5 506.3 71 496.8c0-.1 11.8 9.7 72.4 13.6 92.2 5.9 233.8-3.3 237.1-46.9 0 0-6.4 16.5-76.2 29.7M260.7 353c-59.2 11.4-93.5 11.1-136.8 6.6-33.5-3.5-11.6-19.7-11.6-19.7-86.8 28.8 48.2 61.4 169.5 25.9-7.8-2.8-15-7.1-21.1-12.8"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Beginner's Guide To FRC Java
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Subsystems
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="deep-purple"  aria-label="Light Mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Light Mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="deep-purple"  aria-label="Dark Mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark Mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/DynamicWhiteHat/FRC-Java-Docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DynamicWhiteHat/FRC-Java-Docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Beginner&#39;s Guide To FRC Java" class="md-nav__button md-logo" aria-label="Beginner's Guide To FRC Java" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M277.8 312.9c9.8-6.7 23.4-12.5 23.4-12.5s-38.7 7-77.2 10.2c-47.1 3.9-97.7 4.7-123.1 1.3-60.1-8 33-30.1 33-30.1s-36.1-2.4-80.6 19c-52.5 25.4 130 37 224.5 12.1m-85.4-32.1c-19-42.7-83.1-80.2 0-145.8C296.1 53.2 242.9 0 242.9 0c21.5 84.5-75.6 110.1-110.7 162.6-23.9 35.9 11.7 74.4 60.2 118.2M307 104.6c.1 0-175.2 43.8-91.5 140.2 24.7 28.4-6.5 54-6.5 54s62.7-32.4 33.9-72.9c-26.9-37.8-47.5-56.6 64.1-121.3m-6.1 270.5c-.5 1-1.2 1.8-2 2.6 128.3-33.7 81.1-118.9 19.8-97.3-3.3 1.2-6.2 3.4-8.2 6.3 3.6-1.3 7.3-2.3 11-3 31-6.5 75.5 41.5-20.6 91.4m47.1 62.3s14.5 11.9-15.9 21.2c-57.9 17.5-240.8 22.8-291.6.7-18.3-7.9 16-19 26.8-21.3 11.2-2.4 17.7-2 17.7-2-20.3-14.3-131.3 28.1-56.4 40.2C232.8 509.4 401 461.3 348 437.4M124.5 396c-78.7 22 47.9 67.4 148.1 24.5q-14.7-5.7-28.2-13.8c-44.7 8.5-65.4 9.1-106 4.5-33.5-3.8-13.9-15.2-13.9-15.2m179.8 97.2C225.6 508 128.5 506.3 71 496.8c0-.1 11.8 9.7 72.4 13.6 92.2 5.9 233.8-3.3 237.1-46.9 0 0-6.4 16.5-76.2 29.7M260.7 353c-59.2 11.4-93.5 11.1-136.8 6.6-33.5-3.5-11.6-19.7-11.6-19.7-86.8 28.8 48.2 61.4 169.5 25.9-7.8-2.8-15-7.1-21.1-12.8"/></svg>
+
+    </a>
+    Beginner's Guide To FRC Java
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/DynamicWhiteHat/FRC-Java-Docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DynamicWhiteHat/FRC-Java-Docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gettingStarted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro to Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Intro to Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/whyJava/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why Java?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/javaLesson1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/javaLesson2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/javaLesson3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/javaQuiz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FRC Specifics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FRC Specifics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frcProgramming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FRC Nuances
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Subsystems
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Subsystems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#three-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three layers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#try-the-finished-intake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Try the finished intake
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-1-the-io-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 1: the IO interface
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-2-the-io-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 2: the IO classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Layer 2: the IO classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-simulated-intake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The simulated intake
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-replay-intake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The replay intake
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-real-intake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The real intake
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-3-the-subsystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 3: the subsystem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-sensors-to-change-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using sensors to change state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-about-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What about commands?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-a-real-robot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        On a real robot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../robotContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RobotContainer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../robotState/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RobotState
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../constants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Constants
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#three-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three layers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#try-the-finished-intake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Try the finished intake
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-1-the-io-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 1: the IO interface
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-2-the-io-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 2: the IO classes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Layer 2: the IO classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-simulated-intake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The simulated intake
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-replay-intake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The replay intake
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-real-intake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The real intake
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layer-3-the-subsystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layer 3: the subsystem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-sensors-to-change-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using sensors to change state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-about-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What about commands?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-a-real-robot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        On a real robot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="subsystems">Subsystems</h1>
+<p>A <strong>subsystem</strong> is one mechanism on the robot: the intake, the elevator, the climber. On our team, every subsystem is built the same way, in three layers, and it runs on <strong>states</strong>. Once you've seen one, you can read all of them.</p>
+<p>This page builds an intake from scratch. Every editor runs in your browser, so you can try each idea as you read.</p>
+<h2 id="three-layers">Three layers</h2>
+<p>The rule is the one from the Java lessons: <strong>only one class touches the hardware.</strong> Everything else asks. We take that rule one step further and split each mechanism into three layers.</p>
+<pre class="mermaid"><code>graph TD
+    S["Intake.java&lt;br&gt;the subsystem: states and logic"] --&gt;|"only talks to"| IO["IntakeIO.java&lt;br&gt;the interface: what the hardware can do"]
+    IO --- K["IntakeIOKraken&lt;br&gt;real motors"]
+    IO --- SIM["IntakeIOSim&lt;br&gt;pretend motors"]
+    IO --- R["IntakeIOReplay&lt;br&gt;for logged replay"]</code></pre>
+<ul>
+<li><strong><code>IntakeIO</code></strong> is an interface. It lists everything the hardware can do (spin at some voltage) and everything it can report (how fast it's spinning).</li>
+<li><strong><code>IntakeIOKraken</code>, <code>IntakeIOSim</code> and <code>IntakeIOReplay</code></strong> each implement that interface. One talks to real motors, one is a pretend intake, and one does nothing.</li>
+<li><strong><code>Intake</code></strong> is the subsystem. It holds an <code>IntakeIO</code> and never knows which one. All the thinking happens here.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Our real intake is two mechanisms</p>
+<p>To keep this page small, we're building an intake with a single roller. On the real robot, the intake is a roller <strong>and</strong> a pivot arm, so it has two IO folders, <code>intake/roller/</code> (<code>IntakeRollerIO</code>) and <code>intake/pivot/</code> (<code>PivotIO</code>), each with its own Kraken, Sim and Replay classes. One <code>Intake</code> subsystem holds both. When you open the real code, that's why you won't find a file called <code>IntakeIO</code>. Every piece works exactly the way it does here, just twice. The <code>Manipulator</code> does the same thing with a roller, a wrist and a sensor.</p>
+</div>
+<p>Why go to all this trouble? Three reasons.</p>
+<ol>
+<li><strong>We can test without a robot.</strong> The robot isn't always available, and half the team wants to code at the same time. With <code>IntakeIOSim</code>, your code runs on a laptop.</li>
+<li><strong>We can replay matches.</strong> Every loop, the robot logs everything the hardware reported. After a match, we feed that log back through the same <code>Intake</code> code on a laptop, using the replay class so no hardware is needed, and watch exactly what the code decided. If something went wrong, we can find out why.</li>
+<li><strong>Changing hardware touches one file.</strong> Swap a motor type and only the Kraken class changes. The logic doesn't care.</li>
+</ol>
+<pre class="mermaid"><code>graph LR
+    subgraph "On the robot"
+    A["Real motor"] --&gt; B["IntakeIOKraken"] --&gt; C["Intake logic"] --&gt; L["Log file"]
+    end
+    subgraph "Replaying on a laptop"
+    L2["Log file"] --&gt; D["IntakeIOReplay (no hardware)"] --&gt; E["Same Intake logic"]
+    end</code></pre>
+<h2 id="try-the-finished-intake">Try the finished intake</h2>
+<p>Here is the whole thing working. Read it once, press <strong>Run</strong>, switch to <strong>Teleop</strong>, then press <strong>A</strong> (intake), <strong>B</strong> (outtake) and <strong>X</strong> (stow). Watch the dashboard on the right. You'll see the state change and the speed ramp up. You will build each of these pieces yourself below.</p>
+<pre class="playground"><code>//@ title: The finished intake
+//@ panel: robot
+//@ show: controller,dashboard
+//@ goal: Run it, switch to Teleop, and press A, B and X. Notice that the speed doesn't jump instantly, because the pretend motor takes a moment to spin up.
+//@ lines: 70
+//@ maxlines: 34
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+    private double m_velocity = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        // spin up a little each loop, like a real motor does
+        m_velocity += (m_voltage * 8.0 - m_velocity) * 0.2;
+        inputs.velocityRPS = m_velocity;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+
+public class Intake extends SubsystemBase {
+    public static enum IntakeState {
+        kStow,
+        kIntaking,
+        kOuttaking
+    }
+
+    private final IntakeIO m_io;
+    private final IntakeInputsAutoLogged m_inputs = new IntakeInputsAutoLogged();
+    private final SubsystemProfiles&lt;IntakeState&gt; m_profiles;
+
+    public Intake(IntakeIO io) {
+        m_io = io;
+
+        Map&lt;IntakeState, Runnable&gt; periodicHash = new HashMap&lt;&gt;();
+        periodicHash.put(IntakeState.kStow, this::stowPeriodic);
+        periodicHash.put(IntakeState.kIntaking, this::intakingPeriodic);
+        periodicHash.put(IntakeState.kOuttaking, this::outtakingPeriodic);
+
+        m_profiles = new SubsystemProfiles&lt;&gt;(periodicHash, IntakeState.kStow);
+    }
+
+    public void updateState(IntakeState state) {
+        m_profiles.setCurrentProfile(state);
+    }
+
+    public IntakeState getCurrentState() {
+        return m_profiles.getCurrentProfile();
+    }
+
+    @Override
+    public void periodic() {
+        m_io.updateInputs(m_inputs);
+
+        m_profiles.getPeriodicFunctionTimed().run();
+
+        Logger.processInputs("Intake", m_inputs);
+        Logger.recordOutput("Intake/State", m_profiles.getCurrentProfile());
+    }
+
+    public void stowPeriodic() {
+        m_io.setVoltage(0.0);
+    }
+
+    public void intakingPeriodic() {
+        m_io.setVoltage(8.0);
+    }
+
+    public void outtakingPeriodic() {
+        m_io.setVoltage(-8.0);
+    }
+}
+
+// Buttons just change the state. You'll see how this works in RobotContainer.
+public class RobotContainer {
+    private final Intake m_intake = new Intake(new IntakeIOSim());
+    private final CommandXboxController m_driver = new CommandXboxController(0);
+
+    public RobotContainer() {
+        m_driver.a().onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kIntaking)));
+        m_driver.b().onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kOuttaking)));
+        m_driver.x().onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kStow)));
+    }
+}</code></pre>
+<p>Now let's build it, one layer at a time.</p>
+<h2 id="layer-1-the-io-interface">Layer 1: the IO interface</h2>
+<p>The interface does two jobs. It lists what you can <strong>tell</strong> the hardware to do (<code>setVoltage</code>), and it defines everything the hardware can <strong>report</strong>, bundled into an inputs class.</p>
+<div class="highlight"><span class="filename">IntakeIO.java</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">IntakeIO</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@AutoLog</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">IntakeInputs</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">velocityRPS</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">voltage</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateInputs</span><span class="p">(</span><span class="n">IntakeInputs</span><span class="w"> </span><span class="n">inputs</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setVoltage</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">voltage</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The inputs class is just a bag of public fields: speed, voltage, current, temperature, and whether the motor is even connected. The <code>@AutoLog</code> above it tells AdvantageKit, our logging library, to record every field in it. <code>updateInputs</code> fills the bag with fresh readings, and <code>setVoltage</code> is a command going the other way.</p>
+<p>We control intake motors with <strong>voltage</strong> instead of a percent. A battery gives about 12 volts, so <code>8.0</code> means two thirds power, and unlike a percent, it doesn't change when the battery sags.</p>
+<p>Your turn. <code>IntakeIOSim</code> is finished below, but the interface it implements doesn't exist yet. Write it.</p>
+<pre class="playground"><code>//@ title: Write the IO interface
+//@ goal: Write IntakeIO. It needs an inputs class with two double fields (velocityRPS and voltage), an updateInputs method, and a setVoltage method.
+//@ lines: 24
+//@ require: @AutoLog | Put @AutoLog above the inputs class.
+//@ require: interface\s+IntakeIO | Declare an interface named IntakeIO.
+// Write the IntakeIO interface here:
+
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        inputs.velocityRPS = m_voltage * 8.0;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+//@@ harness
+IntakeIO io = new IntakeIOSim();
+IntakeIO.IntakeInputs inputs = new IntakeIO.IntakeInputs();
+io.setVoltage(6.0);
+io.updateInputs(inputs);
+System.out.println(inputs.velocityRPS);
+System.out.println(inputs.voltage);
+//@@ expect
+48.0
+6.0
+//@@ hint
+Start with `public interface IntakeIO {`. Inside it go three things: the inputs class, and two method headers that end in a semicolon instead of a body.
+//@@ hint
+The inputs class is `@AutoLog public static class IntakeInputs { ... }` with `public double velocityRPS;` and `public double voltage;` inside.
+//@@ solution
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        inputs.velocityRPS = m_voltage * 8.0;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+//@@ explain
+Every IO class for this mechanism now has to provide exactly these two methods, and fill in exactly these two fields. That's the contract that makes real, sim and replay swappable.</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Where does <code>IntakeInputsAutoLogged</code> come from?</p>
+<p>You'll see the subsystem use a class called <code>IntakeInputsAutoLogged</code>, which you never wrote. When the robot code is built, AdvantageKit reads each <code>@AutoLog</code> class and generates a <code>...AutoLogged</code> version of it that knows how to write every field to the log, and read it back during a replay. The editors on this page generate it for you the same way.</p>
+</div>
+<h2 id="layer-2-the-io-classes">Layer 2: the IO classes</h2>
+<p>Each IO class fills in the inputs and applies the voltage. They differ in where the numbers come from.</p>
+<h3 id="the-simulated-intake">The simulated intake</h3>
+<p>In simulation there's no motor to ask, so the class remembers the voltage it was told and pretends to be a motor. Real teams use WPILib's physics classes here. We'll keep the math simple: speed is 8 times the voltage.</p>
+<pre class="playground"><code>//@ title: Make the pretend motor report
+//@ goal: Fill in updateInputs. The velocity should be 8 times the voltage the motor was told, and the voltage field should report that voltage.
+//@ lines: 28
+//@ require: inputs\.velocityRPS\s*= | Set inputs.velocityRPS.
+//@ require: inputs\.voltage\s*= | Set inputs.voltage.
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        // Report what the pretend motor is doing here:
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+//@@ harness
+IntakeIO io = new IntakeIOSim();
+IntakeIO.IntakeInputs inputs = new IntakeIO.IntakeInputs();
+io.setVoltage(6.0);
+io.updateInputs(inputs);
+System.out.println(inputs.velocityRPS);
+System.out.println(inputs.voltage);
+//@@ expect
+48.0
+6.0
+//@@ hint
+`m_voltage` holds the last voltage the subsystem asked for.
+//@@ hint
+`inputs.velocityRPS = m_voltage * 8.0;` and `inputs.voltage = m_voltage;`
+//@@ solution
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        inputs.velocityRPS = m_voltage * 8.0;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+//@@ explain
+The subsystem never asks "is this real?" It calls `updateInputs`, reads the fields, and gets sensible numbers either way.</code></pre>
+<h3 id="the-replay-intake">The replay intake</h3>
+<p>When replaying a log, the real readings come from the log file, and there is no hardware to command. So the replay class is empty: every method exists and does nothing. You wrote one of these on the previous page.</p>
+<div class="highlight"><span class="filename">IntakeIOReplay.java</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">IntakeIOReplay</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">IntakeIO</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateInputs</span><span class="p">(</span><span class="n">IntakeInputs</span><span class="w"> </span><span class="n">inputs</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setVoltage</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">voltage</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="the-real-intake">The real intake</h3>
+<p>This is the only class that touches a real motor. Our robot uses Kraken motors, which are controlled through a <code>TalonFX</code> object from the CTRE library. You don't need to memorize it, but read it, because every real IO class on our robot looks like this.</p>
+<div class="highlight"><span class="filename">IntakeIOKraken.java (shortened)</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">IntakeIOKraken</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">IntakeIO</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">TalonFX</span><span class="w"> </span><span class="n">m_motor</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">AngularVelocity</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_motorVelocity</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">StatusSignal</span><span class="o">&lt;</span><span class="n">Voltage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_motorVoltage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">VoltageOut</span><span class="w"> </span><span class="n">m_voltageOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">VoltageOut</span><span class="p">(</span><span class="mf">0.0</span><span class="p">).</span><span class="na">withEnableFOC</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">IntakeIOKraken</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">port</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">m_motor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TalonFX</span><span class="p">(</span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">Ports</span><span class="p">.</span><span class="na">kDriveCanivoreName</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// protect the motor and the battery</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">currentLimits</span><span class="w"> </span><span class="o">=</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">CurrentLimitsConfigs</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">withSupplyCurrentLimitEnable</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">withSupplyCurrentLimit</span><span class="p">(</span><span class="n">CurrentLimitConstants</span><span class="p">.</span><span class="na">kIntakeRollerDefaultSupplyLimit</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">m_motor</span><span class="p">.</span><span class="na">getConfigurator</span><span class="p">().</span><span class="na">apply</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TalonFXConfiguration</span><span class="p">().</span><span class="na">withCurrentLimits</span><span class="p">(</span><span class="n">currentLimits</span><span class="p">));</span>
+
+<span class="w">        </span><span class="c1">// ask the motor for the readings we want, and how often</span>
+<span class="w">        </span><span class="n">m_motorVelocity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_motor</span><span class="p">.</span><span class="na">getVelocity</span><span class="p">();</span>
+<span class="w">        </span><span class="n">m_motorVoltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_motor</span><span class="p">.</span><span class="na">getMotorVoltage</span><span class="p">();</span>
+<span class="w">        </span><span class="n">BaseStatusSignal</span><span class="p">.</span><span class="na">setUpdateFrequencyForAll</span><span class="p">(</span><span class="mf">75.0</span><span class="p">,</span><span class="w"> </span><span class="n">m_motorVelocity</span><span class="p">,</span><span class="w"> </span><span class="n">m_motorVoltage</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateInputs</span><span class="p">(</span><span class="n">IntakeInputs</span><span class="w"> </span><span class="n">inputs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">BaseStatusSignal</span><span class="p">.</span><span class="na">refreshAll</span><span class="p">(</span><span class="n">m_motorVelocity</span><span class="p">,</span><span class="w"> </span><span class="n">m_motorVoltage</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">inputs</span><span class="p">.</span><span class="na">velocityRPS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_motorVelocity</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">in</span><span class="p">(</span><span class="n">RotationsPerSecond</span><span class="p">);</span>
+<span class="w">        </span><span class="n">inputs</span><span class="p">.</span><span class="na">voltage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_motorVoltage</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">in</span><span class="p">(</span><span class="n">Volts</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setVoltage</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">voltage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">m_motor</span><span class="p">.</span><span class="na">setControl</span><span class="p">(</span><span class="n">m_voltageOut</span><span class="p">.</span><span class="na">withOutput</span><span class="p">(</span><span class="n">voltage</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Compare it to the sim class. <code>setVoltage</code> and <code>updateInputs</code> are the same two methods with the same fields. The only difference is that this one gets its numbers by asking a real motor. The constructor takes the CAN id as a parameter. That's how <code>RobotContainer</code>, not this class, decides which motor it is.</p>
+<pre class="quiz"><code>@ title: The IO layers
+? Which class is the only one that talks to a real motor?
+- `Intake`
+- `IntakeIO`
++ `IntakeIOKraken`
+- `IntakeIOSim`
+&gt; The subsystem only knows about the `IntakeIO` interface. The Kraken class is the one place real hardware is used.
+
+? Why is `IntakeIOReplay` empty?
+- It isn't finished yet
++ During a replay the readings come from the log file and there's no hardware to command
+- Replays don't use motors, so the class is deleted
+- Because the Kraken class does the work
+&gt; An empty implementation is exactly right. The logged data already says what the hardware did.
+
+? What does `updateInputs` do?
+- Sends a command to the motor
++ Fills the inputs object with fresh readings
+- Changes the subsystem's state
+- Creates the motor
+&gt; It is the way __in__: the hardware (real or pretend) reports what it's doing.
+
+? Why do we command a motor with voltage instead of a percent?
+- Percent doesn't work on Krakens
++ The same voltage gives the same push even as the battery drains
+- Voltage is easier to type
+- It uses less power
+&gt; A percent of a sagging battery is a weaker push. A voltage request stays the same.</code></pre>
+<h2 id="layer-3-the-subsystem">Layer 3: the subsystem</h2>
+<p>Now the part where the thinking happens. The subsystem has three pieces:</p>
+<ol>
+<li>A list of <strong>states</strong>, as an enum. Each state is one thing the mechanism can be doing.</li>
+<li>A <strong>map</strong> from each state to the method that runs while it's in that state.</li>
+<li>A <code>periodic()</code> method, called every 20 ms, that ties it together.</li>
+</ol>
+<div class="highlight"><span class="filename">The heart of Intake.java</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">IntakeState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">kStow</span><span class="p">,</span>
+<span class="w">    </span><span class="n">kIntaking</span><span class="p">,</span>
+<span class="w">    </span><span class="n">kOuttaking</span>
+<span class="p">}</span>
+
+<span class="kd">private</span><span class="w"> </span><span class="n">SubsystemProfiles</span><span class="o">&lt;</span><span class="n">IntakeState</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_profiles</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="nf">Intake</span><span class="p">(</span><span class="n">IntakeIO</span><span class="w"> </span><span class="n">io</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">io</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">IntakeState</span><span class="p">,</span><span class="w"> </span><span class="n">Runnable</span><span class="o">&gt;</span><span class="w"> </span><span class="n">periodicHash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">periodicHash</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">IntakeState</span><span class="p">.</span><span class="na">kStow</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">::</span><span class="n">stowPeriodic</span><span class="p">);</span>
+<span class="w">    </span><span class="n">periodicHash</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">IntakeState</span><span class="p">.</span><span class="na">kIntaking</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">::</span><span class="n">intakingPeriodic</span><span class="p">);</span>
+<span class="w">    </span><span class="n">periodicHash</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">IntakeState</span><span class="p">.</span><span class="na">kOuttaking</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">::</span><span class="n">outtakingPeriodic</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">m_profiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SubsystemProfiles</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">periodicHash</span><span class="p">,</span><span class="w"> </span><span class="n">IntakeState</span><span class="p">.</span><span class="na">kStow</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This is the interface/enum/map pattern from the previous page. <code>SubsystemProfiles</code> is a small helper class our team wrote that keeps track of the current state and hands back the method to run for it. It starts in <code>kStow</code>.</p>
+<p>Everything else in the subsystem is small. Changing state is one line, and everything that happens in a state is a short method:</p>
+<div class="highlight"><span class="filename">Changing state, and what each state does</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateState</span><span class="p">(</span><span class="n">IntakeState</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_profiles</span><span class="p">.</span><span class="na">setCurrentProfile</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">stowPeriodic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_io</span><span class="p">.</span><span class="na">setVoltage</span><span class="p">(</span><span class="mf">0.0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">intakingPeriodic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_io</span><span class="p">.</span><span class="na">setVoltage</span><span class="p">(</span><span class="mf">8.0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nothing happens at the moment <code>updateState</code> is called. It only changes which method <code>periodic()</code> will run next. Here's <code>periodic()</code>, the method the scheduler calls every loop. The order of its lines matters.</p>
+<div class="highlight"><span class="filename">periodic(), in order</span><pre><span></span><code><span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">periodic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_io</span><span class="p">.</span><span class="na">updateInputs</span><span class="p">(</span><span class="n">m_inputs</span><span class="p">);</span><span class="w">                       </span><span class="c1">// 1. read the hardware</span>
+
+<span class="w">    </span><span class="n">m_profiles</span><span class="p">.</span><span class="na">getPeriodicFunctionTimed</span><span class="p">().</span><span class="na">run</span><span class="p">();</span><span class="w">       </span><span class="c1">// 2. run the current state's method</span>
+
+<span class="w">    </span><span class="n">Logger</span><span class="p">.</span><span class="na">processInputs</span><span class="p">(</span><span class="s">"Intake"</span><span class="p">,</span><span class="w"> </span><span class="n">m_inputs</span><span class="p">);</span><span class="w">          </span><span class="c1">// 3. log what we read</span>
+<span class="w">    </span><span class="n">Logger</span><span class="p">.</span><span class="na">recordOutput</span><span class="p">(</span><span class="s">"Intake/State"</span><span class="p">,</span><span class="w"> </span><span class="n">m_profiles</span><span class="p">.</span><span class="na">getCurrentProfile</span><span class="p">());</span><span class="w">  </span><span class="c1">// 4. log the state</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Read first, think second, log last.</strong> Every decision in step 2 is made with fresh readings from step 1. And because the inputs are logged, a replay can run the exact same step 2 with the exact same numbers the robot saw.</p>
+<p>Time to add to it. This is the intake without an outtake state. Add one: a new <code>kOuttaking</code> state that runs the roller backwards.</p>
+<pre class="playground"><code>//@ title: Add the outtake state
+//@ prelude: wpilib
+//@ goal: Add a kOuttaking state. Add it to the enum, register outtakingPeriodic in the map, and write outtakingPeriodic so it sets the voltage to Constants.IntakeConstants.kOuttakeVoltage.
+//@ lines: 70
+//@ maxlines: 30
+//@ require: put\(\s*IntakeState\.kOuttaking\s*,\s*this::outtakingPeriodic\s*\) | Register kOuttaking with this::outtakingPeriodic.
+//@ require: void\s+outtakingPeriodic | Write a method called outtakingPeriodic.
+public class Constants {
+    public static final class IntakeConstants {
+        public static final double kIntakeVoltage = 8.0;
+        public static final double kOuttakeVoltage = -8.0;
+    }
+}
+
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        inputs.velocityRPS = m_voltage * 8.0;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+
+public class Intake extends SubsystemBase {
+    public static enum IntakeState {
+        kStow,
+        kIntaking
+    }
+
+    private final IntakeIO m_io;
+    private final IntakeInputsAutoLogged m_inputs = new IntakeInputsAutoLogged();
+    private final SubsystemProfiles&lt;IntakeState&gt; m_profiles;
+
+    public Intake(IntakeIO io) {
+        m_io = io;
+
+        Map&lt;IntakeState, Runnable&gt; periodicHash = new HashMap&lt;&gt;();
+        periodicHash.put(IntakeState.kStow, this::stowPeriodic);
+        periodicHash.put(IntakeState.kIntaking, this::intakingPeriodic);
+
+        m_profiles = new SubsystemProfiles&lt;&gt;(periodicHash, IntakeState.kStow);
+    }
+
+    public void updateState(IntakeState state) {
+        m_profiles.setCurrentProfile(state);
+    }
+
+    public double getVoltage() {
+        return m_inputs.voltage;
+    }
+
+    @Override
+    public void periodic() {
+        m_io.updateInputs(m_inputs);
+        m_profiles.getPeriodicFunctionTimed().run();
+        Logger.processInputs("Intake", m_inputs);
+        Logger.recordOutput("Intake/State", m_profiles.getCurrentProfile());
+    }
+
+    public void stowPeriodic() {
+        m_io.setVoltage(0.0);
+    }
+
+    public void intakingPeriodic() {
+        m_io.setVoltage(Constants.IntakeConstants.kIntakeVoltage);
+    }
+}
+//@@ harness
+Intake intake = new Intake(new IntakeIOSim());
+intake.updateState(Intake.IntakeState.kOuttaking);
+Sim.loops(2);
+System.out.println(intake.getVoltage());
+//@@ expect
+-8.0
+//@@ hint
+There are three places to change: the enum list, the map in the constructor, and a new method at the bottom.
+//@@ hint
+In the enum add `kOuttaking`. In the constructor add `periodicHash.put(IntakeState.kOuttaking, this::outtakingPeriodic);`. Then write `public void outtakingPeriodic()` like `intakingPeriodic()`, but with `Constants.IntakeConstants.kOuttakeVoltage`.
+//@@ solution
+public class Constants {
+    public static final class IntakeConstants {
+        public static final double kIntakeVoltage = 8.0;
+        public static final double kOuttakeVoltage = -8.0;
+    }
+}
+
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        inputs.velocityRPS = m_voltage * 8.0;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+
+public class Intake extends SubsystemBase {
+    public static enum IntakeState {
+        kStow,
+        kIntaking,
+        kOuttaking
+    }
+
+    private final IntakeIO m_io;
+    private final IntakeInputsAutoLogged m_inputs = new IntakeInputsAutoLogged();
+    private final SubsystemProfiles&lt;IntakeState&gt; m_profiles;
+
+    public Intake(IntakeIO io) {
+        m_io = io;
+
+        Map&lt;IntakeState, Runnable&gt; periodicHash = new HashMap&lt;&gt;();
+        periodicHash.put(IntakeState.kStow, this::stowPeriodic);
+        periodicHash.put(IntakeState.kIntaking, this::intakingPeriodic);
+        periodicHash.put(IntakeState.kOuttaking, this::outtakingPeriodic);
+
+        m_profiles = new SubsystemProfiles&lt;&gt;(periodicHash, IntakeState.kStow);
+    }
+
+    public void updateState(IntakeState state) {
+        m_profiles.setCurrentProfile(state);
+    }
+
+    public double getVoltage() {
+        return m_inputs.voltage;
+    }
+
+    @Override
+    public void periodic() {
+        m_io.updateInputs(m_inputs);
+        m_profiles.getPeriodicFunctionTimed().run();
+        Logger.processInputs("Intake", m_inputs);
+        Logger.recordOutput("Intake/State", m_profiles.getCurrentProfile());
+    }
+
+    public void stowPeriodic() {
+        m_io.setVoltage(0.0);
+    }
+
+    public void intakingPeriodic() {
+        m_io.setVoltage(Constants.IntakeConstants.kIntakeVoltage);
+    }
+
+    public void outtakingPeriodic() {
+        m_io.setVoltage(Constants.IntakeConstants.kOuttakeVoltage);
+    }
+}
+//@@ explain
+Adding a state is always the same three steps: add it to the enum, register its method in the map, write the method. The harness called `Sim.loops(2)` because the state's method runs on the first loop, and the readings reflect it on the second.</code></pre>
+<p>Notice that you didn't touch the IO classes at all. A new behavior is a new state, and the hardware layer stays exactly as it was.</p>
+<h2 id="using-sensors-to-change-state">Using sensors to change state</h2>
+<p>Because <code>periodic()</code> reads the inputs before running the state, a state can look at a sensor and move the mechanism to another state by itself. This is how we stop an intake the moment it has a game piece.</p>
+<div class="highlight"><span class="filename">A state that changes itself</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">intakingPeriodic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_io</span><span class="p">.</span><span class="na">setVoltage</span><span class="p">(</span><span class="n">IntakeConstants</span><span class="p">.</span><span class="na">kIntakeVoltage</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// current spikes when the rollers squeeze a game piece</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m_inputs</span><span class="p">.</span><span class="na">current</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">IntakeConstants</span><span class="p">.</span><span class="na">kHasPieceCurrent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">updateState</span><span class="p">(</span><span class="n">IntakeState</span><span class="p">.</span><span class="na">kHold</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The operator pressed intake once. The subsystem decided for itself when it was done. Our real intake does exactly this, along with checking whether its pivot has reached an angle before spinning the rollers.</p>
+<pre class="quiz"><code>@ title: Subsystem states
+? Why is the first line of `periodic()` a call to `updateInputs`?
+- It's required by Java
++ So the state's method decides using fresh readings
+- So the log file is smaller
+- To reset the motor
+&gt; Read first, think second, log last.
+
+? You call `intake.updateState(IntakeState.kIntaking)`. When do the rollers start spinning?
+- Instantly, inside `updateState`
++ On the next `periodic()`, when the new state's method runs
+- Never, you need a command for that
+- When the driver presses A again
+&gt; `updateState` only changes which method runs next. `periodic()` does the work.
+
+? You add a new state `kHold` to the enum but forget to register a method for it in the map. What happens when the subsystem enters `kHold`?
+- The rollers stop safely
++ It prints a warning (and does nothing), because there's no method to run for that state
+- It fixes itself
+- The robot code won't compile
+&gt; `SubsystemProfiles` warns you in the console when a state has no method. Each state in the enum needs a line in the map.
+
+? What decides whether a subsystem is connected to real or simulated hardware?
+- `Intake`
++ `RobotContainer`, which hands the subsystem an IO class when it builds it
+- `periodic()`
+- `stowPeriodic()`
+&gt; The subsystem only talks to the interface, so it never knows which IO class it got. Choosing real or sim is one decision, made in one place. (There are small exceptions, like picking simulation-friendly PID numbers. You'll see one on the Constants page.)</code></pre>
+<h2 id="what-about-commands">What about commands?</h2>
+<p>If you've followed an FRC tutorial, you may have seen subsystems that build commands for each action. That's a perfectly good style, and it's what the WPILib documentation teaches. Here is what the two approaches look like for the same button.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Commands in the subsystem</label><label for="__tabbed_1_2">States (our team)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="c1">// in IntakeSubsystem</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">intake</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">startEnd</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">m_motor</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="mf">0.8</span><span class="p">),</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">m_motor</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="mf">0.0</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1">// in RobotContainer</span>
+<span class="n">m_driver</span><span class="p">.</span><span class="na">a</span><span class="p">().</span><span class="na">whileTrue</span><span class="p">(</span><span class="n">m_intake</span><span class="p">.</span><span class="na">intake</span><span class="p">());</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="c1">// in Intake</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateState</span><span class="p">(</span><span class="n">IntakeState</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_profiles</span><span class="p">.</span><span class="na">setCurrentProfile</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// in RobotContainer (or RobotState), when the driver presses A</span>
+<span class="n">m_intake</span><span class="p">.</span><span class="na">updateState</span><span class="p">(</span><span class="n">IntakeState</span><span class="p">.</span><span class="na">kIntaking</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>We use states because a real robot rarely has one mechanism doing one thing. Picking up a game piece means the intake, the indexer and the elevator all have to change at the same moment, and then react to sensors. With states, one place (<code>RobotState</code>, which you'll see soon) can set all of them, and the log shows each subsystem's state at every moment. We still use commands where they fit best: driving and autonomous routines.</p>
+<h2 id="on-a-real-robot">On a real robot</h2>
+<p>Real files begin with a <code>package</code> line and imports, which this page left out. They also use your team's constants. A few details:</p>
+<ul>
+<li><strong><code>IntakeInputsAutoLogged</code></strong> is generated when the code is built. You'll see it used but never find a file for it.</li>
+<li><strong>Alerts</strong>: our subsystems turn on a dashboard alert when a motor reports it's disconnected, so a loose wire shows up before a match, not during it.</li>
+<li><strong>Timing</strong>: each subsystem logs how long its <code>periodic()</code> took, so we notice if one gets slow.</li>
+<li><strong>Tuning</strong>: numbers like voltages are not plain <code>double</code>s in our constants. They're tunable from the dashboard while the robot runs. See <a href="../constants/">Constants</a>.</li>
+</ul>
+<hr />
+<h2 id="whats-next">What's next</h2>
+<p>You can now build a subsystem in layers and drive it with states. Next, see how <a href="../robotContainer/">RobotContainer</a> builds each one, picks real or simulated hardware, and connects the controller.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../frcProgramming/" class="md-footer__link md-footer__link--prev" aria-label="Previous: FRC Nuances">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                FRC Nuances
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../robotContainer/" class="md-footer__link md-footer__link--next" aria-label="Next: RobotContainer">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                RobotContainer
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/team422" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.mechtechrobotics.com" target="_blank" rel="noopener" title="www.mechtechrobotics.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@mechtechdragons" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.footer", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/minijava.js"></script>
+      
+        <script src="../../javascripts/wpilib-prelude.js"></script>
+      
+        <script src="../../javascripts/playground.js"></script>
+      
+    
+  </body>
+</html>

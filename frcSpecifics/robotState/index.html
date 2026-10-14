@@ -1,0 +1,1853 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://frc422.github.io/JavaDocs/frcSpecifics/robotState/">
+      
+      
+        <link rel="prev" href="../robotContainer/">
+      
+      
+        <link rel="next" href="../constants/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/Logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>RobotState - Beginner's Guide To FRC Java</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/playground.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#robotstate" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Beginner&#39;s Guide To FRC Java" class="md-header__button md-logo" aria-label="Beginner's Guide To FRC Java" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M277.8 312.9c9.8-6.7 23.4-12.5 23.4-12.5s-38.7 7-77.2 10.2c-47.1 3.9-97.7 4.7-123.1 1.3-60.1-8 33-30.1 33-30.1s-36.1-2.4-80.6 19c-52.5 25.4 130 37 224.5 12.1m-85.4-32.1c-19-42.7-83.1-80.2 0-145.8C296.1 53.2 242.9 0 242.9 0c21.5 84.5-75.6 110.1-110.7 162.6-23.9 35.9 11.7 74.4 60.2 118.2M307 104.6c.1 0-175.2 43.8-91.5 140.2 24.7 28.4-6.5 54-6.5 54s62.7-32.4 33.9-72.9c-26.9-37.8-47.5-56.6 64.1-121.3m-6.1 270.5c-.5 1-1.2 1.8-2 2.6 128.3-33.7 81.1-118.9 19.8-97.3-3.3 1.2-6.2 3.4-8.2 6.3 3.6-1.3 7.3-2.3 11-3 31-6.5 75.5 41.5-20.6 91.4m47.1 62.3s14.5 11.9-15.9 21.2c-57.9 17.5-240.8 22.8-291.6.7-18.3-7.9 16-19 26.8-21.3 11.2-2.4 17.7-2 17.7-2-20.3-14.3-131.3 28.1-56.4 40.2C232.8 509.4 401 461.3 348 437.4M124.5 396c-78.7 22 47.9 67.4 148.1 24.5q-14.7-5.7-28.2-13.8c-44.7 8.5-65.4 9.1-106 4.5-33.5-3.8-13.9-15.2-13.9-15.2m179.8 97.2C225.6 508 128.5 506.3 71 496.8c0-.1 11.8 9.7 72.4 13.6 92.2 5.9 233.8-3.3 237.1-46.9 0 0-6.4 16.5-76.2 29.7M260.7 353c-59.2 11.4-93.5 11.1-136.8 6.6-33.5-3.5-11.6-19.7-11.6-19.7-86.8 28.8 48.2 61.4 169.5 25.9-7.8-2.8-15-7.1-21.1-12.8"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Beginner's Guide To FRC Java
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RobotState
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="deep-purple"  aria-label="Light Mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Light Mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="deep-purple"  aria-label="Dark Mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark Mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/DynamicWhiteHat/FRC-Java-Docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DynamicWhiteHat/FRC-Java-Docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Beginner&#39;s Guide To FRC Java" class="md-nav__button md-logo" aria-label="Beginner's Guide To FRC Java" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M277.8 312.9c9.8-6.7 23.4-12.5 23.4-12.5s-38.7 7-77.2 10.2c-47.1 3.9-97.7 4.7-123.1 1.3-60.1-8 33-30.1 33-30.1s-36.1-2.4-80.6 19c-52.5 25.4 130 37 224.5 12.1m-85.4-32.1c-19-42.7-83.1-80.2 0-145.8C296.1 53.2 242.9 0 242.9 0c21.5 84.5-75.6 110.1-110.7 162.6-23.9 35.9 11.7 74.4 60.2 118.2M307 104.6c.1 0-175.2 43.8-91.5 140.2 24.7 28.4-6.5 54-6.5 54s62.7-32.4 33.9-72.9c-26.9-37.8-47.5-56.6 64.1-121.3m-6.1 270.5c-.5 1-1.2 1.8-2 2.6 128.3-33.7 81.1-118.9 19.8-97.3-3.3 1.2-6.2 3.4-8.2 6.3 3.6-1.3 7.3-2.3 11-3 31-6.5 75.5 41.5-20.6 91.4m47.1 62.3s14.5 11.9-15.9 21.2c-57.9 17.5-240.8 22.8-291.6.7-18.3-7.9 16-19 26.8-21.3 11.2-2.4 17.7-2 17.7-2-20.3-14.3-131.3 28.1-56.4 40.2C232.8 509.4 401 461.3 348 437.4M124.5 396c-78.7 22 47.9 67.4 148.1 24.5q-14.7-5.7-28.2-13.8c-44.7 8.5-65.4 9.1-106 4.5-33.5-3.8-13.9-15.2-13.9-15.2m179.8 97.2C225.6 508 128.5 506.3 71 496.8c0-.1 11.8 9.7 72.4 13.6 92.2 5.9 233.8-3.3 237.1-46.9 0 0-6.4 16.5-76.2 29.7M260.7 353c-59.2 11.4-93.5 11.1-136.8 6.6-33.5-3.5-11.6-19.7-11.6-19.7-86.8 28.8 48.2 61.4 169.5 25.9-7.8-2.8-15-7.1-21.1-12.8"/></svg>
+
+    </a>
+    Beginner's Guide To FRC Java
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/DynamicWhiteHat/FRC-Java-Docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DynamicWhiteHat/FRC-Java-Docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gettingStarted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro to Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Intro to Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/whyJava/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why Java?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/javaLesson1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/javaLesson2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/javaLesson3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/javaQuiz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FRC Specifics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FRC Specifics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frcProgramming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FRC Nuances
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subsystems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Subsystems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../robotContainer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RobotContainer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RobotState
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RobotState
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#robotaction-what-the-robot-is-trying-to-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RobotAction: what the robot is trying to do
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-instance-for-the-whole-robot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One instance for the whole robot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-the-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changing the action
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actions-that-run-code-every-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actions that run code every loop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actions that run code every loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#your-turn-add-an-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your turn: add an action
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#your-turn-make-an-action-end-itself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your turn: make an action end itself
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#who-is-allowed-to-change-what" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who is allowed to change what?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../constants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Constants
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#robotaction-what-the-robot-is-trying-to-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RobotAction: what the robot is trying to do
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-instance-for-the-whole-robot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One instance for the whole robot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-the-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changing the action
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actions-that-run-code-every-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actions that run code every loop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actions that run code every loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#your-turn-add-an-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your turn: add an action
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#your-turn-make-an-action-end-itself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your turn: make an action end itself
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#who-is-allowed-to-change-what" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Who is allowed to change what?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="robotstate">RobotState</h1>
+<p>Say the driver presses one button: <strong>intake</strong>. Think about everything that has to happen. The intake rollers spin. The indexer starts moving the game piece along. The elevator drops to the pickup height. Three subsystems, one button.</p>
+<p>Where does the code that coordinates them go?</p>
+<ul>
+<li><strong>In the button binding?</strong> Then every button needs a long list of subsystem calls, and the same list gets copied anywhere else the robot intakes, like in autonomous.</li>
+<li><strong>In a subsystem?</strong> Then the intake has to know about the elevator, and the elevator has to know about the indexer. Our subsystems are built so each one only knows about itself.</li>
+</ul>
+<p>Our answer is a class called <code>RobotState</code>. It sits above all the subsystems and keeps track of one thing: <strong>what is the robot trying to do right now?</strong></p>
+<div class="admonition info">
+<p class="admonition-title">Two levels of state</p>
+<p><strong>Subsystem states</strong> say what one mechanism is doing: the intake is <code>kIntaking</code>.
+<strong>Robot actions</strong> say what the whole robot is doing: the robot is <code>kCoralIntaking</code>.
+One action sets a state for every subsystem it needs.</p>
+</div>
+<pre class="mermaid"><code>graph TD
+    B["Driver presses a button"] --&gt;|"updateRobotAction(kCoralIntaking)"| RS["RobotState&lt;br&gt;the current action"]
+    RS --&gt;|"updateState(kIntaking)"| I["Intake"]
+    RS --&gt;|"updateState(kIndexing)"| X["Indexer"]
+    RS --&gt;|"updateState(kIntaking)"| E["Elevator"]</code></pre>
+<p>You've already used the idea twice. A subsystem is an enum of states plus a map from each state to the method that runs. <code>RobotState</code> does the same thing one level up, with an enum of <strong>actions</strong>.</p>
+<h2 id="robotaction-what-the-robot-is-trying-to-do">RobotAction: what the robot is trying to do</h2>
+<p>Here are a few of the actions from our 2025 robot.</p>
+<div class="highlight"><span class="filename">RobotState.java</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">RobotAction</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">kTeleopDefault</span><span class="p">,</span><span class="w">   </span><span class="c1">// nothing special: everything rests</span>
+<span class="w">    </span><span class="n">kCoralIntaking</span><span class="p">,</span><span class="w">   </span><span class="c1">// get a game piece into the robot</span>
+<span class="w">    </span><span class="n">kCoralOuttaking</span><span class="p">,</span><span class="w">  </span><span class="c1">// release the game piece we're holding</span>
+<span class="w">    </span><span class="n">kAutoScore</span><span class="p">,</span><span class="w">       </span><span class="c1">// drive to the reef and score on our own</span>
+<span class="w">    </span><span class="n">kManualScore</span><span class="p">,</span><span class="w">     </span><span class="c1">// raise the elevator, driver lines up</span>
+<span class="w">    </span><span class="n">kCoralEject</span><span class="p">,</span><span class="w">      </span><span class="c1">// spit the game piece back out</span>
+<span class="w">    </span><span class="c1">// ...about twenty more</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Each one is a <strong>goal</strong>, not a motor setting. <code>kCoralIntaking</code> doesn't say how fast anything spins. It says what we're trying to do, and each subsystem knows how to do its part.</p>
+<h2 id="one-instance-for-the-whole-robot">One instance for the whole robot</h2>
+<p>Any button, anywhere, needs to be able to say "change the robot's action." So there is exactly one <code>RobotState</code>, and any file can get it by calling <code>RobotState.getInstance()</code>. A class that only ever has one object is called a <strong>singleton</strong>, and it's built from things you already know: <code>static</code> and <code>private</code>.</p>
+<div class="highlight"><span class="filename">RobotState.java</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RobotState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">RobotState</span><span class="w"> </span><span class="n">m_instance</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">RobotState</span><span class="p">(</span><span class="n">Drive</span><span class="w"> </span><span class="n">drive</span><span class="p">,</span><span class="w"> </span><span class="n">Intake</span><span class="w"> </span><span class="n">intake</span><span class="p">,</span><span class="w"> </span><span class="n">Indexer</span><span class="w"> </span><span class="n">indexer</span><span class="p">,</span><span class="w"> </span><span class="cm">/* ... */</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ...save the subsystems, build the map of actions...</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">RobotState</span><span class="w"> </span><span class="nf">startInstance</span><span class="p">(</span><span class="n">Drive</span><span class="w"> </span><span class="n">drive</span><span class="p">,</span><span class="w"> </span><span class="n">Intake</span><span class="w"> </span><span class="n">intake</span><span class="p">,</span><span class="w"> </span><span class="n">Indexer</span><span class="w"> </span><span class="n">indexer</span><span class="p">,</span><span class="w"> </span><span class="cm">/* ... */</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m_instance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">m_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RobotState</span><span class="p">(</span><span class="n">drive</span><span class="p">,</span><span class="w"> </span><span class="n">intake</span><span class="p">,</span><span class="w"> </span><span class="n">indexer</span><span class="p">,</span><span class="w"> </span><span class="cm">/* ... */</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">m_instance</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">RobotState</span><span class="w"> </span><span class="nf">getInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">m_instance</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>The constructor is <code>private</code>, so nobody else can write <code>new RobotState(...)</code>.</li>
+<li><code>m_instance</code> is <code>static</code>, so it belongs to the class itself and is shared by everyone.</li>
+<li><code>startInstance</code> builds it once, at startup. It needs the subsystems, so it can only run <strong>after</strong> <code>RobotContainer</code> has created them. That's why <code>configureCommands()</code> in our <code>RobotContainer</code> calls it, with a comment saying "we start here so autofactory won't be null".</li>
+<li>After that, everyone calls <code>getInstance()</code>.</li>
+</ul>
+<p>Predict what this prints. Pay attention to what <code>a == b</code> asks Java: not "do they look the same?" but "are they the very same object?"</p>
+<pre class="playground"><code>//@ title: One object, shared
+//@ mode: predict
+//@ goal: Both calls to getInstance() happen in different places. Type the two lines this prints.
+//@ lines: 18
+public class Config {
+    private static Config m_instance;
+    private int m_value = 0;
+
+    private Config() {}
+
+    public static Config getInstance() {
+        if (m_instance == null) {
+            m_instance = new Config();
+        }
+        return m_instance;
+    }
+
+    public void add(int amount) { m_value += amount; }
+    public int get() { return m_value; }
+}
+
+Config.getInstance().add(5);
+Config.getInstance().add(2);
+
+Config a = Config.getInstance();
+Config b = Config.getInstance();
+System.out.println(a.get());
+System.out.println(a == b);
+//@@ expect
+7
+true
+//@@ explain
+There's only one `Config`. Both `add` calls changed the same object, so its value is 7, and `a` and `b` are two names for that one object. This is how a button binding and an autonomous routine can both talk to the same `RobotState`.</code></pre>
+<h2 id="changing-the-action">Changing the action</h2>
+<p>Every button that changes what the robot is doing ends up calling one method: <code>updateRobotAction</code>. It follows the same three steps every time.</p>
+<div class="highlight"><span class="filename">updateRobotAction(), shortened</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateRobotAction</span><span class="p">(</span><span class="n">RobotAction</span><span class="w"> </span><span class="n">newAction</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 1. Start every subsystem at its resting state</span>
+<span class="w">    </span><span class="n">IntakeState</span><span class="w"> </span><span class="n">newIntakeState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IntakeState</span><span class="p">.</span><span class="na">kStow</span><span class="p">;</span>
+<span class="w">    </span><span class="n">IndexerState</span><span class="w"> </span><span class="n">newIndexerState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IndexerState</span><span class="p">.</span><span class="na">kIdle</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ElevatorState</span><span class="w"> </span><span class="n">newElevatorState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ElevatorState</span><span class="p">.</span><span class="na">kStow</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 2. Let the action change the ones it cares about</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">kCoralIntaking</span><span class="p">:</span>
+<span class="w">            </span><span class="n">newIntakeState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IntakeState</span><span class="p">.</span><span class="na">kFunnelIntaking</span><span class="p">;</span>
+<span class="w">            </span><span class="n">newElevatorState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ElevatorState</span><span class="p">.</span><span class="na">kIntaking</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">kManualScore</span><span class="p">:</span>
+<span class="w">            </span><span class="n">newElevatorState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ElevatorState</span><span class="p">.</span><span class="na">kScoring</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">kTeleopDefault</span><span class="p">:</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 3. Remember the action, then tell each subsystem, but only if its state is changing</span>
+<span class="w">    </span><span class="n">m_profiles</span><span class="p">.</span><span class="na">setCurrentProfile</span><span class="p">(</span><span class="n">newAction</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m_intake</span><span class="p">.</span><span class="na">getCurrentState</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">newIntakeState</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">m_intake</span><span class="p">.</span><span class="na">updateState</span><span class="p">(</span><span class="n">newIntakeState</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m_indexer</span><span class="p">.</span><span class="na">getCurrentState</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">newIndexerState</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">m_indexer</span><span class="p">.</span><span class="na">updateState</span><span class="p">(</span><span class="n">newIndexerState</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m_elevator</span><span class="p">.</span><span class="na">getCurrentState</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">newElevatorState</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">m_elevator</span><span class="p">.</span><span class="na">updateState</span><span class="p">(</span><span class="n">newElevatorState</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Step 1 is the clever one. Because everything starts at "rest," an action only has to list what is <strong>different</strong>. Switching from intaking to the default action puts everything back without a single line of cleanup. Nothing gets left running by accident.</p>
+<p>Step 3 only updates a subsystem when its state is actually changing, so we don't restart a motion that's already going.</p>
+<p>A small honesty note: for some subsystems, "rest" depends on what's happening. Our real code doesn't start the intake at <code>kStow</code> but at <code>m_intake.getStowOrHold()</code>, which stays in the hold state if the intake is already holding a game piece, and only stows otherwise. The idea is the same: start from a default, then let the action change it.</p>
+<div class="admonition note">
+<p class="admonition-title">A <code>switch</code> needs a <code>break</code></p>
+<p>Each <code>case</code> ends with <code>break</code>. Without it, Java keeps running into the next case. Our code has a comment on this: "guys don't use fallthrough it's not worth it". Two cases that do the same thing can share a body by being stacked (<code>case kAutoScore:</code> directly above <code>case kAutoAutoScore:</code>), but any case with code in it ends in <code>break</code>.</p>
+</div>
+<p>Here is the whole thing running. The button bindings are one-liners, just like the real <code>RobotContainer</code>. Run it, switch to <strong>Teleop</strong>, and press <strong>A</strong> (intake), <strong>B</strong> (score), and <strong>X</strong> (back to default). Watch three subsystems change together on the dashboard. The DIO 0 button is a pretend sensor that says "we have a game piece."</p>
+<pre class="playground"><code>//@ title: One button, three subsystems
+//@ panel: robot
+//@ show: controller,motors,dashboard
+//@ dio: 0
+//@ goal: Run it, go to Teleop, and press A. The intake and indexer start together. Then press DIO 0 (we have a piece): the indexer stops by itself. Press B to score, then X for default.
+//@ lines: 120
+//@ maxlines: 36
+public class Intake extends SubsystemBase {
+    public static enum IntakeState { kStow, kIntaking }
+
+    private final TalonFX m_motor = new TalonFX(1);
+    private IntakeState m_state = IntakeState.kStow;
+
+    public void updateState(IntakeState state) { m_state = state; }
+    public IntakeState getCurrentState() { return m_state; }
+
+    @Override
+    public void periodic() {
+        m_motor.set(m_state == IntakeState.kIntaking ? 0.7 : 0.0);
+        Logger.recordOutput("Intake/State", m_state);
+    }
+}
+
+public class Indexer extends SubsystemBase {
+    public static enum IndexerState { kIdle, kIndexing }
+
+    private final TalonFX m_motor = new TalonFX(2);
+    private final DigitalInput m_sensor = new DigitalInput(0);
+    private IndexerState m_state = IndexerState.kIdle;
+
+    public void updateState(IndexerState state) { m_state = state; }
+    public IndexerState getCurrentState() { return m_state; }
+    public boolean hasGamePiece() { return m_sensor.get(); }
+
+    @Override
+    public void periodic() {
+        m_motor.set(m_state == IndexerState.kIndexing ? 0.5 : 0.0);
+        Logger.recordOutput("Indexer/State", m_state);
+    }
+}
+
+public class Elevator extends SubsystemBase {
+    public static enum ElevatorState { kStow, kIntaking, kScoring }
+
+    private ElevatorState m_state = ElevatorState.kStow;
+
+    public void updateState(ElevatorState state) { m_state = state; }
+    public ElevatorState getCurrentState() { return m_state; }
+
+    @Override
+    public void periodic() {
+        Logger.recordOutput("Elevator/State", m_state);
+    }
+}
+
+public class RobotState {
+    public enum RobotAction { kTeleopDefault, kCoralIntaking, kManualScore }
+
+    private static RobotState m_instance;
+
+    private final Intake m_intake;
+    private final Indexer m_indexer;
+    private final Elevator m_elevator;
+    private final SubsystemProfiles&lt;RobotAction&gt; m_profiles;
+
+    private RobotState(Intake intake, Indexer indexer, Elevator elevator) {
+        m_intake = intake;
+        m_indexer = indexer;
+        m_elevator = elevator;
+
+        Map&lt;RobotAction, Runnable&gt; periodicHash = new HashMap&lt;&gt;();
+        periodicHash.put(RobotAction.kTeleopDefault, () -&gt; {});
+        periodicHash.put(RobotAction.kCoralIntaking, this::coralIntakingPeriodic);
+        periodicHash.put(RobotAction.kManualScore, () -&gt; {});
+
+        m_profiles = new SubsystemProfiles&lt;&gt;(periodicHash, RobotAction.kTeleopDefault);
+    }
+
+    public static RobotState startInstance(Intake intake, Indexer indexer, Elevator elevator) {
+        if (m_instance == null) {
+            m_instance = new RobotState(intake, indexer, elevator);
+        }
+        return m_instance;
+    }
+
+    public static RobotState getInstance() {
+        return m_instance;
+    }
+
+    public void updateRobotState() {
+        m_profiles.getPeriodicFunctionTimed().run();
+        Logger.recordOutput("RobotState/CurrentAction", m_profiles.getCurrentProfile());
+    }
+
+    public void updateRobotAction(RobotAction newAction) {
+        IntakeState newIntakeState = IntakeState.kStow;
+        IndexerState newIndexerState = IndexerState.kIdle;
+        ElevatorState newElevatorState = ElevatorState.kStow;
+
+        switch (newAction) {
+            case kCoralIntaking:
+                newIntakeState = IntakeState.kIntaking;
+                newIndexerState = IndexerState.kIndexing;
+                newElevatorState = ElevatorState.kIntaking;
+                break;
+
+            case kManualScore:
+                newElevatorState = ElevatorState.kScoring;
+                break;
+
+            case kTeleopDefault:
+                break;
+        }
+
+        m_profiles.setCurrentProfile(newAction);
+
+        if (m_intake.getCurrentState() != newIntakeState) { m_intake.updateState(newIntakeState); }
+        if (m_indexer.getCurrentState() != newIndexerState) { m_indexer.updateState(newIndexerState); }
+        if (m_elevator.getCurrentState() != newElevatorState) { m_elevator.updateState(newElevatorState); }
+    }
+
+    public void setDefaultAction() {
+        updateRobotAction(RobotAction.kTeleopDefault);
+    }
+
+    // runs every loop while we are intaking
+    public void coralIntakingPeriodic() {
+        if (m_indexer.hasGamePiece()) {
+            m_indexer.updateState(IndexerState.kIdle);
+        } else {
+            m_indexer.updateState(IndexerState.kIndexing);
+        }
+    }
+}
+
+public class RobotContainer {
+    private final Intake m_intake = new Intake();
+    private final Indexer m_indexer = new Indexer();
+    private final Elevator m_elevator = new Elevator();
+    private final CommandXboxController m_driver = new CommandXboxController(0);
+
+    public RobotContainer() {
+        RobotState.startInstance(m_intake, m_indexer, m_elevator);
+
+        m_driver.a().onTrue(Commands.runOnce(
+            () -&gt; RobotState.getInstance().updateRobotAction(RobotState.RobotAction.kCoralIntaking)));
+        m_driver.b().onTrue(Commands.runOnce(
+            () -&gt; RobotState.getInstance().updateRobotAction(RobotState.RobotAction.kManualScore)));
+        m_driver.x().onTrue(Commands.runOnce(
+            () -&gt; RobotState.getInstance().setDefaultAction()));
+    }
+}
+
+public class Robot extends LoggedRobot {
+    private RobotContainer m_robotContainer;
+
+    @Override
+    public void robotInit() {
+        m_robotContainer = new RobotContainer();
+    }
+
+    @Override
+    public void robotPeriodic() {
+        RobotState.getInstance().updateRobotState();
+        CommandScheduler.getInstance().run();
+    }
+}</code></pre>
+<p>Look at <code>Robot.robotPeriodic()</code> at the bottom. It's the real thing: <code>RobotState</code> goes first, then the scheduler, which polls the buttons and calls each subsystem's <code>periodic()</code>. Each subsystem here is shortened to its state and one motor. You built the full layered versions on the <a href="../subsystems/">Subsystems</a> page.</p>
+<h2 id="actions-that-run-code-every-loop">Actions that run code every loop</h2>
+<p>An action isn't only a set of starting states. Each one can have a method that runs <strong>every loop</strong> while it's the current action, using the same map-of-methods trick as the subsystems. That's how <code>kCoralIntaking</code> above reacted to the sensor: the indexer stops when the game piece arrives, and starts again if it leaves.</p>
+<p>An action can also end itself. Here's how our robot finishes scoring:</p>
+<div class="highlight"><span class="filename">coralOuttakingPeriodic(), shortened</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">coralOuttakingPeriodic</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// after the game piece has been out for a moment, we're done: go back to rest</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m_timer</span><span class="p">.</span><span class="na">hasElapsed</span><span class="p">(</span><span class="n">ManipulatorConstants</span><span class="p">.</span><span class="na">kCoralOuttakeTimeout</span><span class="p">.</span><span class="na">get</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">setDefaultAction</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// keep resetting the timer while we still have the game piece</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m_manipulator</span><span class="p">.</span><span class="na">hasGamePiece</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">m_timer</span><span class="p">.</span><span class="na">isRunning</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">m_timer</span><span class="p">.</span><span class="na">restart</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>m_timer</code> is a WPILib <code>Timer</code>. The robot is holding the button's goal ("score") until the sensors say it worked. The driver doesn't have to press anything to stop it.</p>
+<p>One more detail from the real <code>updateRobotAction</code>: every time the action changes, it also resets the timers and flags. That way a timer left running from the last action can't make the new one end early.</p>
+<h3 id="your-turn-add-an-action">Your turn: add an action</h3>
+<p>The robot needs a new action, <code>kCoralEject</code>, which spits a game piece back out. The intake should run outward and the indexer should eject. The new action needs to be added in three places, like the subsystem states: the enum, the map, and the <code>switch</code>.</p>
+<pre class="playground"><code>//@ title: Add the eject action
+//@ prelude: wpilib
+//@ goal: Add a kCoralEject action. It should set the intake to kOuttaking and the indexer to kEject. Add it to the enum, register it in periodicHash (with an empty method), and handle it in the switch.
+//@ lines: 64
+//@ maxlines: 30
+//@ require: case\s+kCoralEject\s*: | Add a case for kCoralEject in the switch.
+//@ require: periodicHash\.put\(\s*RobotAction\.kCoralEject | Register kCoralEject in periodicHash.
+public class Intake {
+    public static enum IntakeState { kStow, kIntaking, kOuttaking }
+    private IntakeState m_state = IntakeState.kStow;
+    public void updateState(IntakeState state) { m_state = state; }
+    public IntakeState getCurrentState() { return m_state; }
+}
+
+public class Indexer {
+    public static enum IndexerState { kIdle, kIndexing, kEject }
+    private IndexerState m_state = IndexerState.kIdle;
+    public void updateState(IndexerState state) { m_state = state; }
+    public IndexerState getCurrentState() { return m_state; }
+}
+
+public class RobotState {
+    public enum RobotAction { kTeleopDefault, kCoralIntaking }
+
+    private static RobotState m_instance;
+    private final Intake m_intake;
+    private final Indexer m_indexer;
+    private final SubsystemProfiles&lt;RobotAction&gt; m_profiles;
+
+    private RobotState(Intake intake, Indexer indexer) {
+        m_intake = intake;
+        m_indexer = indexer;
+
+        Map&lt;RobotAction, Runnable&gt; periodicHash = new HashMap&lt;&gt;();
+        periodicHash.put(RobotAction.kTeleopDefault, () -&gt; {});
+        periodicHash.put(RobotAction.kCoralIntaking, () -&gt; {});
+
+        m_profiles = new SubsystemProfiles&lt;&gt;(periodicHash, RobotAction.kTeleopDefault);
+    }
+
+    public static RobotState startInstance(Intake intake, Indexer indexer) {
+        if (m_instance == null) { m_instance = new RobotState(intake, indexer); }
+        return m_instance;
+    }
+
+    public static RobotState getInstance() { return m_instance; }
+
+    public RobotAction getCurrentAction() { return m_profiles.getCurrentProfile(); }
+
+    public void updateRobotState() { m_profiles.getPeriodicFunctionTimed().run(); }
+
+    public void updateRobotAction(RobotAction newAction) {
+        IntakeState newIntakeState = IntakeState.kStow;
+        IndexerState newIndexerState = IndexerState.kIdle;
+
+        switch (newAction) {
+            case kCoralIntaking:
+                newIntakeState = IntakeState.kIntaking;
+                newIndexerState = IndexerState.kIndexing;
+                break;
+
+            case kTeleopDefault:
+                break;
+        }
+
+        m_profiles.setCurrentProfile(newAction);
+
+        if (m_intake.getCurrentState() != newIntakeState) { m_intake.updateState(newIntakeState); }
+        if (m_indexer.getCurrentState() != newIndexerState) { m_indexer.updateState(newIndexerState); }
+    }
+}
+//@@ harness
+Intake intake = new Intake();
+Indexer indexer = new Indexer();
+RobotState.startInstance(intake, indexer);
+RobotState.getInstance().updateRobotAction(RobotState.RobotAction.kCoralEject);
+RobotState.getInstance().updateRobotState();
+System.out.println(RobotState.getInstance().getCurrentAction());
+System.out.println(intake.getCurrentState());
+System.out.println(indexer.getCurrentState());
+//@@ expect
+kCoralEject
+kOuttaking
+kEject
+//@@ hint
+Three edits: add `kCoralEject` to the `RobotAction` enum, add a `periodicHash.put(RobotAction.kCoralEject, () -&gt; {});` line, and add a new `case` to the `switch`.
+//@@ hint
+The new case looks like the intaking one: set `newIntakeState` and `newIndexerState`, then `break;`.
+//@@ solution
+public class Intake {
+    public static enum IntakeState { kStow, kIntaking, kOuttaking }
+    private IntakeState m_state = IntakeState.kStow;
+    public void updateState(IntakeState state) { m_state = state; }
+    public IntakeState getCurrentState() { return m_state; }
+}
+
+public class Indexer {
+    public static enum IndexerState { kIdle, kIndexing, kEject }
+    private IndexerState m_state = IndexerState.kIdle;
+    public void updateState(IndexerState state) { m_state = state; }
+    public IndexerState getCurrentState() { return m_state; }
+}
+
+public class RobotState {
+    public enum RobotAction { kTeleopDefault, kCoralIntaking, kCoralEject }
+
+    private static RobotState m_instance;
+    private final Intake m_intake;
+    private final Indexer m_indexer;
+    private final SubsystemProfiles&lt;RobotAction&gt; m_profiles;
+
+    private RobotState(Intake intake, Indexer indexer) {
+        m_intake = intake;
+        m_indexer = indexer;
+
+        Map&lt;RobotAction, Runnable&gt; periodicHash = new HashMap&lt;&gt;();
+        periodicHash.put(RobotAction.kTeleopDefault, () -&gt; {});
+        periodicHash.put(RobotAction.kCoralIntaking, () -&gt; {});
+        periodicHash.put(RobotAction.kCoralEject, () -&gt; {});
+
+        m_profiles = new SubsystemProfiles&lt;&gt;(periodicHash, RobotAction.kTeleopDefault);
+    }
+
+    public static RobotState startInstance(Intake intake, Indexer indexer) {
+        if (m_instance == null) { m_instance = new RobotState(intake, indexer); }
+        return m_instance;
+    }
+
+    public static RobotState getInstance() { return m_instance; }
+
+    public RobotAction getCurrentAction() { return m_profiles.getCurrentProfile(); }
+
+    public void updateRobotState() { m_profiles.getPeriodicFunctionTimed().run(); }
+
+    public void updateRobotAction(RobotAction newAction) {
+        IntakeState newIntakeState = IntakeState.kStow;
+        IndexerState newIndexerState = IndexerState.kIdle;
+
+        switch (newAction) {
+            case kCoralIntaking:
+                newIntakeState = IntakeState.kIntaking;
+                newIndexerState = IndexerState.kIndexing;
+                break;
+
+            case kCoralEject:
+                newIntakeState = IntakeState.kOuttaking;
+                newIndexerState = IndexerState.kEject;
+                break;
+
+            case kTeleopDefault:
+                break;
+        }
+
+        m_profiles.setCurrentProfile(newAction);
+
+        if (m_intake.getCurrentState() != newIntakeState) { m_intake.updateState(newIntakeState); }
+        if (m_indexer.getCurrentState() != newIndexerState) { m_indexer.updateState(newIndexerState); }
+    }
+}
+//@@ explain
+Adding an action is the same recipe as adding a subsystem state: the enum, the map, and the code that says what it does. Because step 1 starts every subsystem at rest, you only had to list the two things this action changes.</code></pre>
+<h3 id="your-turn-make-an-action-end-itself">Your turn: make an action end itself</h3>
+<p>Now the other direction. <code>kCoralOuttaking</code> should finish on its own: after 3 loops it should call <code>setDefaultAction()</code> to put the robot back at rest. (The real robot uses a <code>Timer</code>. This version counts loops, since each loop is 20 ms.)</p>
+<pre class="playground"><code>//@ title: End the action by itself
+//@ prelude: wpilib
+//@ goal: Write coralOuttakingPeriodic. Once m_loopCount reaches kOuttakeLoops, call setDefaultAction() so the robot goes back to rest.
+//@ lines: 52
+//@ maxlines: 30
+//@ require: setDefaultAction\(\) | Call setDefaultAction() when the time is up.
+public class Intake {
+    public static enum IntakeState { kStow, kOuttaking }
+    private IntakeState m_state = IntakeState.kStow;
+    public void updateState(IntakeState state) { m_state = state; }
+    public IntakeState getCurrentState() { return m_state; }
+}
+
+public class RobotState {
+    public enum RobotAction { kTeleopDefault, kCoralOuttaking }
+
+    private static final int kOuttakeLoops = 3;
+    private static RobotState m_instance;
+    private final Intake m_intake;
+    private final SubsystemProfiles&lt;RobotAction&gt; m_profiles;
+    private int m_loopCount = 0;
+
+    private RobotState(Intake intake) {
+        m_intake = intake;
+
+        Map&lt;RobotAction, Runnable&gt; periodicHash = new HashMap&lt;&gt;();
+        periodicHash.put(RobotAction.kTeleopDefault, () -&gt; {});
+        periodicHash.put(RobotAction.kCoralOuttaking, this::coralOuttakingPeriodic);
+
+        m_profiles = new SubsystemProfiles&lt;&gt;(periodicHash, RobotAction.kTeleopDefault);
+    }
+
+    public static RobotState startInstance(Intake intake) {
+        if (m_instance == null) { m_instance = new RobotState(intake); }
+        return m_instance;
+    }
+
+    public static RobotState getInstance() { return m_instance; }
+
+    public RobotAction getCurrentAction() { return m_profiles.getCurrentProfile(); }
+
+    public void updateRobotState() {
+        m_profiles.getPeriodicFunctionTimed().run();
+        m_loopCount++;
+    }
+
+    public void updateRobotAction(RobotAction newAction) {
+        IntakeState newIntakeState = IntakeState.kStow;
+
+        switch (newAction) {
+            case kCoralOuttaking:
+                newIntakeState = IntakeState.kOuttaking;
+                break;
+
+            case kTeleopDefault:
+                break;
+        }
+
+        m_profiles.setCurrentProfile(newAction);
+        m_intake.updateState(newIntakeState);
+
+        // a new action starts its count from zero
+        m_loopCount = 0;
+    }
+
+    public void setDefaultAction() {
+        updateRobotAction(RobotAction.kTeleopDefault);
+    }
+
+    public void coralOuttakingPeriodic() {
+        // After kOuttakeLoops loops, go back to the default action:
+    }
+}
+//@@ harness
+Intake intake = new Intake();
+RobotState.startInstance(intake);
+RobotState.getInstance().updateRobotAction(RobotState.RobotAction.kCoralOuttaking);
+for (int i = 0; i &lt; 5; i++) {
+    RobotState.getInstance().updateRobotState();
+    System.out.println(RobotState.getInstance().getCurrentAction() + " " + intake.getCurrentState());
+}
+//@@ expect
+kCoralOuttaking kOuttaking
+kCoralOuttaking kOuttaking
+kCoralOuttaking kOuttaking
+kTeleopDefault kStow
+kTeleopDefault kStow
+//@@ hint
+Use an `if` that compares `m_loopCount` with `kOuttakeLoops`.
+//@@ hint
+`if (m_loopCount &gt;= kOuttakeLoops) { setDefaultAction(); }`
+//@@ solution
+public class Intake {
+    public static enum IntakeState { kStow, kOuttaking }
+    private IntakeState m_state = IntakeState.kStow;
+    public void updateState(IntakeState state) { m_state = state; }
+    public IntakeState getCurrentState() { return m_state; }
+}
+
+public class RobotState {
+    public enum RobotAction { kTeleopDefault, kCoralOuttaking }
+
+    private static final int kOuttakeLoops = 3;
+    private static RobotState m_instance;
+    private final Intake m_intake;
+    private final SubsystemProfiles&lt;RobotAction&gt; m_profiles;
+    private int m_loopCount = 0;
+
+    private RobotState(Intake intake) {
+        m_intake = intake;
+
+        Map&lt;RobotAction, Runnable&gt; periodicHash = new HashMap&lt;&gt;();
+        periodicHash.put(RobotAction.kTeleopDefault, () -&gt; {});
+        periodicHash.put(RobotAction.kCoralOuttaking, this::coralOuttakingPeriodic);
+
+        m_profiles = new SubsystemProfiles&lt;&gt;(periodicHash, RobotAction.kTeleopDefault);
+    }
+
+    public static RobotState startInstance(Intake intake) {
+        if (m_instance == null) { m_instance = new RobotState(intake); }
+        return m_instance;
+    }
+
+    public static RobotState getInstance() { return m_instance; }
+
+    public RobotAction getCurrentAction() { return m_profiles.getCurrentProfile(); }
+
+    public void updateRobotState() {
+        m_profiles.getPeriodicFunctionTimed().run();
+        m_loopCount++;
+    }
+
+    public void updateRobotAction(RobotAction newAction) {
+        IntakeState newIntakeState = IntakeState.kStow;
+
+        switch (newAction) {
+            case kCoralOuttaking:
+                newIntakeState = IntakeState.kOuttaking;
+                break;
+
+            case kTeleopDefault:
+                break;
+        }
+
+        m_profiles.setCurrentProfile(newAction);
+        m_intake.updateState(newIntakeState);
+
+        // a new action starts its count from zero
+        m_loopCount = 0;
+    }
+
+    public void setDefaultAction() {
+        updateRobotAction(RobotAction.kTeleopDefault);
+    }
+
+    public void coralOuttakingPeriodic() {
+        if (m_loopCount &gt;= kOuttakeLoops) {
+            setDefaultAction();
+        }
+    }
+}
+//@@ explain
+Nobody pressed anything to stop it. After three loops the action ended itself, and because `updateRobotAction` starts every subsystem at rest, the intake went back to `kStow` with no extra code. Notice the count is reset inside `updateRobotAction`, just like the real code resets its timers on every new action.</code></pre>
+<h2 id="who-is-allowed-to-change-what">Who is allowed to change what?</h2>
+<p>With three layers, it helps to have a rule for who talks to whom.</p>
+<ul>
+<li><strong>Buttons</strong> (in <code>RobotContainer</code>) ask <code>RobotState</code> for an action. They almost never talk to a subsystem directly.</li>
+<li><strong><code>RobotState</code></strong> turns an action into a state for each subsystem.</li>
+<li><strong>Subsystems</strong> run their own state and talk to their own IO. They don't change each other's states.</li>
+</ul>
+<p>Our code isn't perfectly strict about it, and that's fine. A subsystem can <strong>read</strong> <code>RobotState</code> when it needs to know something about the whole robot (our indexer checks whether the manipulator is auto-reversing). A few simple buttons skip it altogether: the climb button flips the climb between two states, and a comment in the code says "this isn't gonna be in robot state because that's too much work."</p>
+<p>The rule of thumb: if a button needs <strong>more than one subsystem</strong>, or needs the robot to remember <strong>what it's doing</strong>, it goes through <code>RobotState</code>. If it's one mechanism flipping between two states, it can call the subsystem directly.</p>
+<pre class="quiz"><code>@ title: RobotState
+? Why does `RobotState` exist, instead of each button changing every subsystem it needs?
+- Java requires it
++ One place decides what all the subsystems should do together, so buttons and autonomous don't duplicate the lists
+- It makes the motors faster
+- Subsystems can't have states
+&gt; One action can set several subsystems at once, and every button (and autonomous) reuses it.
+
+? What makes `RobotState` a singleton?
+- It extends `SubsystemBase`
++ A private constructor and a static instance that everyone gets through `getInstance()`
+- It's declared `final`
+- It has only one method
+&gt; Nobody else can call `new RobotState(...)`, so there can only be the one built by `startInstance`.
+
+? Why does `updateRobotAction` start every subsystem at its resting state before the `switch`?
+- To make the code longer
++ So an action only lists what it changes, and nothing from the previous action gets left running
+- Because `switch` requires it
+- To reset the log file
+&gt; Switching back to the default action puts everything at rest with no cleanup code.
+
+? A `case` in the `switch` sets some states but has no `break`. What happens?
+- Java reports an error
++ Java keeps running into the next case's code too
+- The robot stops
+- Nothing, `break` is optional
+&gt; That's called fallthrough. Our team avoids it for any case that has code in it.
+
+? When does `RobotState` call each subsystem's `updateState`?
++ When the action changes, in `updateRobotAction`
+- Every 20 ms
+- Only when the robot is disabled
+- Never. The subsystems do it themselves.
+&gt; `updateRobotAction` sets them in one go. The action's own periodic method may adjust some every loop.
+
+? In `robotPeriodic()`, which comes first?
+- `CommandScheduler.getInstance().run()`
++ `RobotState.getInstance().updateRobotState()`
+- Neither. They run at the same time.
+- The order doesn't exist, only one runs.
+&gt; The robot decides what it's doing first, then the scheduler runs the subsystems.</code></pre>
+<hr />
+<h2 id="whats-next">What's next</h2>
+<p>You now have the full picture of how a button press becomes motor output: a binding asks <code>RobotState</code> for an action, <code>RobotState</code> sets each subsystem's state, and each subsystem's <code>periodic()</code> runs its state through an IO class. The last piece is where all the numbers in those states live. That's <a href="../constants/">Constants</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../robotContainer/" class="md-footer__link md-footer__link--prev" aria-label="Previous: RobotContainer">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                RobotContainer
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../constants/" class="md-footer__link md-footer__link--next" aria-label="Next: Constants">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Constants
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/team422" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.mechtechrobotics.com" target="_blank" rel="noopener" title="www.mechtechrobotics.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@mechtechdragons" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.footer", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/minijava.js"></script>
+      
+        <script src="../../javascripts/wpilib-prelude.js"></script>
+      
+        <script src="../../javascripts/playground.js"></script>
+      
+    
+  </body>
+</html>

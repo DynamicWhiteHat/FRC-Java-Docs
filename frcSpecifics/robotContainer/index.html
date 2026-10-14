@@ -1,0 +1,2418 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://frc422.github.io/JavaDocs/frcSpecifics/robotContainer/">
+      
+      
+        <link rel="prev" href="../subsystems/">
+      
+      
+        <link rel="next" href="../robotState/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/Logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>RobotContainer - Beginner's Guide To FRC Java</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/playground.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#robotcontainer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Beginner&#39;s Guide To FRC Java" class="md-header__button md-logo" aria-label="Beginner's Guide To FRC Java" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M277.8 312.9c9.8-6.7 23.4-12.5 23.4-12.5s-38.7 7-77.2 10.2c-47.1 3.9-97.7 4.7-123.1 1.3-60.1-8 33-30.1 33-30.1s-36.1-2.4-80.6 19c-52.5 25.4 130 37 224.5 12.1m-85.4-32.1c-19-42.7-83.1-80.2 0-145.8C296.1 53.2 242.9 0 242.9 0c21.5 84.5-75.6 110.1-110.7 162.6-23.9 35.9 11.7 74.4 60.2 118.2M307 104.6c.1 0-175.2 43.8-91.5 140.2 24.7 28.4-6.5 54-6.5 54s62.7-32.4 33.9-72.9c-26.9-37.8-47.5-56.6 64.1-121.3m-6.1 270.5c-.5 1-1.2 1.8-2 2.6 128.3-33.7 81.1-118.9 19.8-97.3-3.3 1.2-6.2 3.4-8.2 6.3 3.6-1.3 7.3-2.3 11-3 31-6.5 75.5 41.5-20.6 91.4m47.1 62.3s14.5 11.9-15.9 21.2c-57.9 17.5-240.8 22.8-291.6.7-18.3-7.9 16-19 26.8-21.3 11.2-2.4 17.7-2 17.7-2-20.3-14.3-131.3 28.1-56.4 40.2C232.8 509.4 401 461.3 348 437.4M124.5 396c-78.7 22 47.9 67.4 148.1 24.5q-14.7-5.7-28.2-13.8c-44.7 8.5-65.4 9.1-106 4.5-33.5-3.8-13.9-15.2-13.9-15.2m179.8 97.2C225.6 508 128.5 506.3 71 496.8c0-.1 11.8 9.7 72.4 13.6 92.2 5.9 233.8-3.3 237.1-46.9 0 0-6.4 16.5-76.2 29.7M260.7 353c-59.2 11.4-93.5 11.1-136.8 6.6-33.5-3.5-11.6-19.7-11.6-19.7-86.8 28.8 48.2 61.4 169.5 25.9-7.8-2.8-15-7.1-21.1-12.8"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Beginner's Guide To FRC Java
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RobotContainer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="deep-purple"  aria-label="Light Mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Light Mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="deep-purple"  aria-label="Dark Mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark Mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/DynamicWhiteHat/FRC-Java-Docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DynamicWhiteHat/FRC-Java-Docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Beginner&#39;s Guide To FRC Java" class="md-nav__button md-logo" aria-label="Beginner's Guide To FRC Java" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M277.8 312.9c9.8-6.7 23.4-12.5 23.4-12.5s-38.7 7-77.2 10.2c-47.1 3.9-97.7 4.7-123.1 1.3-60.1-8 33-30.1 33-30.1s-36.1-2.4-80.6 19c-52.5 25.4 130 37 224.5 12.1m-85.4-32.1c-19-42.7-83.1-80.2 0-145.8C296.1 53.2 242.9 0 242.9 0c21.5 84.5-75.6 110.1-110.7 162.6-23.9 35.9 11.7 74.4 60.2 118.2M307 104.6c.1 0-175.2 43.8-91.5 140.2 24.7 28.4-6.5 54-6.5 54s62.7-32.4 33.9-72.9c-26.9-37.8-47.5-56.6 64.1-121.3m-6.1 270.5c-.5 1-1.2 1.8-2 2.6 128.3-33.7 81.1-118.9 19.8-97.3-3.3 1.2-6.2 3.4-8.2 6.3 3.6-1.3 7.3-2.3 11-3 31-6.5 75.5 41.5-20.6 91.4m47.1 62.3s14.5 11.9-15.9 21.2c-57.9 17.5-240.8 22.8-291.6.7-18.3-7.9 16-19 26.8-21.3 11.2-2.4 17.7-2 17.7-2-20.3-14.3-131.3 28.1-56.4 40.2C232.8 509.4 401 461.3 348 437.4M124.5 396c-78.7 22 47.9 67.4 148.1 24.5q-14.7-5.7-28.2-13.8c-44.7 8.5-65.4 9.1-106 4.5-33.5-3.8-13.9-15.2-13.9-15.2m179.8 97.2C225.6 508 128.5 506.3 71 496.8c0-.1 11.8 9.7 72.4 13.6 92.2 5.9 233.8-3.3 237.1-46.9 0 0-6.4 16.5-76.2 29.7M260.7 353c-59.2 11.4-93.5 11.1-136.8 6.6-33.5-3.5-11.6-19.7-11.6-19.7-86.8 28.8 48.2 61.4 169.5 25.9-7.8-2.8-15-7.1-21.1-12.8"/></svg>
+
+    </a>
+    Beginner's Guide To FRC Java
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/DynamicWhiteHat/FRC-Java-Docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DynamicWhiteHat/FRC-Java-Docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../gettingStarted/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intro to Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Intro to Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/whyJava/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why Java?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/javaLesson1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/javaLesson2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/javaLesson3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introToJava/javaQuiz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FRC Specifics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FRC Specifics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frcProgramming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FRC Nuances
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subsystems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Subsystems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RobotContainer
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RobotContainer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#four-steps-in-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Four steps, in order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-sim-or-replay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Real, sim or replay?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controllers-ask-for-what-not-which-button" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controllers: ask for what, not which button
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bindings-buttons-change-states" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bindings: buttons change states
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bindings: buttons change states">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bindings-that-call-robotstate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bindings that call RobotState
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zeroing-while-the-robot-is-disabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zeroing while the robot is disabled
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#driving-the-default-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Driving: the default command
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autonomous-getautonomouscommand" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autonomous: getAutonomousCommand()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-belongs-where" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What belongs where?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../robotState/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RobotState
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../constants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Constants
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#four-steps-in-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Four steps, in order
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-sim-or-replay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Real, sim or replay?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controllers-ask-for-what-not-which-button" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controllers: ask for what, not which button
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bindings-buttons-change-states" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bindings: buttons change states
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bindings: buttons change states">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bindings-that-call-robotstate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bindings that call RobotState
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zeroing-while-the-robot-is-disabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zeroing while the robot is disabled
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#driving-the-default-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Driving: the default command
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autonomous-getautonomouscommand" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autonomous: getAutonomousCommand()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-belongs-where" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What belongs where?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's next
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="robotcontainer">RobotContainer</h1>
+<p>If subsystems are the parts of the robot, <code>RobotContainer</code> is where the parts get assembled. It builds every subsystem, picks whether they talk to real or simulated hardware, creates the controllers, and connects each button to something that happens.</p>
+<div class="admonition info">
+<p class="admonition-title">A good way to think about it</p>
+<p><strong>Subsystems know <em>how</em>.</strong> <code>Intake</code> knows how to run its rollers.
+<strong>RobotContainer builds <em>what exists</em>.</strong> It creates the intake and hands it the right IO class.
+<strong>The buttons decide <em>when</em>.</strong> Pressing A tells the robot to start intaking.</p>
+</div>
+<p><code>RobotContainer</code> should contain very little real logic. It reads almost like a list of instructions, and that's a good thing. If you find yourself writing math in here, it probably belongs in a subsystem.</p>
+<h2 id="four-steps-in-order">Four steps, in order</h2>
+<p>Our <code>RobotContainer</code> has a constructor that does the same four things every year, each in its own method.</p>
+<div class="highlight"><span class="filename">RobotContainer.java</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="nf">RobotContainer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">configureSubsystems</span><span class="p">();</span><span class="w">     </span><span class="c1">// build the subsystems, real or sim</span>
+<span class="w">    </span><span class="n">configureCommands</span><span class="p">();</span><span class="w">       </span><span class="c1">// the autonomous chooser and its routines</span>
+<span class="w">    </span><span class="n">configureControllers</span><span class="p">();</span><span class="w">    </span><span class="c1">// which controller is plugged in</span>
+<span class="w">    </span><span class="n">configureButtonBindings</span><span class="p">();</span><span class="w"> </span><span class="c1">// what each button does</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The order matters. Bindings need the controllers, and the controllers' buttons need the subsystems to point at. We'll go through them in a slightly different order, starting with the most surprising one.</p>
+<h2 id="real-sim-or-replay">Real, sim or replay?</h2>
+<p>Remember the three IO classes from <a href="../subsystems/">Subsystems</a>? <code>RobotContainer</code> is where one of them is chosen. It looks at a setting called the <strong>mode</strong> and builds each subsystem with the matching IO class.</p>
+<div class="highlight"><span class="filename">Constants.java</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">Mode</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">REAL</span><span class="p">,</span><span class="w">    </span><span class="c1">// running on the robot</span>
+<span class="w">    </span><span class="n">PROTO</span><span class="p">,</span><span class="w">   </span><span class="c1">// running on the practice board, with some mechanisms real and some simulated</span>
+<span class="w">    </span><span class="n">SIM</span><span class="p">,</span><span class="w">     </span><span class="c1">// running on a laptop, with pretend hardware</span>
+<span class="w">    </span><span class="n">REPLAY</span><span class="w">   </span><span class="c1">// replaying a log file, with no hardware</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The mode is set once. When the code is on a roboRIO, WPILib can tell, so <code>kCurrentMode</code> is <code>REAL</code> there and <code>SIM</code> everywhere else. To replay a log, we change it by hand. Then <code>configureSubsystems()</code> is one big <code>switch</code>:</p>
+<div class="highlight"><span class="filename">configureSubsystems(), shortened</span><pre><span></span><code><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">Constants</span><span class="p">.</span><span class="na">kCurrentMode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">REAL</span><span class="p">:</span>
+<span class="w">        </span><span class="n">m_intake</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Intake</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">IntakeRollerIOKraken</span><span class="p">(</span><span class="n">Ports</span><span class="p">.</span><span class="na">kIntakeRoller</span><span class="p">),</span><span class="w"> </span><span class="p">...);</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">SIM</span><span class="p">:</span>
+<span class="w">        </span><span class="n">m_intake</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Intake</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">IntakeRollerIOSim</span><span class="p">(),</span><span class="w"> </span><span class="p">...);</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">REPLAY</span><span class="p">:</span>
+<span class="w">        </span><span class="n">m_intake</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Intake</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">IntakeRollerIOReplay</span><span class="p">(),</span><span class="w"> </span><span class="p">...);</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>That <code>switch</code> is the <strong>only</strong> place that decides which IO class each subsystem is connected to. (A few other spots check the mode too, such as <code>Robot.java</code> choosing where to send the logs, but none of them choose the hardware.) Try it. Here's the full intake with a mode switch. Run it, switch to <strong>Teleop</strong>, press <strong>A</strong>, and look at the dashboard. Then change <code>kCurrentMode</code> to <code>Mode.REAL</code>, press <strong>Restart</strong>, and press <strong>A</strong> again. A motor shows up, because now <code>IntakeIOKraken</code> is the class being used. Then try <code>Mode.REPLAY</code>: nothing responds at all, because that class does nothing.</p>
+<pre class="playground"><code>//@ title: Real, sim or replay?
+//@ panel: robot
+//@ show: controller,motors,dashboard
+//@ goal: Run it, go to Teleop, and press A. Then change kCurrentMode to Mode.REAL and restart: a motor appears. Try Mode.REPLAY: nothing happens.
+//@ lines: 130
+//@ maxlines: 34
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+    private double m_velocity = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        m_velocity += (m_voltage * 8.0 - m_velocity) * 0.2;
+        inputs.velocityRPS = m_velocity;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+
+public class IntakeIOKraken implements IntakeIO {
+    private final TalonFX m_motor;
+    private final VoltageOut m_voltageOut = new VoltageOut(0.0).withEnableFOC(true);
+    private double m_voltage = 0.0;
+
+    public IntakeIOKraken(int port) {
+        m_motor = new TalonFX(port);
+    }
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        // a real class reads the motor's sensors here
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+        m_motor.setControl(m_voltageOut.withOutput(voltage));
+    }
+}
+
+public class IntakeIOReplay implements IntakeIO {
+    @Override
+    public void updateInputs(IntakeInputs inputs) {}
+
+    @Override
+    public void setVoltage(double voltage) {}
+}
+
+public class Intake extends SubsystemBase {
+    public static enum IntakeState {
+        kStow,
+        kIntaking,
+        kOuttaking
+    }
+
+    private final IntakeIO m_io;
+    private final IntakeInputsAutoLogged m_inputs = new IntakeInputsAutoLogged();
+    private final SubsystemProfiles&lt;IntakeState&gt; m_profiles;
+
+    public Intake(IntakeIO io) {
+        m_io = io;
+
+        Map&lt;IntakeState, Runnable&gt; periodicHash = new HashMap&lt;&gt;();
+        periodicHash.put(IntakeState.kStow, this::stowPeriodic);
+        periodicHash.put(IntakeState.kIntaking, this::intakingPeriodic);
+        periodicHash.put(IntakeState.kOuttaking, this::outtakingPeriodic);
+
+        m_profiles = new SubsystemProfiles&lt;&gt;(periodicHash, IntakeState.kStow);
+    }
+
+    public void updateState(IntakeState state) {
+        m_profiles.setCurrentProfile(state);
+    }
+
+    public IntakeState getCurrentState() {
+        return m_profiles.getCurrentProfile();
+    }
+
+    @Override
+    public void periodic() {
+        m_io.updateInputs(m_inputs);
+        m_profiles.getPeriodicFunctionTimed().run();
+        Logger.processInputs("Intake", m_inputs);
+        Logger.recordOutput("Intake/State", m_profiles.getCurrentProfile());
+    }
+
+    public void stowPeriodic() {
+        m_io.setVoltage(0.0);
+    }
+
+    public void intakingPeriodic() {
+        m_io.setVoltage(8.0);
+    }
+
+    public void outtakingPeriodic() {
+        m_io.setVoltage(-8.0);
+    }
+}
+
+public class Constants {
+    public enum Mode {
+        REAL,
+        SIM,
+        REPLAY
+    }
+
+    public static final Mode kCurrentMode = Mode.SIM;
+
+    public static final class Ports {
+        public static final int kIntakeRoller = 5;
+    }
+}
+
+public class RobotContainer {
+    private Intake m_intake;
+    private final CommandXboxController m_driver = new CommandXboxController(0);
+
+    public RobotContainer() {
+        configureSubsystems();
+        configureButtonBindings();
+    }
+
+    private void configureSubsystems() {
+        switch (Constants.kCurrentMode) {
+            case REAL:
+                m_intake = new Intake(new IntakeIOKraken(Constants.Ports.kIntakeRoller));
+                break;
+            case SIM:
+                m_intake = new Intake(new IntakeIOSim());
+                break;
+            case REPLAY:
+                m_intake = new Intake(new IntakeIOReplay());
+                break;
+        }
+    }
+
+    private void configureButtonBindings() {
+        m_driver.a().onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kIntaking)));
+        m_driver.x().onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kStow)));
+    }
+}</code></pre>
+<p>On the robot, the Kraken class also reads the motor's actual speed and current. The pretend one here only echoes the voltage, so some dashboard numbers stay at zero in <code>REAL</code> mode.</p>
+<p>Now fill in the missing case yourself. This method builds the intake for any mode, but someone forgot about replays.</p>
+<pre class="playground"><code>//@ title: Add the replay case
+//@ goal: Add the REPLAY case so a replay builds the intake with IntakeIOReplay. Don't forget the break.
+//@ lines: 38
+//@ require: case\s+REPLAY | Add a case for REPLAY.
+//@ require: new\s+IntakeIOReplay | Build the intake with IntakeIOReplay.
+public enum Mode {
+    REAL,
+    SIM,
+    REPLAY
+}
+
+public interface IntakeIO {
+    void setVoltage(double voltage);
+}
+
+public class IntakeIOKraken implements IntakeIO {
+    public IntakeIOKraken(int port) {}
+
+    @Override
+    public void setVoltage(double voltage) {}
+}
+
+public class IntakeIOSim implements IntakeIO {
+    @Override
+    public void setVoltage(double voltage) {}
+}
+
+public class IntakeIOReplay implements IntakeIO {
+    @Override
+    public void setVoltage(double voltage) {}
+}
+
+public class Intake {
+    private final IntakeIO m_io;
+
+    public Intake(IntakeIO io) {
+        m_io = io;
+    }
+
+    public String getIOName() {
+        return m_io.getClass().getSimpleName();
+    }
+}
+
+public class RobotContainer {
+    public static Intake buildIntake(Mode mode) {
+        Intake intake = null;
+
+        switch (mode) {
+            case REAL:
+                intake = new Intake(new IntakeIOKraken(5));
+                break;
+            case SIM:
+                intake = new Intake(new IntakeIOSim());
+                break;
+            // Add the REPLAY case here:
+
+        }
+
+        return intake;
+    }
+}
+//@@ harness
+System.out.println(RobotContainer.buildIntake(Mode.REAL).getIOName());
+System.out.println(RobotContainer.buildIntake(Mode.SIM).getIOName());
+System.out.println(RobotContainer.buildIntake(Mode.REPLAY).getIOName());
+//@@ expect
+IntakeIOKraken
+IntakeIOSim
+IntakeIOReplay
+//@@ hint
+Copy the SIM case and change what it builds.
+//@@ hint
+`case REPLAY:` then `intake = new Intake(new IntakeIOReplay());` then `break;`
+//@@ solution
+public enum Mode {
+    REAL,
+    SIM,
+    REPLAY
+}
+
+public interface IntakeIO {
+    void setVoltage(double voltage);
+}
+
+public class IntakeIOKraken implements IntakeIO {
+    public IntakeIOKraken(int port) {}
+
+    @Override
+    public void setVoltage(double voltage) {}
+}
+
+public class IntakeIOSim implements IntakeIO {
+    @Override
+    public void setVoltage(double voltage) {}
+}
+
+public class IntakeIOReplay implements IntakeIO {
+    @Override
+    public void setVoltage(double voltage) {}
+}
+
+public class Intake {
+    private final IntakeIO m_io;
+
+    public Intake(IntakeIO io) {
+        m_io = io;
+    }
+
+    public String getIOName() {
+        return m_io.getClass().getSimpleName();
+    }
+}
+
+public class RobotContainer {
+    public static Intake buildIntake(Mode mode) {
+        Intake intake = null;
+
+        switch (mode) {
+            case REAL:
+                intake = new Intake(new IntakeIOKraken(5));
+                break;
+            case SIM:
+                intake = new Intake(new IntakeIOSim());
+                break;
+            case REPLAY:
+                intake = new Intake(new IntakeIOReplay());
+                break;
+        }
+
+        return intake;
+    }
+}
+//@@ explain
+Without that case, a replay would leave `intake` as `null` and the robot code would crash the moment it touched it. Every mode needs a case, and every subsystem needs a line in each one.</code></pre>
+<pre class="quiz"><code>@ title: Choosing the hardware
+? Which part of the program decides whether the intake uses real or simulated hardware?
+- The `Intake` class
+- `IntakeIO`
++ The `switch` in `configureSubsystems()`
+- The driver, with a button
+&gt; It's the one place that knows. Everything else just uses the `IntakeIO` it was given.
+
+? You replay a match log on your laptop. Which mode do you want?
+- `REAL`
+- `SIM`
++ `REPLAY`
+- `PROTO`
+&gt; `REPLAY` builds every subsystem with its empty replay IO class, so the logged readings drive the code.
+
+? Why does each subsystem get its IO class passed into its constructor, instead of creating it inside?
+- Constructors can't create objects
++ So `RobotContainer` can choose which IO class it gets, without the subsystem changing
+- It makes the code run faster
+- It's required by WPILib
+&gt; Passing a dependency in, rather than building it inside, is what makes the classes swappable.</code></pre>
+<h2 id="controllers-ask-for-what-not-which-button">Controllers: ask for what, not which button</h2>
+<p>Our code never says "the left bumper." It says <code>coralIntake()</code>. A small interface lists everything a driver can do, and a class for each kind of controller says which button does it.</p>
+<div class="highlight"><span class="filename">DriverControls.java</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">DriverControls</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getForward</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Trigger</span><span class="w"> </span><span class="nf">coralIntake</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Trigger</span><span class="w"> </span><span class="nf">coralOuttake</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Trigger</span><span class="w"> </span><span class="nf">climb</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">DriverControlsXbox.java</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DriverControlsXbox</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">DriverControls</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">CommandXboxController</span><span class="w"> </span><span class="n">m_controller</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">DriverControlsXbox</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">port</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">m_controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CommandXboxController</span><span class="p">(</span><span class="n">port</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">getForward</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">m_controller</span><span class="p">.</span><span class="na">getLeftY</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Trigger</span><span class="w"> </span><span class="nf">coralIntake</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">m_controller</span><span class="p">.</span><span class="na">leftBumper</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Trigger</span><span class="w"> </span><span class="nf">climb</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">m_controller</span><span class="p">.</span><span class="na">a</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>It's the interface idea again. We have a second class, <code>DriverControlsPS5</code>, for a PlayStation controller. To switch, <code>configureControllers()</code> changes one line:</p>
+<div class="highlight"><span class="filename">configureControllers()</span><pre><span></span><code><span class="c1">// m_driverControls = new DriverControlsXbox(0);</span>
+<span class="n">m_driverControls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DriverControlsPS5</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div>
+<p>And if the team decides to move the climb to a different button, you change it in one class, and not in every file that uses it.</p>
+<p>Two details worth noticing. <code>getForward()</code> returns <code>-m_controller.getLeftY()</code>, with a minus sign. On a controller, pushing a stick forward reads <strong>negative</strong>, which is the opposite of what you want, so the controller class flips it once, here, and nobody else has to think about it. And each button method returns a <code>Trigger</code>, which is how you hook up what happens when it's pressed (below).</p>
+<p>Time to write one. This controller class has the intake button but not the outtake button. The outtake should be the <strong>B</strong> button.</p>
+<pre class="playground"><code>//@ title: Write the outtake button
+//@ prelude: wpilib
+//@ goal: Add an outtake() method to DriverControlsXbox that returns the B button.
+//@ lines: 56
+//@ maxlines: 30
+//@ require: Trigger\s+outtake\s*\( | Write a method named outtake that returns a Trigger.
+public interface DriverControls {
+    double getForward();
+
+    Trigger intake();
+
+    Trigger outtake();
+}
+
+public class DriverControlsXbox implements DriverControls {
+    private final CommandXboxController m_controller;
+
+    public DriverControlsXbox(int port) {
+        m_controller = new CommandXboxController(port);
+    }
+
+    @Override
+    public double getForward() {
+        return -m_controller.getLeftY();
+    }
+
+    @Override
+    public Trigger intake() {
+        return m_controller.a();
+    }
+
+    // Write outtake() here. It should be the B button.
+
+}
+
+public class Intake {
+    public static enum IntakeState {
+        kStow,
+        kIntaking,
+        kOuttaking
+    }
+
+    private IntakeState m_state = IntakeState.kStow;
+
+    public void updateState(IntakeState state) {
+        m_state = state;
+    }
+
+    public IntakeState getCurrentState() {
+        return m_state;
+    }
+}
+
+public class RobotContainer {
+    private final Intake m_intake = new Intake();
+    private final DriverControls m_driverControls = new DriverControlsXbox(0);
+
+    public RobotContainer() {
+        m_driverControls.intake().onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kIntaking)));
+        m_driverControls.outtake().onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kOuttaking)));
+    }
+
+    public Intake getIntake() {
+        return m_intake;
+    }
+}
+//@@ harness
+RobotContainer container = new RobotContainer();
+Sim.press(0, "B");
+Sim.loops(2);
+System.out.println(container.getIntake().getCurrentState());
+//@@ expect
+kOuttaking
+//@@ hint
+It looks just like `intake()`, but for a different button.
+//@@ hint
+`@Override public Trigger outtake() { return m_controller.b(); }`
+//@@ solution
+public interface DriverControls {
+    double getForward();
+
+    Trigger intake();
+
+    Trigger outtake();
+}
+
+public class DriverControlsXbox implements DriverControls {
+    private final CommandXboxController m_controller;
+
+    public DriverControlsXbox(int port) {
+        m_controller = new CommandXboxController(port);
+    }
+
+    @Override
+    public double getForward() {
+        return -m_controller.getLeftY();
+    }
+
+    @Override
+    public Trigger intake() {
+        return m_controller.a();
+    }
+
+    @Override
+    public Trigger outtake() {
+        return m_controller.b();
+    }
+}
+
+public class Intake {
+    public static enum IntakeState {
+        kStow,
+        kIntaking,
+        kOuttaking
+    }
+
+    private IntakeState m_state = IntakeState.kStow;
+
+    public void updateState(IntakeState state) {
+        m_state = state;
+    }
+
+    public IntakeState getCurrentState() {
+        return m_state;
+    }
+}
+
+public class RobotContainer {
+    private final Intake m_intake = new Intake();
+    private final DriverControls m_driverControls = new DriverControlsXbox(0);
+
+    public RobotContainer() {
+        m_driverControls.intake().onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kIntaking)));
+        m_driverControls.outtake().onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kOuttaking)));
+    }
+
+    public Intake getIntake() {
+        return m_intake;
+    }
+}
+//@@ explain
+`RobotContainer` already says `m_driverControls.outtake()`. Now the Xbox class says which physical button that is. A PlayStation class would answer differently and nothing else would change.</code></pre>
+<h2 id="bindings-buttons-change-states">Bindings: buttons change states</h2>
+<p>A <code>Trigger</code> is a button (or any true/false condition) that can start things when it changes. Here are the ways to react to it:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>When it happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>onTrue(command)</code></td>
+<td>Once, at the moment the button goes down.</td>
+</tr>
+<tr>
+<td><code>onFalse(command)</code></td>
+<td>Once, at the moment the button is released.</td>
+</tr>
+<tr>
+<td><code>whileTrue(command)</code></td>
+<td>While the button is held. It's cancelled on release.</td>
+</tr>
+</tbody>
+</table>
+<p>Since our subsystems have states instead of commands, a binding wraps a state change in <code>Commands.runOnce</code>. <code>runOnce</code> takes a lambda, a package of code, and makes a command that runs it one time and finishes.</p>
+<div class="highlight"><pre><span></span><code><span class="n">m_driverControls</span><span class="p">.</span><span class="na">coralIntake</span><span class="p">().</span><span class="na">onTrue</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Commands</span><span class="p">.</span><span class="na">runOnce</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">m_intake</span><span class="p">.</span><span class="na">updateState</span><span class="p">(</span><span class="n">IntakeState</span><span class="p">.</span><span class="na">kIntaking</span><span class="p">)));</span>
+</code></pre></div>
+<p>Read it as: "when the intake button goes down, run this one line, which sets the intake's state." Nothing happens right then except the state change. The next <code>periodic()</code> does the rest.</p>
+<p>Triggers can be chained, so one button can do something on press and something else on release. Here's a tap, a hold, and a plain button. Run it, switch to <strong>Teleop</strong>, tap <strong>A</strong> (the intake keeps going after you let go), hold <strong>B</strong> (it outtakes only while held), and tap <strong>X</strong> to stow.</p>
+<pre class="playground"><code>//@ title: Tap, hold and stow
+//@ panel: robot
+//@ show: controller,dashboard
+//@ goal: Run it, go to Teleop. Tap A: the intake keeps running. Hold B: it outtakes only while held. Press X to stow. Watch Intake/State change on the dashboard.
+//@ lines: 100
+//@ maxlines: 34
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+    private double m_velocity = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        m_velocity += (m_voltage * 8.0 - m_velocity) * 0.2;
+        inputs.velocityRPS = m_velocity;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+
+public class Intake extends SubsystemBase {
+    public static enum IntakeState {
+        kStow,
+        kIntaking,
+        kOuttaking
+    }
+
+    private final IntakeIO m_io;
+    private final IntakeInputsAutoLogged m_inputs = new IntakeInputsAutoLogged();
+    private final SubsystemProfiles&lt;IntakeState&gt; m_profiles;
+
+    public Intake(IntakeIO io) {
+        m_io = io;
+
+        Map&lt;IntakeState, Runnable&gt; periodicHash = new HashMap&lt;&gt;();
+        periodicHash.put(IntakeState.kStow, this::stowPeriodic);
+        periodicHash.put(IntakeState.kIntaking, this::intakingPeriodic);
+        periodicHash.put(IntakeState.kOuttaking, this::outtakingPeriodic);
+
+        m_profiles = new SubsystemProfiles&lt;&gt;(periodicHash, IntakeState.kStow);
+    }
+
+    public void updateState(IntakeState state) {
+        m_profiles.setCurrentProfile(state);
+    }
+
+    public IntakeState getCurrentState() {
+        return m_profiles.getCurrentProfile();
+    }
+
+    @Override
+    public void periodic() {
+        m_io.updateInputs(m_inputs);
+        m_profiles.getPeriodicFunctionTimed().run();
+        Logger.processInputs("Intake", m_inputs);
+        Logger.recordOutput("Intake/State", m_profiles.getCurrentProfile());
+    }
+
+    public void stowPeriodic() {
+        m_io.setVoltage(0.0);
+    }
+
+    public void intakingPeriodic() {
+        m_io.setVoltage(8.0);
+    }
+
+    public void outtakingPeriodic() {
+        m_io.setVoltage(-8.0);
+    }
+}
+
+public class RobotContainer {
+    private final Intake m_intake = new Intake(new IntakeIOSim());
+    private final CommandXboxController m_driver = new CommandXboxController(0);
+
+    public RobotContainer() {
+        // A: tap to start. It stays in this state until something changes it.
+        m_driver.a().onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kIntaking)));
+
+        // B: outtake while held, stow on release
+        m_driver.b()
+            .onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kOuttaking)))
+            .onFalse(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kStow)));
+
+        // X: stow
+        m_driver.x().onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kStow)));
+    }
+}</code></pre>
+<p>Your turn. A is already bound. Bind <strong>B</strong> so the intake outtakes while B is held and goes back to stow when it's released.</p>
+<pre class="playground"><code>//@ title: Hold to outtake
+//@ prelude: wpilib
+//@ goal: Bind the B button: set the state to kOuttaking when it goes down, and kStow when it's released. Use onTrue and onFalse.
+//@ lines: 36
+//@ maxlines: 30
+//@ require: \.b\(\) | Use the B button: m_driver.b().
+//@ require: onTrue | Use onTrue for the press.
+//@ require: onFalse | Use onFalse for the release.
+public class Intake {
+    public static enum IntakeState {
+        kStow,
+        kIntaking,
+        kOuttaking
+    }
+
+    private IntakeState m_state = IntakeState.kStow;
+
+    public void updateState(IntakeState state) {
+        m_state = state;
+    }
+
+    public IntakeState getCurrentState() {
+        return m_state;
+    }
+}
+
+public class RobotContainer {
+    private final Intake m_intake = new Intake();
+    private final CommandXboxController m_driver = new CommandXboxController(0);
+
+    public RobotContainer() {
+        m_driver.a().onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kIntaking)));
+
+        // Bind B here:
+
+    }
+
+    public Intake getIntake() {
+        return m_intake;
+    }
+}
+//@@ harness
+RobotContainer container = new RobotContainer();
+Sim.press(0, "B");
+Sim.loops(2);
+System.out.println(container.getIntake().getCurrentState());
+Sim.release(0, "B");
+Sim.loops(2);
+System.out.println(container.getIntake().getCurrentState());
+//@@ expect
+kOuttaking
+kStow
+//@@ hint
+Chain the two: `m_driver.b().onTrue(...).onFalse(...);`
+//@@ hint
+Each of the two is a `Commands.runOnce(() -&gt; m_intake.updateState(...))`.
+//@@ solution
+public class Intake {
+    public static enum IntakeState {
+        kStow,
+        kIntaking,
+        kOuttaking
+    }
+
+    private IntakeState m_state = IntakeState.kStow;
+
+    public void updateState(IntakeState state) {
+        m_state = state;
+    }
+
+    public IntakeState getCurrentState() {
+        return m_state;
+    }
+}
+
+public class RobotContainer {
+    private final Intake m_intake = new Intake();
+    private final CommandXboxController m_driver = new CommandXboxController(0);
+
+    public RobotContainer() {
+        m_driver.a().onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kIntaking)));
+
+        m_driver.b()
+            .onTrue(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kOuttaking)))
+            .onFalse(Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kStow)));
+    }
+
+    public Intake getIntake() {
+        return m_intake;
+    }
+}
+//@@ explain
+`onTrue` handles the press and `onFalse` handles the release. Without `onFalse`, the intake would keep outtaking forever once you let go.</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">A lesson from our own code</p>
+<p>You may find <code>toggleOnTrue</code>, a WPILib binding that starts something on the first press and stops it on the next. Our <code>RobotContainer</code> doesn't use it. A comment in the code says, "if anyone is reading this, here's a lesson: don't use WPILib toggle, it's not good." Our intake button instead sets a robot action through <code>RobotState</code> and watches that action, so the button always matches what the robot is really doing. You'll see how on the <a href="../robotState/">RobotState</a> page.</p>
+</div>
+<h3 id="bindings-that-call-robotstate">Bindings that call RobotState</h3>
+<p>The intake button above is a simplification. On the real robot, one button press usually changes several subsystems at once, so the binding doesn't call a subsystem. It tells <code>RobotState</code> what the robot should be doing.</p>
+<div class="highlight"><span class="filename">A real binding from our RobotContainer</span><pre><span></span><code><span class="n">m_driverControls</span>
+<span class="w">    </span><span class="p">.</span><span class="na">coralEject</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="na">onTrue</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Commands</span><span class="p">.</span><span class="na">runOnce</span><span class="p">(</span>
+<span class="w">            </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="n">RobotState</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">updateRobotAction</span><span class="p">(</span><span class="n">RobotAction</span><span class="p">.</span><span class="na">kCoralEject</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}))</span>
+<span class="w">    </span><span class="p">.</span><span class="na">onFalse</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Commands</span><span class="p">.</span><span class="na">runOnce</span><span class="p">(</span>
+<span class="w">            </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="n">RobotState</span><span class="p">.</span><span class="na">getInstance</span><span class="p">().</span><span class="na">setDefaultAction</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}));</span>
+</code></pre></div>
+<p>Same shape as the B button: something on press, something else on release. It just talks to a different object. The next page explains it.</p>
+<h3 id="zeroing-while-the-robot-is-disabled">Zeroing while the robot is disabled</h3>
+<p>Commands don't run while the robot is disabled, which is a safety feature. But some things you want to do <strong>before</strong> a match, while disabled, like telling the elevator "this is height zero." Our code adds <code>.ignoringDisable(true)</code> to those bindings.</p>
+<div class="highlight"><pre><span></span><code><span class="n">m_driverControls</span>
+<span class="w">    </span><span class="p">.</span><span class="na">zeroElevator</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="na">onTrue</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Commands</span><span class="p">.</span><span class="na">runOnce</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">m_elevator</span><span class="p">.</span><span class="na">zeroElevator</span><span class="p">())</span>
+<span class="w">            </span><span class="p">.</span><span class="na">ignoringDisable</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+</code></pre></div>
+<p>Try it. This container is set to disabled before the button is pressed, so the zero command is silently ignored.</p>
+<pre class="playground"><code>//@ title: Zero while disabled
+//@ prelude: wpilib
+//@ goal: Pressing START should zero the elevator even while the robot is disabled. Right now it does nothing. Fix the binding.
+//@ lines: 22
+//@ require: ignoringDisable\(\s*true\s*\) | Add .ignoringDisable(true) to the command.
+public class Elevator {
+    private int m_zeroCount = 0;
+
+    public void zero() { m_zeroCount++; }
+
+    public int getZeroCount() { return m_zeroCount; }
+}
+
+public class RobotContainer {
+    private final Elevator m_elevator = new Elevator();
+    private final CommandXboxController m_driver = new CommandXboxController(0);
+
+    public RobotContainer() {
+        m_driver.start().onTrue(Commands.runOnce(() -&gt; m_elevator.zero()));
+    }
+
+    public Elevator getElevator() {
+        return m_elevator;
+    }
+}
+//@@ harness
+Sim.setMode("disabled");
+RobotContainer container = new RobotContainer();
+Sim.press(0, "START");
+Sim.loops(2);
+System.out.println(container.getElevator().getZeroCount());
+//@@ expect
+1
+//@@ hint
+Add one call onto the end of `Commands.runOnce(...)`, before the closing parenthesis of `onTrue`.
+//@@ solution
+public class Elevator {
+    private int m_zeroCount = 0;
+
+    public void zero() { m_zeroCount++; }
+
+    public int getZeroCount() { return m_zeroCount; }
+}
+
+public class RobotContainer {
+    private final Elevator m_elevator = new Elevator();
+    private final CommandXboxController m_driver = new CommandXboxController(0);
+
+    public RobotContainer() {
+        m_driver.start().onTrue(Commands.runOnce(() -&gt; m_elevator.zero()).ignoringDisable(true));
+    }
+
+    public Elevator getElevator() {
+        return m_elevator;
+    }
+}
+//@@ explain
+Commands don't run when the robot is disabled unless you say they may. Zeroing a sensor is exactly the kind of thing you want to do before the match starts.</code></pre>
+<h2 id="driving-the-default-command">Driving: the default command</h2>
+<p>Driving is where we <strong>do</strong> use commands. Most subsystems sit idle until a button asks for them, but the drivetrain should respond to the sticks all the time. So it gets a <strong>default command</strong>: the command that runs whenever nothing else is using that subsystem.</p>
+<p>Driving commands live in <code>commands/drive/DriveCommands.java</code> as static methods, not inside the subsystem. They take their inputs as suppliers, the live lambdas from <a href="../frcProgramming/">FRC Nuances</a>, so they read the sticks fresh every loop. Notice <code>m_driverControls::getForward</code>, a method reference, passed in where a live value is needed.</p>
+<pre class="playground"><code>//@ title: A drivetrain with a default command
+//@ panel: robot
+//@ show: controller,motors,dashboard
+//@ goal: Run it, switch to Teleop, and drive: left stick up for forward, right stick sideways to turn. Then remove the minus sign in getTurn() and see which way it turns.
+//@ lines: 60
+//@ maxlines: 34
+public class Drive extends SubsystemBase {
+    private final TalonFX m_left = new TalonFX(1);
+    private final TalonFX m_right = new TalonFX(2);
+    private final DifferentialDrive m_drive = new DifferentialDrive(m_left, m_right);
+
+    public void arcadeDrive(double forward, double turn) {
+        m_drive.arcadeDrive(forward, turn);
+    }
+}
+
+public class DriveCommands {
+    private DriveCommands() {}
+
+    public static Command arcade(Drive drive, DoubleSupplier forward, DoubleSupplier turn) {
+        return Commands.run(
+            () -&gt; drive.arcadeDrive(forward.getAsDouble(), turn.getAsDouble()),
+            drive);
+    }
+}
+
+public interface DriverControls {
+    double getForward();
+
+    double getTurn();
+}
+
+public class DriverControlsXbox implements DriverControls {
+    private final CommandXboxController m_controller = new CommandXboxController(0);
+
+    @Override
+    public double getForward() {
+        return -m_controller.getLeftY();
+    }
+
+    @Override
+    public double getTurn() {
+        return -m_controller.getRightX();
+    }
+}
+
+public class RobotContainer {
+    private final Drive m_drive = new Drive();
+    private final DriverControls m_driverControls = new DriverControlsXbox();
+
+    public RobotContainer() {
+        m_drive.setDefaultCommand(
+            DriveCommands.arcade(m_drive, m_driverControls::getForward, m_driverControls::getTurn));
+    }
+}</code></pre>
+<p>Our real drivetrain is a swerve drive, which is a lot more math, but it hooks up the same way: a <code>joystickDrive</code> command is set as the drivetrain's default command, fed by <code>getForward</code>, <code>getStrafe</code> and <code>getTurn</code>.</p>
+<pre class="quiz"><code>@ title: Controllers and driving
+? Why does `getForward()` return `-m_controller.getLeftY()`?
+- The controller is broken
++ Pushing a stick forward reads negative, so the controller class flips it once, in one place
+- Negative numbers are faster
+- WPILib requires it
+&gt; Forward is negative on Y. Flipping it inside the controller class means nobody else has to remember.
+
+? Why do drive commands take `m_driverControls::getForward` instead of `m_driverControls.getForward()`?
+- It runs faster
++ The command needs to read the stick again on every loop, not once
+- Java requires method references for suppliers
+- To hide the controller
+&gt; Without a supplier you'd capture the stick's value at one instant and the robot would never respond to it moving.
+
+? Which statement about a default command is true?
+- It runs once when the robot turns on
++ It runs whenever nothing else is using that subsystem
+- It makes the subsystem ignore other commands
+- Every subsystem must have one
+&gt; It's perfect for driving. Pressing a button that needs the drivetrain interrupts it, and it resumes afterwards.</code></pre>
+<h2 id="autonomous-getautonomouscommand">Autonomous: getAutonomousCommand()</h2>
+<p>During autonomous nobody touches the controllers, so the robot runs a pre-planned routine. In code, a routine is just <strong>one command</strong>, usually several small ones chained together. <code>RobotContainer</code> hands it over in <code>getAutonomousCommand()</code>, and <code>Robot.java</code> schedules it when autonomous starts.</p>
+<p>Because our subsystems run on states, an autonomous step is often just "set a state," then wait. Two helpers chain the steps:</p>
+<ul>
+<li><code>Commands.waitSeconds(seconds)</code> does nothing for that long.</li>
+<li><code>Commands.sequence(a, b, c)</code> runs <code>a</code>, then <code>b</code>, then <code>c</code>.</li>
+</ul>
+<p>Here is a complete example, <code>Robot.java</code> included. Run it, switch to <strong>Auto</strong>, and watch <code>Intake/State</code>. It intakes for a second and then stows by itself. Switch to <strong>Teleop</strong> and any unfinished autonomous command is cancelled.</p>
+<pre class="playground"><code>//@ title: A simple autonomous
+//@ panel: robot
+//@ show: dashboard,scheduler
+//@ goal: Run it and switch to Auto: the intake runs for 1 second, then stows. Change the wait, or add a second step.
+//@ lines: 110
+//@ maxlines: 34
+public interface IntakeIO {
+    @AutoLog
+    public static class IntakeInputs {
+        public double velocityRPS;
+        public double voltage;
+    }
+
+    public void updateInputs(IntakeInputs inputs);
+
+    public void setVoltage(double voltage);
+}
+
+public class IntakeIOSim implements IntakeIO {
+    private double m_voltage = 0.0;
+    private double m_velocity = 0.0;
+
+    @Override
+    public void updateInputs(IntakeInputs inputs) {
+        m_velocity += (m_voltage * 8.0 - m_velocity) * 0.2;
+        inputs.velocityRPS = m_velocity;
+        inputs.voltage = m_voltage;
+    }
+
+    @Override
+    public void setVoltage(double voltage) {
+        m_voltage = voltage;
+    }
+}
+
+public class Intake extends SubsystemBase {
+    public static enum IntakeState {
+        kStow,
+        kIntaking,
+        kOuttaking
+    }
+
+    private final IntakeIO m_io;
+    private final IntakeInputsAutoLogged m_inputs = new IntakeInputsAutoLogged();
+    private final SubsystemProfiles&lt;IntakeState&gt; m_profiles;
+
+    public Intake(IntakeIO io) {
+        m_io = io;
+
+        Map&lt;IntakeState, Runnable&gt; periodicHash = new HashMap&lt;&gt;();
+        periodicHash.put(IntakeState.kStow, this::stowPeriodic);
+        periodicHash.put(IntakeState.kIntaking, this::intakingPeriodic);
+        periodicHash.put(IntakeState.kOuttaking, this::outtakingPeriodic);
+
+        m_profiles = new SubsystemProfiles&lt;&gt;(periodicHash, IntakeState.kStow);
+    }
+
+    public void updateState(IntakeState state) {
+        m_profiles.setCurrentProfile(state);
+    }
+
+    public IntakeState getCurrentState() {
+        return m_profiles.getCurrentProfile();
+    }
+
+    @Override
+    public void periodic() {
+        m_io.updateInputs(m_inputs);
+        m_profiles.getPeriodicFunctionTimed().run();
+        Logger.processInputs("Intake", m_inputs);
+        Logger.recordOutput("Intake/State", m_profiles.getCurrentProfile());
+    }
+
+    public void stowPeriodic() {
+        m_io.setVoltage(0.0);
+    }
+
+    public void intakingPeriodic() {
+        m_io.setVoltage(8.0);
+    }
+
+    public void outtakingPeriodic() {
+        m_io.setVoltage(-8.0);
+    }
+}
+
+public class RobotContainer {
+    private final Intake m_intake = new Intake(new IntakeIOSim());
+
+    public Command getAutonomousCommand() {
+        return Commands.sequence(
+            Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kIntaking)),
+            Commands.waitSeconds(1.0),
+            Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kStow)));
+    }
+}
+
+public class Robot extends LoggedRobot {
+    private final RobotContainer m_robotContainer;
+    private Command m_autonomousCommand;
+
+    public Robot() {
+        m_robotContainer = new RobotContainer();
+    }
+
+    @Override
+    public void robotPeriodic() {
+        CommandScheduler.getInstance().run();
+    }
+
+    @Override
+    public void autonomousInit() {
+        m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+        if (m_autonomousCommand != null) {
+            m_autonomousCommand.schedule();
+        }
+    }
+
+    @Override
+    public void teleopInit() {
+        if (m_autonomousCommand != null) {
+            m_autonomousCommand.cancel();
+        }
+    }
+}</code></pre>
+<p>On the real robot there isn't one routine, there's a menu. <code>RobotContainer</code> builds a chooser the drivers use on the dashboard, and <code>getAutonomousCommand()</code> returns whichever was picked.</p>
+<div class="highlight"><span class="filename">configureCommands(), shortened</span><pre><span></span><code><span class="n">m_autoChooser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LoggedDashboardChooser</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="s">"Auto Chooser"</span><span class="p">);</span>
+<span class="n">m_autoFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AutoFactory</span><span class="p">(</span><span class="n">m_drive</span><span class="p">);</span>
+
+<span class="n">m_autoChooser</span><span class="p">.</span><span class="na">addOption</span><span class="p">(</span><span class="s">"Do Nothing"</span><span class="p">,</span><span class="w"> </span><span class="n">Commands</span><span class="p">.</span><span class="na">none</span><span class="p">());</span>
+<span class="n">m_autoChooser</span><span class="p">.</span><span class="na">addDefaultOption</span><span class="p">(</span><span class="s">"3 Coral Left"</span><span class="p">,</span><span class="w"> </span><span class="n">m_autoFactory</span><span class="p">.</span><span class="na">getAutoCommand</span><span class="p">(</span><span class="s">"3 Coral Left"</span><span class="p">));</span>
+
+<span class="c1">// every path drawn in PathPlanner shows up as an option too</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">PathPlannerUtil</span><span class="p">.</span><span class="na">getExistingPaths</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">m_autoChooser</span><span class="p">.</span><span class="na">addOption</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">m_autoFactory</span><span class="p">.</span><span class="na">getAutoCommand</span><span class="p">(</span><span class="n">path</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">getAutonomousCommand()</span><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="nf">getAutonomousCommand</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">m_autoChooser</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>AutoFactory</code> also teaches PathPlanner the names of our actions, like "Set Height L1", each one a <code>Commands.runOnce</code> that sets something in <code>RobotState</code>. So a routine drawn in PathPlanner can say "drive here, set L1, score" and the same state machine does the work.</p>
+<p>Now build one. Make this routine intake for 2 seconds, then outtake for 1 second, then stow.</p>
+<pre class="playground"><code>//@ title: Build an autonomous routine
+//@ prelude: wpilib
+//@ goal: Build the routine: intake for 2 seconds, outtake for 1 second, then stow. Use Commands.sequence, runOnce and waitSeconds.
+//@ lines: 36
+//@ maxlines: 30
+//@ require: waitSeconds | Use Commands.waitSeconds(...) for the waiting.
+//@ require: sequence|andThen | Chain the steps with Commands.sequence(...) or andThen(...).
+public class Intake {
+    public static enum IntakeState {
+        kStow,
+        kIntaking,
+        kOuttaking
+    }
+
+    private IntakeState m_state = IntakeState.kStow;
+
+    public void updateState(IntakeState state) {
+        m_state = state;
+    }
+
+    public IntakeState getCurrentState() {
+        return m_state;
+    }
+}
+
+public class RobotContainer {
+    private final Intake m_intake = new Intake();
+
+    public Command getAutonomousCommand() {
+        // Build the routine here
+        return Commands.none();
+    }
+
+    public Intake getIntake() {
+        return m_intake;
+    }
+}
+//@@ harness
+RobotContainer container = new RobotContainer();
+container.getAutonomousCommand().schedule();
+Sim.loops(10);
+System.out.println(container.getIntake().getCurrentState());
+Sim.loops(110);
+System.out.println(container.getIntake().getCurrentState());
+Sim.loops(80);
+System.out.println(container.getIntake().getCurrentState());
+//@@ expect
+kIntaking
+kOuttaking
+kStow
+//@@ hint
+The routine is five steps: set intaking, wait, set outtaking, wait, set stow.
+//@@ hint
+Each "set" is `Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kIntaking))` with a different state. Each wait is `Commands.waitSeconds(2.0)`.
+//@@ solution
+public class Intake {
+    public static enum IntakeState {
+        kStow,
+        kIntaking,
+        kOuttaking
+    }
+
+    private IntakeState m_state = IntakeState.kStow;
+
+    public void updateState(IntakeState state) {
+        m_state = state;
+    }
+
+    public IntakeState getCurrentState() {
+        return m_state;
+    }
+}
+
+public class RobotContainer {
+    private final Intake m_intake = new Intake();
+
+    public Command getAutonomousCommand() {
+        return Commands.sequence(
+            Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kIntaking)),
+            Commands.waitSeconds(2.0),
+            Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kOuttaking)),
+            Commands.waitSeconds(1.0),
+            Commands.runOnce(() -&gt; m_intake.updateState(Intake.IntakeState.kStow)));
+    }
+
+    public Intake getIntake() {
+        return m_intake;
+    }
+}
+//@@ explain
+An autonomous routine is a timeline of state changes. The subsystems do the actual work in their `periodic()` methods, the same as in teleop.</code></pre>
+<h2 id="what-belongs-where">What belongs where?</h2>
+<p>Now that you've seen every part of <code>RobotContainer</code>, test your sense of where things go.</p>
+<pre class="quiz"><code>@ title: RobotContainer
+? Which of these belongs in `RobotContainer`?
+- The code that sets the intake motor's voltage
++ The line that makes the A button change the intake's state
+- The intake motor's CAN id
+- The code that calls `periodic()` on each subsystem
+&gt; Subsystems hold the "how", constants hold the numbers, and `RobotContainer` connects the buttons.
+
+? Which file is the only one that needs to change when the team moves "outtake" from the B button to the Y button?
+- `Intake.java`
+- `RobotContainer.java`
++ `DriverControlsXbox.java`
+- `Constants.java`
+&gt; `RobotContainer` asks for `outtake()`. Which button that is lives in the controller class.
+
+? A button binding for "hold to run, release to stop" needs:
+- Only `onTrue`
++ `onTrue` for the press and `onFalse` for the release
+- `toggleOnTrue`
+- Nothing, it's automatic
+&gt; Without `onFalse`, nothing ever tells the mechanism to stop.
+
+? You want a button to zero the elevator before a match, while the robot is still disabled. What must you add?
+- `.onFalse(...)`
++ `.ignoringDisable(true)` on the command
+- `.whileTrue(...)`
+- Nothing, commands always run
+&gt; Commands don't run while disabled unless they say they may.
+
+? When does `Robot.java` ask `RobotContainer` for the autonomous command?
+- When the robot is first powered on
++ When autonomous mode starts
+- Every 20 ms
+- When teleop starts
+&gt; `autonomousInit()` calls `getAutonomousCommand()` and schedules whatever comes back.
+
+? Pushing the left stick forward reads...
+- +1.0
++ -1.0
+- 0.0
+- It depends on the controller's batteries
+&gt; Forward is negative on Y, which is why the controller class negates it.</code></pre>
+<hr />
+<h2 id="whats-next">What's next</h2>
+<p>You've seen how the robot is assembled and how buttons reach it. The last piece is what happens when a button is pressed and several subsystems need to change together. That's the job of <a href="../robotState/">RobotState</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../subsystems/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Subsystems">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Subsystems
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../robotState/" class="md-footer__link md-footer__link--next" aria-label="Next: RobotState">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                RobotState
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/team422" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.mechtechrobotics.com" target="_blank" rel="noopener" title="www.mechtechrobotics.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2s.06-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.92 7.92 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8 8 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.7 15.7 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@mechtechdragons" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.footer", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/minijava.js"></script>
+      
+        <script src="../../javascripts/wpilib-prelude.js"></script>
+      
+        <script src="../../javascripts/playground.js"></script>
+      
+    
+  </body>
+</html>
