@@ -382,7 +382,7 @@
     function makeStick(prefix, label) {
       var knob = h('div', { class: 'mj-knob' });
       var pad = h('div', { class: 'mj-stick', role: 'application', 'aria-label': label + ' stick', tabindex: '0' }, [knob]);
-      var readout = h('div', { class: 'mj-stick-read', text: 'X 0.00  Y 0.00' });
+      var readout = h('div', { class: 'mj-stick-read', text: 'X 0.00\nY 0.00' });
       var active = false;
       function setFrom(ev) {
         var r = pad.getBoundingClientRect(), R = r.width / 2;
@@ -395,7 +395,7 @@
         dx = Math.round(dx * 100) / 100; dy = Math.round(dy * 100) / 100;
         axes[prefix + 'X'] = dx; axes[prefix + 'Y'] = dy;
         knob.style.transform = 'translate(' + (dx * TRAVEL) + 'px,' + (dy * TRAVEL) + 'px)';
-        readout.textContent = 'X ' + dx.toFixed(2) + '  Y ' + dy.toFixed(2);
+        readout.textContent = 'X ' + dx.toFixed(2) + '\nY ' + dy.toFixed(2);
         if (state.session) {
           pending.push({ code: 'Sim.setAxis(' + port + ', "' + prefix + 'X", ' + dx.toFixed(2) + '); Sim.setAxis(' + port + ', "' + prefix + 'Y", ' + dy.toFixed(2) + ');', gate: 0, key: prefix });
           if (!state.timer) nudge();
