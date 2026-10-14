@@ -47,44 +47,31 @@ Additionally, if your class contains members, you can define it inside the paren
 Java is an object-oriented program language, which means that objects will take the members and methods of a class. This allows objects created by `instantiation` to perform actions of its assigned class. This is done using the __dot operator__, which is simply a `.` placed after the object name, which allows you to access the methods and members of the instance.
 
 
-=== "Main.java"
-    ```java title="Main.java" linenums="1"
-    public class Main {
-        Car Acura = new Car("red");
+```playground
+//@ title: Two cars from one blueprint
+//@ goal: Run it. Then add a third car of your own, give it a color, and make it drive.
+//@ lines: 22
+public class Car {
+    public String color;
 
-        Acura.drive();
-
-        System.out.println(Acura.color);
-
-        Car Toyota = new Car("orange");
-
-        Toyota.drive();
-
-        System.out.println(Toyota.color);
+    public Car(String color) {
+        this.color = color;
     }
-    ```
-=== "Car.java"
-    ```java title="Car.java" 
-    public class Car {
-        public String color;
 
-        public Car(String color) {
-            this.color = color;
-        }
-
-        public void drive() {
-            // insert drive code
-        }
-
-        public void stop() {
-            // insert stop code
-        }
+    public void drive() {
+        System.out.println("The " + color + " car is driving");
     }
-    ```
-``` title="Output"
-red
-orange
+}
+
+Car acura = new Car("red");
+acura.drive();
+System.out.println(acura.color);
+
+Car toyota = new Car("orange");
+toyota.drive();
+System.out.println(toyota.color);
 ```
+
 In the above example, we have instantiated two unique cars, an Acura and a Toyota. Since both the Acura and the Toyota are made from the `Car` class, they can both drive and stop. However, since they are objects unique of each other, they each have their own color, which is also accessed using the dot operator.
 
 ## Constructors
@@ -112,6 +99,28 @@ public class Car {
 }
 ```
 This constructor assigns the color specified during instantiation to the specific _instance_ of the car.
+
+The word `this` means "the object being built right now". It separates the object's own `color` field (`this.color`) from the parameter that is also called `color`. Try the example below, and add a second parameter to the constructor.
+
+```playground
+//@ title: Add a field to the constructor
+//@ goal: Run it. Then add a topSpeed field (an int), take it as a second constructor parameter, and print it too. Remember to change the call at the bottom.
+//@ lines: 16
+public class Car {
+    private String color;
+
+    public Car(String color) {
+        this.color = color;
+    }
+
+    public void printInfo() {
+        System.out.println("A " + color + " car");
+    }
+}
+
+Car acura = new Car("red");
+acura.printInfo();
+```
 
 ## Combining Classes, Objects, and Constructors
 
@@ -149,27 +158,179 @@ Here's what happens when you run the code above:
 
 ---
 
-## Practice 
-See if you can correctly identify the class, object, and constructor in the following code snippet.
-=== "Identify"
-    ```java
-    public class Car {
+## Practice
+
+#### Identify the parts
+
+```playground
+//@ title: Read the code
+//@ mode: predict
+//@ goal: What does this program print? (Hint: follow the constructor.)
+public class Car {
     private String color;
 
-        public Car(String color) {
-            this.color = color;
-        }
-
-        public void honk() {
-            System.out.println("Beep!");
-        }
+    public Car(String color) {
+        this.color = color;
     }
 
-    Car acura = new Car("red");
-    ``` 
-=== "Answers"
-    ```java
-    public class Car { ... } // Class
-    public Car(String color) { ... } // Constructor
-    Car acura = new Car("red"); // Object instantiation
-    ``` 
+    public void honk() {
+        System.out.println(color + " car says Beep!");
+    }
+}
+
+Car acura = new Car("red");
+acura.honk();
+//@@ explain
+`new Car("red")` runs the constructor, which stores `"red"` in this car's `color`. Then `honk()` uses that stored color.
+```
+
+Now match each piece of that code to its name.
+
+```quiz
+@ title: Class, object, or constructor?
+? Which part is the **class**?
+| public class Car { ... }
+| public Car(String color) { ... }
+| Car acura = new Car("red");
++ `public class Car { ... }`
+- `public Car(String color) { ... }`
+- `Car acura = new Car("red");`
+> The class is the blueprint. It's the whole `Car` definition.
+
+? Which part is the **constructor**?
+| public class Car { ... }
+| public Car(String color) { ... }
+| Car acura = new Car("red");
+- `public class Car { ... }`
++ `public Car(String color) { ... }`
+- `Car acura = new Car("red");`
+> A constructor has the same name as the class and no return type.
+
+? Which part **instantiates an object**?
+| public class Car { ... }
+| public Car(String color) { ... }
+| Car acura = new Car("red");
+- `public class Car { ... }`
+- `public Car(String color) { ... }`
++ `Car acura = new Car("red");`
+> The `new` keyword builds a real Car from the blueprint, and `acura` is that object.
+
+? How many objects exist after these two lines run? `Car a = new Car("red");` and `Car b = new Car("red");`
+- 1, because they are both red
++ 2
+- 0, because nothing was printed
+> Every use of `new` creates a separate object, even when the contents are identical.
+```
+
+#### Challenge 1: Write a constructor
+
+An FRC robot cares a lot about battery voltage. Finish this class by writing its constructor.
+
+```playground
+//@ title: Battery constructor
+//@ goal: Write a constructor for Battery that takes a double called voltage and stores it in the voltage field.
+//@ lines: 12
+//@ require: public\s+Battery\s*\( | The constructor must be named Battery and be public.
+//@ require: this\.voltage | Use this.voltage to set the field.
+public class Battery {
+    private double voltage;
+
+    // Write the constructor here
+
+    public double getVoltage() {
+        return voltage;
+    }
+
+    public boolean isLow() {
+        return voltage < 11.5;
+    }
+}
+//@@ harness
+Battery full = new Battery(12.6);
+Battery weak = new Battery(10.9);
+System.out.println(full.getVoltage());
+System.out.println(full.isLow());
+System.out.println(weak.getVoltage());
+System.out.println(weak.isLow());
+//@@ expect
+12.6
+false
+10.9
+true
+//@@ hint
+A constructor looks like a method with no return type, named exactly like the class.
+//@@ hint
+`public Battery(double voltage) { ... }`. Inside the braces, assign the parameter to the field.
+//@@ solution
+public class Battery {
+    private double voltage;
+
+    public Battery(double voltage) {
+        this.voltage = voltage;
+    }
+
+    public double getVoltage() {
+        return voltage;
+    }
+
+    public boolean isLow() {
+        return voltage < 11.5;
+    }
+}
+//@@ explain
+Each Battery object remembers its own voltage, so the full battery and the weak battery behave differently from the same class.
+```
+
+#### Challenge 2: Make some objects
+
+```playground
+//@ title: Two cars
+//@ goal: Below the class, create a red Car going 50 mph and a blue Car going 70 mph, then call describe() on each.
+//@ lines: 16
+//@ require: new\s+Car\s*\([^)]*\)[\s\S]*new\s+Car\s*\([^)]*\) | Use new to create two Car objects.
+//@ require: describe\s*\(\s*\) | Call describe() on your cars.
+public class Car {
+    public String color;
+    public int speed;
+
+    public Car(String color, int speed) {
+        this.color = color;
+        this.speed = speed;
+    }
+
+    public void describe() {
+        System.out.println("A " + color + " car going " + speed + " mph");
+    }
+}
+
+// Create your cars below:
+
+//@@ expect
+A red car going 50 mph
+A blue car going 70 mph
+//@@ hint
+`Car name = new Car("red", 50);` creates one. Give each car its own variable name.
+//@@ hint
+Use the dot operator to call a method: `name.describe();`
+//@@ solution
+public class Car {
+    public String color;
+    public int speed;
+
+    public Car(String color, int speed) {
+        this.color = color;
+        this.speed = speed;
+    }
+
+    public void describe() {
+        System.out.println("A " + color + " car going " + speed + " mph");
+    }
+}
+
+Car acura = new Car("red", 50);
+Car toyota = new Car("blue", 70);
+acura.describe();
+toyota.describe();
+//@@ explain
+One class, two objects. Each has its own color and speed, but they share the same methods. This pattern is the heart of how FRC subsystems work.
+```
